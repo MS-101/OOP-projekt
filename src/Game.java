@@ -1,5 +1,8 @@
 public class Game {
     public static void main(String[] args) {
-        System.out.println("test.");
+        Mercenary player = new Mercenary();
+        Ghoul dummy = new Ghoul();
+
+        Combat.engage(player, dummy);
     }
 }

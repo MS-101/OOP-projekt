@@ -1,10 +1,9 @@
 import java.util.Random;
 
 public class Entity {
-    int maxHp;
-    int hp;
-    int lowDmg;
-    int highDmg;
+    int maxHp, hp;
+    int maxMp, mp;
+    int lowDmg, highDmg;
     int armor;
     String name;
 
@@ -16,6 +15,10 @@ public class Entity {
         Random randomNumber = new Random();
 
         inflictedDmg = randomNumber.nextInt((highDmg - lowDmg) + 1) + lowDmg;
+
+        if (receiver instanceof  Mercenary) {
+            inflictedDmg *= ((Mercenary) receiver).stats.strength / 10;
+        }
 
         armorReduction = 0.3;
 
