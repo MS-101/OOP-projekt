@@ -10,11 +10,14 @@ public class Mercenary extends  Entity {
     public Mercenary() {
         this.maxHp = 200;
         this.hp = maxHp;
+
         this.maxMp = 100;
         this.mp = maxMp;
+
         this.lowDmg = 10;
         this.highDmg = 12;
         this.armor = 0;
+
         this.name = "Mercenary";
 
         this.stats = new PlayerStats(10, 10, 10);
