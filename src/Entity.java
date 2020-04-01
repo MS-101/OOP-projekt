@@ -9,15 +9,15 @@ public class Entity {
 
     //later i will add equipped weapons and armor here
 
-    void attack(Entity receiver) {
+    boolean attack(Entity receiver) {
         int inflictedDmg, remainingDmg, absorbedDmg, realDmg;
         double armorReduction;
         Random randomNumber = new Random();
 
         inflictedDmg = randomNumber.nextInt((highDmg - lowDmg) + 1) + lowDmg;
 
-        if (receiver instanceof  Mercenary) {
-            inflictedDmg *= ((Mercenary) receiver).stats.strength / 10;
+        if (this instanceof  Mercenary) {
+            inflictedDmg *= ((Mercenary) this).stats.strength / 10;
         }
 
         armorReduction = 0.3;
@@ -38,10 +38,12 @@ public class Entity {
         System.out.println(this.name + " deals " + realDmg + " damage to " + receiver.name + ".");
 
         if (receiver.hp > 0) {
-            System.out.println(receiver.name + " has " + receiver.hp + " hitpoints remaining.");
+            System.out.println(receiver.name + " has " + receiver.hp + "/" + receiver.maxHp + " hp remaining.");
             System.out.println();
         } else {
             System.out.println(receiver.name + " has died.");
         }
+
+        return true;
     }
 }

@@ -3,6 +3,6 @@ public class Game {
         Mercenary player = new Mercenary();
         Ghoul dummy = new Ghoul();
 
-        Combat.engage(player, dummy);
+        Combat.start(player, dummy);
     }
 }
