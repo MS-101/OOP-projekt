@@ -2,42 +2,51 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Combat {
+    Mercenary player;
+    Monster opponent;
 
-    public static void start(Mercenary player, Monster opponent) {
-        System.out.println(player.name + " engaged in combat with " + opponent.name + "!");
+    public Combat(Mercenary player, Monster opponent) {
+        this.player = player;
+        this.opponent = opponent;
+
+        start();
+    }
+
+    private void start() {
+        System.out.println(this.player.name + " engaged in combat with " + this.opponent.name + "!");
         System.out.println();
 
         int turnCounter = 1;
 
-        while (player.hp > 0 && opponent.hp > 0) {
+        while (this.player.hp > 0 && this.opponent.hp > 0) {
             System.out.println("TURN " + turnCounter + " START:");
             System.out.println();
 
-            System.out.println(player.name + ": " + player.hp + "/" + player.maxHp + " hp, " + player.mp + "/" + player.maxMp + " mp");
-            System.out.println(opponent.name + ": " + opponent.hp + "/" + opponent.maxHp + " hp, " + opponent.mp + "/" + opponent.maxMp + " mp");
+            System.out.println(this.player.name + ": " + this.player.hp + "/" + this.player.maxHp + " hp, " + this.player.mp + "/" + this.player.maxMp + " mp");
+            System.out.println(this.opponent.name + ": " + this.opponent.hp + "/" + this.opponent.maxHp + " hp, " + this.opponent.mp + "/" + this.opponent.maxMp + " mp");
 
             System.out.println();
 
-            if (playerTurn(player, opponent)) {
+            if (playerTurn()) {
                 return;
             }
 
-            if (opponent.hp > 0) {
-                opponentTurn(player, opponent);
+            if (this.opponent.hp > 0) {
+                opponentTurn();
             }
 
             turnCounter++;
         }
 
-        if (player.hp > 0) {
-            victory(player, opponent);
+        if (this.player.hp > 0) {
+            victory();
         } else {
             defeat();
         }
     }
 
     //this function return true when player successfully escaped from combat
-    private static boolean playerTurn(Mercenary player, Monster opponent) {
+    private boolean playerTurn() {
         Scanner myScanner = new Scanner(System.in);
 
         System.out.println("Your turn:");
@@ -45,11 +54,11 @@ public class Combat {
 
         System.out.println("Enter one of the following commands:");
         System.out.println("ATTACK - deal damage to your opponent");
-        if (player.consumables.hpPotions_amount > 0) {
-            System.out.println("HP - use hp potion [heals " + player.consumables.hpPotion_heal + " hp] (" + player.consumables.hpPotions_amount + " remaining)");
+        if (this.player.consumables.hpPotions_amount > 0) {
+            System.out.println("HP - use hp potion [heals " + this.player.consumables.hpPotion_heal + " hp] (" + this.player.consumables.hpPotions_amount + " remaining)");
         }
-        if (player.consumables.mpPotions_amount > 0) {
-            System.out.println("MP - use mp potion [heals " + player.consumables.mpPotion_heal + " mp] (" + player.consumables.mpPotions_amount + " remaining)");
+        if (this.player.consumables.mpPotions_amount > 0) {
+            System.out.println("MP - use mp potion [heals " + this.player.consumables.mpPotion_heal + " mp] (" + this.player.consumables.mpPotions_amount + " remaining)");
         }
         System.out.println("SKIP - if you are feeling suicidal");
         System.out.println("FLEE - disengage from combat (may be unsuccessful)");
@@ -59,20 +68,20 @@ public class Combat {
             String command = myScanner.nextLine();
 
             if (command.equalsIgnoreCase("ATTACK")) {
-                player.attack(opponent);
+                this.player.attack(opponent);
                 return false;
             }
 
-            if (player.consumables.hpPotions_amount > 0 && command.equalsIgnoreCase("HP")) {
-                if (player.useHpPotion()) {
+            if (this.player.consumables.hpPotions_amount > 0 && command.equalsIgnoreCase("HP")) {
+                if (this.player.useHpPotion()) {
                     return false;
                 } else {
                     continue;
                 }
             }
 
-            if (player.consumables.mpPotions_amount > 0 && command.equalsIgnoreCase("MP")) {
-                if (player.useMpPotion()) {
+            if (this.player.consumables.mpPotions_amount > 0 && command.equalsIgnoreCase("MP")) {
+                if (this.player.useMpPotion()) {
                     return false;
                 } else {
                     continue;
@@ -106,29 +115,29 @@ public class Combat {
         }
     }
 
-    private static void opponentTurn(Mercenary player, Monster opponent) {
-        System.out.println(opponent.name + "'s turn:");
+    private void opponentTurn() {
+        System.out.println(this.opponent.name + "'s turn:");
         System.out.println();
 
-        opponent.attack(player);
+        this.opponent.attack(this.player);
     }
 
-    public static void victory(Mercenary player, Monster opponent) {
+    private void victory() {
         Random randomNumber = new Random();
         int gainedGold;
 
-        gainedGold = randomNumber.nextInt((opponent.highGold - opponent.lowGold) + 1) + opponent.lowGold;
+        gainedGold = randomNumber.nextInt((this.opponent.highGold - this.opponent.lowGold) + 1) + this.opponent.lowGold;
 
-        player.loot.addExp(opponent.exp);
-        player.loot.addGold(gainedGold);
+        this.player.loot.addExp(this.opponent.exp);
+        this.player.loot.addGold(gainedGold);
 
         System.out.println("You emerge victorious!");
-        System.out.println("You have gained " + opponent.exp + " exp and " + gainedGold + " gold");
-        System.out.println("You currently have " + player.loot.exp + " exp and " + player.loot.gold + " gold");
+        System.out.println("You have gained " + this.opponent.exp + " exp and " + gainedGold + " gold");
+        System.out.println("You currently have " + this.player.loot.exp + " exp and " + this.player.loot.gold + " gold");
         System.out.println();
     }
 
-    public static void defeat() {
+    private void defeat() {
         System.out.println("You have been defeated in combat.");
         System.out.println();
     }

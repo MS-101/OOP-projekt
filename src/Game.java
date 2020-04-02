@@ -1,12 +1,15 @@
 public class Game {
     public static void main(String[] args) {
         Mercenary player = new Mercenary();
-        Ghoul dummy = new Ghoul();
-
         player.weapon = new Steel_Spear();
         player.armor = new Steel_Armor();
 
-        Combat.start(player, dummy);
+        Combat fight;
+        int i;
+
+        for (i = 0; i < 3; i++) {
+            fight = new Combat(player, new Ghoul());
+        }
     }
 }
 
