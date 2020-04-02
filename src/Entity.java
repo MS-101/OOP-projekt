@@ -9,6 +9,29 @@ public class Entity {
 
     //later i will add equipped weapons and armor here
 
+    void setMaxHp(int maxHp) {
+        this.maxHp = maxHp;
+        this.hp = maxHp;
+    }
+
+    void setMaxMp(int maxMp) {
+        this.maxMp = maxMp;
+        this.mp = maxMp;
+    }
+
+    void setBaseDmg(int lowDmg, int highDmg) {
+        this.lowDmg = lowDmg;
+        this.highDmg = highDmg;
+    }
+
+    void setBaseArmor(int armor) {
+        this.armor = armor;
+    }
+
+    void setName(String name) {
+        this.name = name;
+    }
+
     boolean attack(Entity receiver) {
         int inflictedDmg, remainingDmg, absorbedDmg, realDmg;
         double armorReduction;
@@ -16,7 +39,7 @@ public class Entity {
 
         inflictedDmg = randomNumber.nextInt((highDmg - lowDmg) + 1) + lowDmg;
 
-        if (this instanceof  Mercenary) {
+        if (this instanceof Mercenary) {
             inflictedDmg *= ((Mercenary) this).stats.strength / 10;
         }
 
@@ -42,6 +65,7 @@ public class Entity {
             System.out.println();
         } else {
             System.out.println(receiver.name + " has died.");
+            System.out.println();
         }
 
         return true;

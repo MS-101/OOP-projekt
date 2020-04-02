@@ -1,15 +1,11 @@
-public class Ghoul extends Entity {
+public class Ghoul extends Monster {
     public Ghoul() {
-        this.maxHp = 50;
-        this.hp = maxHp;
+        setMaxHp(50);
+        setMaxMp(0);
+        setBaseDmg(7, 9);
+        setBaseArmor(0);
+        setName("Ghoul");
 
-        this.maxMp = 0;
-        this.mp = maxMp;
-
-        this.lowDmg = 7;
-        this.highDmg = 9;
-        this.armor = 0;
-
-        this.name = "Ghoul";
+        setLoot(10, 8, 12);
     }
 }

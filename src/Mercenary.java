@@ -1,32 +1,18 @@
 public class Mercenary extends  Entity {
-    int hpPotions_amount;
-    int hpPotion_heal;
-
-    int mpPotions_amount;
-    int mpPotion_heal;
-
+    PlayerConsumables consumables;
     PlayerStats stats;
+    PlayerLoot loot;
 
     public Mercenary() {
-        this.maxHp = 200;
-        this.hp = maxHp;
-
-        this.maxMp = 100;
-        this.mp = maxMp;
-
-        this.lowDmg = 10;
-        this.highDmg = 12;
-        this.armor = 0;
-
-        this.name = "Mercenary";
+        setMaxHp(200);
+        setMaxMp(100);
+        setBaseDmg(10, 12);
+        setBaseArmor(0);
+        setName("Mercenary");
 
         this.stats = new PlayerStats(10, 10, 10);
-
-        this.hpPotions_amount = 3;
-        this.mpPotions_amount = 0;
-
-        this.hpPotion_heal = 60;
-        this.mpPotion_heal = 40;
+        this.consumables = new PlayerConsumables(3, 0, 60, 40);
+        this.loot = new PlayerLoot(50);
     }
 
     boolean useHpPotion() {
@@ -35,8 +21,8 @@ public class Mercenary extends  Entity {
 
             prevHp = hp;
 
-            this.hpPotions_amount--;
-            this.hp += hpPotion_heal;
+            this.consumables.hpPotions_amount--;
+            this.hp += this.consumables.hpPotion_heal;
 
             if (this.hp > this.maxHp) {
                 this.hp = this.maxHp;
@@ -60,8 +46,8 @@ public class Mercenary extends  Entity {
 
             prevMp = mp;
 
-            this.mpPotions_amount--;
-            this.mp += mpPotion_heal;
+            this.consumables.mpPotions_amount--;
+            this.mp += this.consumables.mpPotion_heal;
 
             if (this.mp > this.maxMp) {
                 this.mp = this.maxMp;
@@ -71,6 +57,7 @@ public class Mercenary extends  Entity {
 
             System.out.println("You used a mana potion. You healed for " + healedMp + " mp.");
             System.out.println("You have " + mp + "/" + maxMp + " mp remaining.");
+            System.out.println();
 
             return true;
         } else {
