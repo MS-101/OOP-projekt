@@ -1,38 +1,77 @@
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Combat {
     Mercenary player;
-    Monster opponent;
+    ArrayList<Monster> opponents;
+    int goldGain, expGain;
 
-    public Combat(Mercenary player, Monster opponent) {
+    public Combat(Mercenary player, ArrayList<Monster> opponents) {
         this.player = player;
-        this.opponent = opponent;
+        this.opponents = opponents;
+
+        this.goldGain = 0;
+        this.expGain = 0;
 
         start();
     }
 
     private void start() {
-        System.out.println(this.player.name + " engaged in combat with " + this.opponent.name + "!");
+        int turnCounter = 1;
+        int i;
+        boolean legalCombat;
+        Random randomNumber = new Random();
+        int gainedGold;
+
+        System.out.print(this.player.name + " engaged in combat with " + this.opponents.get(0).name);
+        for (i = 1; i < opponents.size(); i++) {
+            if (i == opponents.size()) {
+                System.out.print(" and " + this.opponents.get(i).name);
+            } else {
+                System.out.print(", " + this.opponents.get(i).name);
+            }
+        }
+        System.out.println("!");
         System.out.println();
 
-        int turnCounter = 1;
+        legalCombat = true;
 
-        while (this.player.hp > 0 && this.opponent.hp > 0) {
+        while (legalCombat) {
             System.out.println("TURN " + turnCounter + " START:");
             System.out.println();
 
+            //Prints all remaining combatants
             System.out.println(this.player.name + ": " + this.player.hp + "/" + this.player.maxHp + " hp, " + this.player.mp + "/" + this.player.maxMp + " mp");
-            System.out.println(this.opponent.name + ": " + this.opponent.hp + "/" + this.opponent.maxHp + " hp, " + this.opponent.mp + "/" + this.opponent.maxMp + " mp");
-
+            for (i = 0; i < this.opponents.size(); i++) {
+                    System.out.println(i+1 + ") " + this.opponents.get(i).name + ": " + this.opponents.get(i).hp + "/" + this.opponents.get(i).maxHp + " hp, " + this.opponents.get(i).mp + "/" + this.opponents.get(i).maxMp + " mp");
+            }
             System.out.println();
 
             if (playerTurn()) {
                 return;
             }
 
-            if (this.opponent.hp > 0) {
-                opponentTurn();
+            if (this.opponents.get(0).hp < 0) {
+                gainedGold = randomNumber.nextInt((this.opponents.get(0).highGold - this.opponents.get(0).lowGold) + 1) + this.opponents.get(0).lowGold;
+
+                this.expGain += this.opponents.get(0).exp;
+                this.goldGain += gainedGold;
+
+                this.opponents.remove(0);
+
+                if (this.opponents.size() == 0) {
+                    break;
+                }
+            }
+
+            for (i = 0; i < this.opponents.size(); i++) {
+                opponentTurn(i);
+
+                if (this.player.hp <= 0) {
+                    legalCombat = false;
+                    break;
+                }
             }
 
             turnCounter++;
@@ -68,7 +107,7 @@ public class Combat {
             String command = myScanner.nextLine();
 
             if (command.equalsIgnoreCase("ATTACK")) {
-                this.player.attack(opponent);
+                this.player.attack(this.opponents.get(0));
                 return false;
             }
 
@@ -115,24 +154,19 @@ public class Combat {
         }
     }
 
-    private void opponentTurn() {
-        System.out.println(this.opponent.name + "'s turn:");
+    private void opponentTurn(int opponentIndex) {
+        System.out.println(opponentIndex+1 + ") " + this.opponents.get(opponentIndex).name + "'s turn:");
         System.out.println();
 
-        this.opponent.attack(this.player);
+        this.opponents.get(opponentIndex).attack(this.player);
     }
 
     private void victory() {
-        Random randomNumber = new Random();
-        int gainedGold;
-
-        gainedGold = randomNumber.nextInt((this.opponent.highGold - this.opponent.lowGold) + 1) + this.opponent.lowGold;
-
-        this.player.loot.addExp(this.opponent.exp);
-        this.player.loot.addGold(gainedGold);
+        this.player.loot.addExp(this.expGain);
+        this.player.loot.addGold(this.goldGain);
 
         System.out.println("You emerge victorious!");
-        System.out.println("You have gained " + this.opponent.exp + " exp and " + gainedGold + " gold");
+        System.out.println("You have gained " + this.expGain + " exp and " + this.goldGain + " gold");
         System.out.println("You currently have " + this.player.loot.exp + " exp and " + this.player.loot.gold + " gold");
         System.out.println();
     }
