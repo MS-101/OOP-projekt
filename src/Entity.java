@@ -5,11 +5,11 @@ public class Entity {
     int maxMp, mp;
     int lowPhysicalDmg, highPhysicalDmg;
     int lowPiercingDmg, highPiercingDmg;
-    int armor;
+    int baseArmor;
     String name;
 
-    //later i will add equipped weapons and armor here
     Weapon weapon;
+    Armor armor;
 
     void setMaxHp(int maxHp) {
         this.maxHp = maxHp;
@@ -31,8 +31,8 @@ public class Entity {
         this.highPiercingDmg = highPiercingDmg;
     }
 
-    void setBaseArmor(int armor) {
-        this.armor = armor;
+    void setBaseArmor(int baseArmor) {
+        this.baseArmor = baseArmor;
     }
 
     void setName(String name) {
@@ -42,9 +42,15 @@ public class Entity {
     boolean attack(Entity receiver) {
         int inflictedPhysicalDmg, remainingPhysicalDmg, absorbedPhysicalDmg;
         int inflictedPiercingDmg;
-        int realDmg;
+        int totalArmor, totalDmg;
         double armorReduction;
         Random randomNumber = new Random();
+
+        totalArmor = receiver.baseArmor;
+
+        if (receiver.armor != null) {
+            totalArmor += receiver.armor.armorVal;
+        }
 
         inflictedPhysicalDmg = randomNumber.nextInt((this.highPhysicalDmg - this.lowPhysicalDmg) + 1) + lowPhysicalDmg;
 
@@ -58,10 +64,10 @@ public class Entity {
 
         armorReduction = 0.3;
 
-        remainingPhysicalDmg = inflictedPhysicalDmg - receiver.armor;
+        remainingPhysicalDmg = inflictedPhysicalDmg - totalArmor;
 
         if (remainingPhysicalDmg > 0) {
-            absorbedPhysicalDmg = receiver.armor;
+            absorbedPhysicalDmg = totalArmor;
 
             inflictedPhysicalDmg = (int)(armorReduction * absorbedPhysicalDmg) + remainingPhysicalDmg;
         } else {
@@ -69,8 +75,6 @@ public class Entity {
 
             inflictedPhysicalDmg = (int)(armorReduction * absorbedPhysicalDmg);
         }
-
-        System.out.println(this.name + " deals " + inflictedPhysicalDmg + " physical damage to " + receiver.name + ".");
 
         inflictedPiercingDmg = randomNumber.nextInt((this.highPiercingDmg - this.lowPiercingDmg) + 1) + this.lowPiercingDmg;
 
@@ -82,12 +86,10 @@ public class Entity {
             inflictedPiercingDmg *= ((Mercenary) this).stats.dexterity / 10;
         }
 
-        System.out.println(this.name + " deals " + inflictedPiercingDmg + " piercing damage to " + receiver.name + ".");
+        totalDmg = inflictedPhysicalDmg + inflictedPiercingDmg;
 
-        realDmg = inflictedPhysicalDmg + inflictedPiercingDmg;
-
-        receiver.hp -= realDmg;
-        System.out.println(this.name + " deals " + realDmg + " total damage to " + receiver.name + ".");
+        receiver.hp -= totalDmg;
+        System.out.println(this.name + " deals " + totalDmg + " damage to " + receiver.name + ".");
 
         if (receiver.hp > 0) {
             System.out.println(receiver.name + " has " + receiver.hp + "/" + receiver.maxHp + " hp remaining.");

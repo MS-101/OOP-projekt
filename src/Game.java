@@ -4,6 +4,7 @@ public class Game {
         Ghoul dummy = new Ghoul();
 
         player.weapon = new Steel_Spear();
+        player.armor = new Steel_Armor();
 
         Combat.start(player, dummy);
     }
