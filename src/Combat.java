@@ -106,17 +106,30 @@ public class Combat {
 
         while (true) {
             String command = myScanner.nextLine();
+            String commandParameter = null;
+
             StringTokenizer st = new StringTokenizer(command," ");
+            int commandParameterInt = 0;
 
             String commandName = st.nextToken();;
-            int commandParameter = Integer.parseInt(st.nextToken());
+            if (st.hasMoreTokens()) {
+                commandParameter = st.nextToken();
+                if (commandParameter.matches("[0-9]+")) {
+                    commandParameterInt = Integer.parseInt(commandParameter);
+                }
+            }
 
             if (commandName.equalsIgnoreCase("ATTACK")) {
-                if (commandParameter <= opponents.size()) {
-                    this.player.attack(this.opponents.get(commandParameter - 1));
-                    return false;
+                if (commandParameter != null) {
+                    if (commandParameterInt <= opponents.size()) {
+                        this.player.attack(this.opponents.get(commandParameterInt - 1));
+                        return false;
+                    } else {
+                        System.out.println("Selected opponent does not exist.");
+                        continue;
+                    }
                 } else {
-                    System.out.println("Selected opponent does not exist.");
+                    System.out.println("You did not select an opponent.");
                     continue;
                 }
             }
