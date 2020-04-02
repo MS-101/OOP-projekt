@@ -3,6 +3,9 @@ public class Game {
         Mercenary player = new Mercenary();
         Ghoul dummy = new Ghoul();
 
+        player.weapon = new Steel_Spear();
+
         Combat.start(player, dummy);
     }
 }
+

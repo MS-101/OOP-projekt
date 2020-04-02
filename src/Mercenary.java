@@ -6,7 +6,8 @@ public class Mercenary extends  Entity {
     public Mercenary() {
         setMaxHp(200);
         setMaxMp(100);
-        setBaseDmg(10, 12);
+        setBasePhysicalDmg(10, 12);
+        setBasePiercingDmg(0, 0);
         setBaseArmor(0);
         setName("Mercenary");
 
