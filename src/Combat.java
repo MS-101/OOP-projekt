@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Combat {
     Mercenary player;
@@ -105,13 +106,22 @@ public class Combat {
 
         while (true) {
             String command = myScanner.nextLine();
+            StringTokenizer st = new StringTokenizer(command," ");
 
-            if (command.equalsIgnoreCase("ATTACK")) {
-                this.player.attack(this.opponents.get(0));
-                return false;
+            String commandName = st.nextToken();;
+            int commandParameter = Integer.parseInt(st.nextToken());
+
+            if (commandName.equalsIgnoreCase("ATTACK")) {
+                if (commandParameter <= opponents.size()) {
+                    this.player.attack(this.opponents.get(commandParameter - 1));
+                    return false;
+                } else {
+                    System.out.println("Selected opponent does not exist.");
+                    continue;
+                }
             }
 
-            if (this.player.consumables.hpPotions_amount > 0 && command.equalsIgnoreCase("HP")) {
+            if (this.player.consumables.hpPotions_amount > 0 && commandName.equalsIgnoreCase("HP")) {
                 if (this.player.useHpPotion()) {
                     return false;
                 } else {
@@ -119,7 +129,7 @@ public class Combat {
                 }
             }
 
-            if (this.player.consumables.mpPotions_amount > 0 && command.equalsIgnoreCase("MP")) {
+            if (this.player.consumables.mpPotions_amount > 0 && commandName.equalsIgnoreCase("MP")) {
                 if (this.player.useMpPotion()) {
                     return false;
                 } else {
@@ -127,14 +137,14 @@ public class Combat {
                 }
             }
 
-            if (command.equalsIgnoreCase("SKIP")) {
+            if (commandName.equalsIgnoreCase("SKIP")) {
                 System.out.println("You have decided to skip your turn.");
                 System.out.println();
 
                 return false;
             }
 
-            if (command.equalsIgnoreCase("FLEE")) {
+            if (commandName.equalsIgnoreCase("FLEE")) {
                 Random randomNumber = new Random();
                 int diceRoll = randomNumber.nextInt(100);
 
