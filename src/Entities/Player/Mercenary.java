@@ -1,7 +1,11 @@
-public class Mercenary extends  Entity {
-    PlayerConsumables consumables;
-    PlayerStats stats;
-    PlayerLoot loot;
+package Entities.Player;
+
+import Entities.Entity;
+
+public class Mercenary extends Entity {
+    public PlayerConsumables consumables;
+    public PlayerStats stats;
+    public PlayerLoot loot;
 
     public Mercenary() {
         setMaxHp(200);
@@ -9,14 +13,14 @@ public class Mercenary extends  Entity {
         setBasePhysicalDmg(10, 12);
         setBasePiercingDmg(0, 0);
         setBaseArmor(0);
-        setName("Mercenary");
+        setName("Entities.Player.Mercenary");
 
         this.stats = new PlayerStats(10, 10, 10);
         this.consumables = new PlayerConsumables(3, 0, 60, 40);
         this.loot = new PlayerLoot(50);
     }
 
-    boolean useHpPotion() {
+    public boolean useHpPotion() {
         if (hp < maxHp) {
             int prevHp, healedHp;
 
@@ -41,7 +45,7 @@ public class Mercenary extends  Entity {
         }
     }
 
-    boolean useMpPotion() {
+    public boolean useMpPotion() {
         if (mp < maxMp) {
             int prevMp, healedMp;
 

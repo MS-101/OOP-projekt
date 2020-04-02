@@ -1,5 +1,9 @@
+package Items.Armor;
+
+import Items.Item;
+
 public class Armor extends Item {
-    int armorVal;
+    public int armorVal;
 
     void setArmor(int armorVal) {
         this.armorVal = armorVal;

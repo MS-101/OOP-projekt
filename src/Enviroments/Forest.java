@@ -1,8 +1,12 @@
+package Enviroments;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import Entities.Player.Mercenary;
+import Entities.Monsters.*;
 
-public class Forest implements  Location {
+public class Forest implements Location {
     public void visit(Mercenary player) {
         Scanner myScanner = new Scanner(System.in);
         int i;

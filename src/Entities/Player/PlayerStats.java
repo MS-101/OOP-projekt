@@ -1,7 +1,9 @@
+package Entities.Player;
+
 public class PlayerStats {
-    int strength;
-    int dexterity;
-    int intelligence;
+    public int strength;
+    public int dexterity;
+    public int intelligence;
 
     public PlayerStats(int strength, int dexterity, int intelligence) {
         this.strength = strength;

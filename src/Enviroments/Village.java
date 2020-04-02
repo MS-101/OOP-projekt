@@ -1,4 +1,7 @@
+package Enviroments;
+
 import java.util.Scanner;
+import Entities.Player.Mercenary;
 
 public class Village implements Location {
     Tavern myTavern;

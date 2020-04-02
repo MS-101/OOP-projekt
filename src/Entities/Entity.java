@@ -1,45 +1,51 @@
+package Entities;
+
+import Entities.Player.*;
+import Items.Weapons.Weapon;
+import Items.Armor.Armor;
+
 import java.util.Random;
 
 public class Entity {
-    int maxHp, hp;
-    int maxMp, mp;
+    public int maxHp, hp;
+    public int maxMp, mp;
     int lowPhysicalDmg, highPhysicalDmg;
     int lowPiercingDmg, highPiercingDmg;
     int baseArmor;
-    String name;
+    public String name;
 
     Weapon weapon;
     Armor armor;
 
-    void setMaxHp(int maxHp) {
+    public void setMaxHp(int maxHp) {
         this.maxHp = maxHp;
         this.hp = maxHp;
     }
 
-    void setMaxMp(int maxMp) {
+    public void setMaxMp(int maxMp) {
         this.maxMp = maxMp;
         this.mp = maxMp;
     }
 
-    void setBasePhysicalDmg(int lowPhysicalDmg, int highPhysicalDmg) {
+    public void setBasePhysicalDmg(int lowPhysicalDmg, int highPhysicalDmg) {
         this.lowPhysicalDmg = lowPhysicalDmg;
         this.highPhysicalDmg = highPhysicalDmg;
     }
 
-    void setBasePiercingDmg(int lowPiercingDmg, int highPiercingDmg) {
+    public void setBasePiercingDmg(int lowPiercingDmg, int highPiercingDmg) {
         this.lowPiercingDmg = lowPiercingDmg;
         this.highPiercingDmg = highPiercingDmg;
     }
 
-    void setBaseArmor(int baseArmor) {
+    public void setBaseArmor(int baseArmor) {
         this.baseArmor = baseArmor;
     }
 
-    void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    boolean attack(Entity receiver) {
+    public boolean attack(Entity receiver) {
         int inflictedPhysicalDmg, remainingPhysicalDmg, absorbedPhysicalDmg;
         int inflictedPiercingDmg;
         int totalArmor, totalDmg;

@@ -1,3 +1,8 @@
+package Enviroments;
+
+import Entities.Player.Mercenary;
+import Entities.Monsters.Monster;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;

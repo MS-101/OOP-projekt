@@ -1,6 +1,5 @@
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+import Entities.Player.Mercenary;
+import Enviroments.Village;
 
 public class Game {
     public static void main(String[] args) {

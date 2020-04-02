@@ -1,3 +1,5 @@
+package Entities.Monsters;
+
 public class Ghoul extends Monster {
     public Ghoul() {
         setMaxHp(50);
