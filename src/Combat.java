@@ -27,7 +27,7 @@ public class Combat {
 
         System.out.print(this.player.name + " engaged in combat with " + this.opponents.get(0).name);
         for (i = 1; i < opponents.size(); i++) {
-            if (i == opponents.size()) {
+            if (i+1 == opponents.size()) {
                 System.out.print(" and " + this.opponents.get(i).name);
             } else {
                 System.out.print(", " + this.opponents.get(i).name);
@@ -93,7 +93,7 @@ public class Combat {
         System.out.println();
 
         System.out.println("Enter one of the following commands:");
-        System.out.println("ATTACK - deal damage to your opponent");
+        System.out.println("ATTACK 'ENEMY_INDEX' - deal damage to a specific opponent");
         if (this.player.consumables.hpPotions_amount > 0) {
             System.out.println("HP - use hp potion [heals " + this.player.consumables.hpPotion_heal + " hp] (" + this.player.consumables.hpPotions_amount + " remaining)");
         }
