@@ -1,6 +1,6 @@
 package Items;
 
-public class Item {
+public abstract class Item {
     public int cost, repairCost;
     public int durability, maxDurability;
     public String name;
@@ -22,4 +22,12 @@ public class Item {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void copy(Item itemCopy) {
+        itemCopy.setCost(this.cost, this.repairCost);
+        itemCopy.setDurability(this.maxDurability);
+        itemCopy.setName(this.name);
+    }
+
+    public abstract Item getCopy();
 }

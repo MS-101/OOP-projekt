@@ -32,11 +32,17 @@ public class Forge implements Location {
 
     private void generateLoot() {
         Random randomNumber = new Random();
-        int i, randomItem;
+        Item newItem;
+        int i, randomIndex;
+
+        forgeInventory.clear();
 
         for (i = 0; i < forgeInventoryLimit; i++) {
-            randomItem = randomNumber.nextInt(forgeLootTable.size());
-            forgeInventory.add(forgeLootTable.get(randomItem));
+            randomIndex = randomNumber.nextInt(forgeLootTable.size());
+
+            newItem = forgeLootTable.get(randomIndex).getCopy();
+
+            forgeInventory.add(newItem);
         }
     }
 
@@ -141,17 +147,20 @@ public class Forge implements Location {
                 if (commandName.equalsIgnoreCase("BUY")) {
                     if (commandParameter != null) {
                         if (commandParameterInt > 0 && commandParameterInt <= this.forgeInventory.size()) {
-                            pickedItem = this.forgeInventory.get(commandParameterInt);
+                            pickedItem = this.forgeInventory.get(commandParameterInt - 1);
 
                             if (player.loot.gold >= pickedItem.cost) {
                                 System.out.println("\"Pleasure doing business with you,\" the smith says contentedly.");
                                 System.out.println();
 
+                                player.loot.payGold(pickedItem.cost);
                                 if (pickedItem instanceof  Weapon) {
                                     player.setWeapon((Weapon) pickedItem);
                                 } else {
                                     player.setArmor((Armor) pickedItem);
                                 }
+
+                                this.forgeInventory.remove(commandParameterInt - 1);
 
                                 break;
                             } else {

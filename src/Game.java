@@ -6,7 +6,7 @@ public class Game {
         Mercenary player = new Mercenary();
         Village myVillage = new Village();
 
-        player.weapon.durability = (int)(0.4 * player.weapon.maxDurability);
+        player.loot.addGold(10000);
 
         myVillage.visit(player);
     }

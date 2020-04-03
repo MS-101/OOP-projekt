@@ -15,4 +15,17 @@ public class Weapon extends Item {
         this.lowPiercingDmg = lowPiercingDmg;
         this.highPiercingDmg = highPiercingDmg;
     }
+
+    public void copy(Weapon weaponCopy) {
+        super.copy(weaponCopy);
+        weaponCopy.setPhysicalDmg(this.lowPhysicalDmg, this.highPhysicalDmg);
+        weaponCopy.setPiercingDmg(this.lowPiercingDmg, this.highPiercingDmg);
+    }
+
+    public Weapon getCopy() {
+        Weapon weaponCopy = new Weapon();
+        this.copy(weaponCopy);
+
+        return weaponCopy;
+    }
 }

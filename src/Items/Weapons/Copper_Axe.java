@@ -1,5 +1,7 @@
 package Items.Weapons;
 
+import Items.Item;
+
 public class Copper_Axe extends  Weapon {
     public Copper_Axe() {
         setPhysicalDmg(16, 24);
