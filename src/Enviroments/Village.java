@@ -31,7 +31,7 @@ public class Village implements Location {
             System.out.println("TAVERN - you may spend the night here or acquire new contracts");
             System.out.println("FORGE - local smith can sell you his goods or repair your equipment");
             System.out.println("MARKET - a place where you can purchase consumables");
-            System.out.println("CHURCH - ???");
+            System.out.println("CHURCH - allocate your points here after gaining a new level");
             System.out.println("GRAVEYARD - visit the graves of fallen adventurers");
             System.out.println("FOREST - find and slay monsters from your contracts here");
             System.out.println();
@@ -48,7 +48,7 @@ public class Village implements Location {
                 }
 
                 if (command.equalsIgnoreCase("FORGE")) {
-                    System.out.println("You have entered the establishment.");
+                    System.out.println("You decide to pay a visit to the local smith.");
                     System.out.println();
 
                     myForge.visit(player);

@@ -1,8 +1,9 @@
 package Items;
 
 public class Item {
-    int cost, repairCost;
-    int durability, maxDurability;
+    public int cost, repairCost;
+    public int durability, maxDurability;
+    public String name;
 
     public void setCost(int cost, int repairCost) {
         this.cost = cost;
@@ -12,5 +13,13 @@ public class Item {
     public void setDurability(int maxDurability) {
         this.maxDurability = maxDurability;
         this.durability = maxDurability;
+    }
+
+    public void repairItem() {
+        this.durability = this.maxDurability;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

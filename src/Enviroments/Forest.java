@@ -17,7 +17,7 @@ public class Forest implements Location {
 
             System.out.println("Enter one of the following commands:");
             System.out.println("HUNT - find and attempt to slay some monsters");
-            System.out.println("RETURN - come back to the village to resupply, rest or pick up your reward.");
+            System.out.println("RETURN - come back to the village to resupply, rest or pick up your reward");
             System.out.println();
 
             while (true) {

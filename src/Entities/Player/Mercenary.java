@@ -1,23 +1,29 @@
 package Entities.Player;
 
 import Entities.Entity;
+import Items.Item;
+import Items.Weapons.Copper_Dagger;
+import java.util.ArrayList;
 
 public class Mercenary extends Entity {
     public PlayerConsumables consumables;
     public PlayerStats stats;
     public PlayerLoot loot;
+    public ArrayList<Item> inventory;
 
     public Mercenary() {
         setMaxHp(200);
         setMaxMp(100);
-        setBasePhysicalDmg(10, 12);
+        setBasePhysicalDmg(4, 5);
         setBasePiercingDmg(0, 0);
         setBaseArmor(0);
-        setName("Entities.Player.Mercenary");
+        setName("Mercenary");
 
         this.stats = new PlayerStats(10, 10, 10);
         this.consumables = new PlayerConsumables(3, 0, 60, 40);
         this.loot = new PlayerLoot(50);
+
+        setWeapon(new Copper_Dagger());
     }
 
     public boolean useHpPotion() {

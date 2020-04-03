@@ -14,8 +14,8 @@ public class Entity {
     int baseArmor;
     public String name;
 
-    Weapon weapon;
-    Armor armor;
+    public Weapon weapon;
+    public Armor armor;
 
     public void setMaxHp(int maxHp) {
         this.maxHp = maxHp;
@@ -45,9 +45,18 @@ public class Entity {
         this.name = name;
     }
 
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    public void setArmor(Armor armor) {
+        this.armor = armor;
+    }
+
     public boolean attack(Entity receiver) {
         int inflictedPhysicalDmg, remainingPhysicalDmg, absorbedPhysicalDmg;
         int inflictedPiercingDmg;
+        int weaponPhysicalDmg, weaponPiercingDmg, equipmentArmor;
         int totalArmor, totalDmg;
         double armorReduction;
         Random randomNumber = new Random();
@@ -55,13 +64,25 @@ public class Entity {
         totalArmor = receiver.baseArmor;
 
         if (receiver.armor != null) {
-            totalArmor += receiver.armor.armorVal;
+            equipmentArmor = receiver.armor.armorVal;
+
+            if (this instanceof Mercenary && this.armor.durability <= 0.2 * this.weapon.maxDurability) {
+                equipmentArmor *= 0.5;
+            }
+
+            totalArmor += equipmentArmor;
         }
 
         inflictedPhysicalDmg = randomNumber.nextInt((this.highPhysicalDmg - this.lowPhysicalDmg) + 1) + lowPhysicalDmg;
 
         if (this.weapon != null) {
-            inflictedPhysicalDmg += randomNumber.nextInt((this.weapon.highPhysicalDmg - this.weapon.lowPhysicalDmg) + 1) + this.weapon.lowPhysicalDmg;
+            weaponPhysicalDmg = randomNumber.nextInt((this.weapon.highPhysicalDmg - this.weapon.lowPhysicalDmg) + 1) + this.weapon.lowPhysicalDmg;
+
+            if (this instanceof  Mercenary && this.weapon.durability <= 0.2 * this.weapon.maxDurability) {
+                weaponPhysicalDmg *= 0.5;
+            }
+
+            inflictedPhysicalDmg += weaponPhysicalDmg;
         }
 
         if (this instanceof Mercenary) {
@@ -85,7 +106,13 @@ public class Entity {
         inflictedPiercingDmg = randomNumber.nextInt((this.highPiercingDmg - this.lowPiercingDmg) + 1) + this.lowPiercingDmg;
 
         if (this.weapon != null) {
-            inflictedPiercingDmg += randomNumber.nextInt((this.weapon.highPiercingDmg - this.weapon.lowPiercingDmg) + 1) + this.weapon.lowPiercingDmg;
+            weaponPiercingDmg = randomNumber.nextInt((this.weapon.highPhysicalDmg - this.weapon.lowPhysicalDmg) + 1) + this.weapon.lowPhysicalDmg;
+
+            if (this instanceof  Mercenary && this.weapon.durability <= 0.2 * this.weapon.maxDurability) {
+                weaponPiercingDmg *= 0.5;
+            }
+
+            inflictedPiercingDmg += weaponPiercingDmg;
         }
 
         if (this instanceof Mercenary) {
@@ -103,6 +130,40 @@ public class Entity {
         } else {
             System.out.println(receiver.name + " has died.");
             System.out.println();
+        }
+
+        if (this instanceof Mercenary && this.weapon != null) {
+            this.weapon.durability--;
+
+            if (this.weapon.durability == 0) {
+                System.out.println("Your weapon just broke!");
+                System.out.println();
+
+                this.setWeapon(null);
+            } else if (this.weapon.durability < 0.2 * this.weapon.maxDurability) {
+                System.out.println("You should repair your weapon if you don't want to break it [" + this.weapon.durability + "/" + this.weapon.maxDurability +  " durability]");
+                System.out.println();
+            } else if (this.weapon.durability < 0.4 * this.weapon.maxDurability) {
+                System.out.println("Your weapon could use some repairs... [" + this.weapon.durability + "/" + this.weapon.maxDurability +  " durability]");
+                System.out.println();
+            }
+        }
+
+        if (receiver instanceof Mercenary && this.armor != null) {
+            receiver.armor.durability--;
+
+            if (receiver.armor.durability == 0) {
+                System.out.println("Your armor just broke!");
+                System.out.println();
+
+                receiver.setArmor(null);
+            } else if (receiver.armor.durability < 0.2 * receiver.armor.maxDurability) {
+                System.out.println("You should repair your armor if you don't want to break it [" + receiver.weapon.durability + "/" + receiver.weapon.maxDurability +  " durability]");
+                System.out.println();
+            } else if (receiver.weapon.durability < 0.4 * receiver.weapon.maxDurability) {
+                System.out.println("Your weapon could use some repairs... [" + receiver.weapon.durability + "/" + receiver.weapon.maxDurability +  " durability]");
+                System.out.println();
+            }
         }
 
         return true;

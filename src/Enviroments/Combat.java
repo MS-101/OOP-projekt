@@ -1,7 +1,7 @@
 package Enviroments;
 
-import Entities.Player.Mercenary;
-import Entities.Monsters.Monster;
+import Entities.Player.*;
+import Entities.Monsters.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -27,8 +27,6 @@ public class Combat {
         int turnCounter = 1;
         int i;
         boolean legalCombat;
-        Random randomNumber = new Random();
-        int gainedGold;
 
         System.out.print(this.player.name + " engaged in combat with " + this.opponents.get(0).name);
         for (i = 1; i < opponents.size(); i++) {
@@ -58,17 +56,8 @@ public class Combat {
                 return;
             }
 
-            if (this.opponents.get(0).hp < 0) {
-                gainedGold = randomNumber.nextInt((this.opponents.get(0).highGold - this.opponents.get(0).lowGold) + 1) + this.opponents.get(0).lowGold;
-
-                this.expGain += this.opponents.get(0).exp;
-                this.goldGain += gainedGold;
-
-                this.opponents.remove(0);
-
-                if (this.opponents.size() == 0) {
-                    break;
-                }
+            if (this.opponents.size() == 0) {
+                break;
             }
 
             for (i = 0; i < this.opponents.size(); i++) {
@@ -126,8 +115,21 @@ public class Combat {
 
             if (commandName.equalsIgnoreCase("ATTACK")) {
                 if (commandParameter != null) {
-                    if (commandParameterInt <= opponents.size()) {
+                    if (commandParameterInt > 0 && commandParameterInt <= opponents.size()) {
                         this.player.attack(this.opponents.get(commandParameterInt - 1));
+
+                        if (this.opponents.get(commandParameterInt - 1).hp < 0) {
+                            Random randomNumber = new Random();
+                            int gainedGold;
+
+                            gainedGold = randomNumber.nextInt((this.opponents.get(commandParameterInt - 1).highGold - this.opponents.get(commandParameterInt - 1).lowGold) + 1) + this.opponents.get(commandParameterInt - 1).lowGold;
+
+                            this.expGain += this.opponents.get(commandParameterInt - 1).exp;
+                            this.goldGain += gainedGold;
+
+                            this.opponents.remove(commandParameterInt - 1);
+                        }
+
                         return false;
                     } else {
                         System.out.println("Selected opponent does not exist.");

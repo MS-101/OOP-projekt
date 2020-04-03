@@ -16,4 +16,8 @@ public class PlayerLoot {
     public void addGold(int gold) {
         this.gold += gold;
     }
+
+    public void payGold(int payment) {
+        this.gold -= payment;
+    }
 }
