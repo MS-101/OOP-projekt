@@ -94,6 +94,7 @@ public class Combat extends Location {
 
         System.out.println("Enter one of the following commands:");
         System.out.println("ATTACK <enemyIndex> - deal damage to a specific opponent");
+        System.out.println("SPELL <spellName> {spellTarget} - use 'spell help' to view all available spells");
         if (this.player.consumables.hpPotions_amount > 0) {
             System.out.println("HP - use hp potion [heals " + this.player.consumables.hpPotion_heal + " hp] (" + this.player.consumables.hpPotions_amount + " remaining)");
         }
@@ -121,6 +122,54 @@ public class Combat extends Location {
                     }
                 } else {
                     System.out.println("You did not select an opponent.");
+                    continue;
+                }
+            }
+
+            if (myCommand.name.equalsIgnoreCase("SPELL")) {
+                if (myCommand.param1Str != null) {
+                    if (myCommand.param1Str.equalsIgnoreCase("fireball")) {
+                        if (myCommand.param2Str != null) {
+                            if (myCommand.param2Int > 0 && myCommand.param2Int <= opponents.size()) {
+                                int opponentIndex = myCommand.param2Int - 1;
+                                Monster selectedOpponent = opponents.get(opponentIndex);
+
+                                player.skills.fireball.cast(player, selectedOpponent);
+                                break;
+                            } else {
+                                System.out.println("Selected opponent does not exist.");
+                                continue;
+                            }
+                        } else {
+                            System.out.println("You did not select an opponent.");
+                            continue;
+                        }
+                    }
+
+                    if (myCommand.param1Str.equalsIgnoreCase("flamestrike")) {
+                        if (player.skills.flamestrike.curLvl > 0) {
+                            if (player.mp >= player.skills.flamestrike.manaCost) {
+                                player.skills.flamestrike.cast(player, opponents);
+                                break;
+                            } else {
+                                System.out.println("You don't have enough mana to cast this spell.");
+                                continue;
+                            }
+                        } else {
+                            System.out.println("You have not learnt this spell yet.");
+                            continue;
+                        }
+                    }
+
+                    if (myCommand.param1Str.equalsIgnoreCase("heal")) {
+                        player.skills.heal.cast(player);
+                        break;
+                    }
+
+                    System.out.println("Invalid ability name.");
+                    continue;
+                } else {
+                    System.out.println("You did not select an ability.");
                     continue;
                 }
             }

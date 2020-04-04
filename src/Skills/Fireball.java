@@ -13,14 +13,14 @@ public class Fireball extends Skill {
         this.maxLvl = 3;
         this.manaCost = 30;
 
-        this.lowSpellDmg = 30;
-        this.highSpellDmg = 40;
+        this.lowSpellDmg = 35;
+        this.highSpellDmg = 45;
     }
 
     public void upgrade() {
         if (this.curLvl > 0) {
-            this.lowSpellDmg += 5;
-            this.highSpellDmg += 5;
+            this.lowSpellDmg += 10;
+            this.highSpellDmg += 10;
         }
 
         this.curLvl++;

@@ -1,6 +1,7 @@
 package Skills;
 
 import Entities.Entity;
+import Entities.Monsters.Monster;
 import Entities.Player.Mercenary;
 
 import java.util.ArrayList;
@@ -14,8 +15,8 @@ public class Flamestrike extends Skill {
         this.maxLvl = 3;
         this.manaCost = 40;
 
-        this.lowSpellDmg = 15;
-        this.highSpellDmg = 20;
+        this.lowSpellDmg = 20;
+        this.highSpellDmg = 25;
     }
 
     public void upgrade() {
@@ -27,7 +28,7 @@ public class Flamestrike extends Skill {
         this.curLvl++;
     }
 
-    public void cast(Entity caster, ArrayList<Entity> targets) {
+    public void cast(Entity caster, ArrayList<Monster> targets) {
         super.cast(caster);
 
         int i, spellDamage;

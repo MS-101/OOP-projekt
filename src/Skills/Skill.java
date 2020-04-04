@@ -3,8 +3,8 @@ package Skills;
 import Entities.Entity;
 
 public class Skill {
-    int curLvl, maxLvl;
-    int manaCost;
+    public int curLvl, maxLvl;
+    public int manaCost;
 
     public void cast(Entity caster) {
         caster.mp -= manaCost;
