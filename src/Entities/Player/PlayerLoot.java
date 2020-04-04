@@ -19,5 +19,6 @@ public class PlayerLoot {
 
     public void payGold(int payment) {
         this.gold -= payment;
+        System.out.println("You paid " + payment + " gold");
     }
 }

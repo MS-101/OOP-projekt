@@ -5,13 +5,12 @@ import Entities.Monsters.*;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
-import java.util.StringTokenizer;
 
-public class Combat {
+public class Combat extends Location {
     Mercenary player;
     ArrayList<Monster> opponents;
     int goldGain, expGain;
+    boolean playerEscaped;
 
     public Combat(Mercenary player, ArrayList<Monster> opponents) {
         this.player = player;
@@ -26,7 +25,6 @@ public class Combat {
     private void start() {
         int turnCounter = 1;
         int i;
-        boolean legalCombat;
 
         System.out.print(this.player.name + " engaged in combat with " + this.opponents.get(0).name);
         for (i = 1; i < opponents.size(); i++) {
@@ -39,9 +37,7 @@ public class Combat {
         System.out.println("!");
         System.out.println();
 
-        legalCombat = true;
-
-        while (legalCombat) {
+        while (true) {
             System.out.println("TURN " + turnCounter + " START:");
             System.out.println();
 
@@ -52,42 +48,52 @@ public class Combat {
             }
             System.out.println();
 
-            if (playerTurn()) {
+            playerTurn();
+
+            if (this.playerEscaped) {
                 return;
             }
 
+            for (i = 0; i < this.opponents.size(); i++) {
+                Monster pickedOpponent = opponents.get(i);
+
+                if (pickedOpponent.hp < 0) {
+                    Random randomNumber = new Random();
+                    int gainedGold;
+
+                    gainedGold = randomNumber.nextInt((pickedOpponent.highGold - pickedOpponent.lowGold) + 1) + pickedOpponent.lowGold;
+
+                    this.expGain += pickedOpponent.exp;
+                    this.goldGain += gainedGold;
+
+                    this.opponents.remove(i);
+                }
+            }
+
             if (this.opponents.size() == 0) {
-                break;
+                victory();
+                return;
             }
 
             for (i = 0; i < this.opponents.size(); i++) {
                 opponentTurn(i);
 
                 if (this.player.hp <= 0) {
-                    legalCombat = false;
-                    break;
+                    defeat();
+                    return;
                 }
             }
 
             turnCounter++;
         }
-
-        if (this.player.hp > 0) {
-            victory();
-        } else {
-            defeat();
-        }
     }
 
-    //this function return true when player successfully escaped from combat
-    private boolean playerTurn() {
-        Scanner myScanner = new Scanner(System.in);
-
+    private void playerTurn() {
         System.out.println("Your turn:");
         System.out.println();
 
         System.out.println("Enter one of the following commands:");
-        System.out.println("ATTACK 'ENEMY_INDEX' - deal damage to a specific opponent");
+        System.out.println("ATTACK <enemyIndex> - deal damage to a specific opponent");
         if (this.player.consumables.hpPotions_amount > 0) {
             System.out.println("HP - use hp potion [heals " + this.player.consumables.hpPotion_heal + " hp] (" + this.player.consumables.hpPotions_amount + " remaining)");
         }
@@ -99,38 +105,16 @@ public class Combat {
         System.out.println();
 
         while (true) {
-            String command = myScanner.nextLine();
-            String commandParameter = null;
+            myCommand.readInput();
 
-            StringTokenizer st = new StringTokenizer(command," ");
-            int commandParameterInt = 0;
+            if (myCommand.name.equalsIgnoreCase("ATTACK")) {
+                if (myCommand.param1Str != null) {
+                    if (myCommand.param1Int > 0 && myCommand.param1Int <= opponents.size()) {
+                        int opponentIndex = myCommand.param1Int - 1;
+                        Monster pickedOpponent = this.opponents.get(opponentIndex);
 
-            String commandName = st.nextToken();;
-            if (st.hasMoreTokens()) {
-                commandParameter = st.nextToken();
-                if (commandParameter.matches("[0-9]+")) {
-                    commandParameterInt = Integer.parseInt(commandParameter);
-                }
-            }
-
-            if (commandName.equalsIgnoreCase("ATTACK")) {
-                if (commandParameter != null) {
-                    if (commandParameterInt > 0 && commandParameterInt <= opponents.size()) {
-                        this.player.attack(this.opponents.get(commandParameterInt - 1));
-
-                        if (this.opponents.get(commandParameterInt - 1).hp < 0) {
-                            Random randomNumber = new Random();
-                            int gainedGold;
-
-                            gainedGold = randomNumber.nextInt((this.opponents.get(commandParameterInt - 1).highGold - this.opponents.get(commandParameterInt - 1).lowGold) + 1) + this.opponents.get(commandParameterInt - 1).lowGold;
-
-                            this.expGain += this.opponents.get(commandParameterInt - 1).exp;
-                            this.goldGain += gainedGold;
-
-                            this.opponents.remove(commandParameterInt - 1);
-                        }
-
-                        return false;
+                        this.player.attack(pickedOpponent);
+                        return;
                     } else {
                         System.out.println("Selected opponent does not exist.");
                         continue;
@@ -141,41 +125,41 @@ public class Combat {
                 }
             }
 
-            if (this.player.consumables.hpPotions_amount > 0 && commandName.equalsIgnoreCase("HP")) {
+            if (this.player.consumables.hpPotions_amount > 0 && myCommand.name.equalsIgnoreCase("HP")) {
                 if (this.player.useHpPotion()) {
-                    return false;
+                    return;
                 } else {
                     continue;
                 }
             }
 
-            if (this.player.consumables.mpPotions_amount > 0 && commandName.equalsIgnoreCase("MP")) {
+            if (this.player.consumables.mpPotions_amount > 0 && myCommand.name.equalsIgnoreCase("MP")) {
                 if (this.player.useMpPotion()) {
-                    return false;
+                    return;
                 } else {
                     continue;
                 }
             }
 
-            if (commandName.equalsIgnoreCase("SKIP")) {
+            if (myCommand.name.equalsIgnoreCase("SKIP")) {
                 System.out.println("You have decided to skip your turn.");
                 System.out.println();
 
-                return false;
+                return;
             }
 
-            if (commandName.equalsIgnoreCase("FLEE")) {
+            if (myCommand.name.equalsIgnoreCase("FLEE")) {
                 Random randomNumber = new Random();
                 int diceRoll = randomNumber.nextInt(100);
 
                 if (diceRoll < 60) {
                     System.out.println("You may live to fight another day.");
                     System.out.println();
-                    return true;
+                    return;
                 } else {
                     System.out.println("You have failed to lose your pursuers.");
                     System.out.println();
-                    return false;
+                    return;
                 }
 
             }
@@ -185,10 +169,14 @@ public class Combat {
     }
 
     private void opponentTurn(int opponentIndex) {
-        System.out.println(opponentIndex+1 + ") " + this.opponents.get(opponentIndex).name + "'s turn:");
+        Monster pickedOpponent;
+
+        pickedOpponent = this.opponents.get(opponentIndex);
+
+        System.out.println(opponentIndex+1 + ") " + pickedOpponent.name + "'s turn:");
         System.out.println();
 
-        this.opponents.get(opponentIndex).attack(this.player);
+        pickedOpponent.attack(this.player);
     }
 
     private void victory() {

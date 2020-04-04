@@ -3,12 +3,11 @@ package Enviroments;
 import java.util.Scanner;
 import Entities.Player.Mercenary;
 
-public class Village implements Location {
+public class Village extends Location {
     Inn myInn;
     Forge myForge;
     Market myMarket;
     Church myChurch;
-    Graveyard myGraveyard;
     Forest myForest;
 
     public Village() {
@@ -16,13 +15,10 @@ public class Village implements Location {
         myForge = new Forge();
         myMarket = new Market();
         myChurch = new Church();
-        myGraveyard = new Graveyard();
         myForest = new Forest();
     }
 
     public void visit(Mercenary player) {
-        Scanner myScanner = new Scanner(System.in);
-
         while (true) {
             System.out.println("Choose a location of your next visit.");
             System.out.println();
@@ -32,14 +28,13 @@ public class Village implements Location {
             System.out.println("FORGE - local smith can sell you his goods or repair your equipment");
             System.out.println("MARKET - a place where you can purchase consumables");
             System.out.println("CHURCH - allocate your points here after gaining a new level");
-            System.out.println("CEMETERY - visit the graves of fallen adventurers");
             System.out.println("FOREST - find and slay monsters from your contracts here");
             System.out.println();
 
             while (true) {
-                String command = myScanner.nextLine();
+                myCommand.readInput();
 
-                if (command.equalsIgnoreCase("INN")) {
+                if (myCommand.name.equalsIgnoreCase("INN")) {
                     System.out.println("You have entered the establishment.");
                     System.out.println();
 
@@ -47,7 +42,7 @@ public class Village implements Location {
                     break;
                 }
 
-                if (command.equalsIgnoreCase("FORGE")) {
+                if (myCommand.name.equalsIgnoreCase("FORGE")) {
                     System.out.println("You decide to pay a visit to the local smith.");
                     System.out.println();
 
@@ -55,7 +50,7 @@ public class Village implements Location {
                     break;
                 }
 
-                if (command.equalsIgnoreCase("MARKET")) {
+                if (myCommand.name.equalsIgnoreCase("MARKET")) {
                     System.out.println("You have decided to buy some necessities.");
                     System.out.println();
 
@@ -63,7 +58,7 @@ public class Village implements Location {
                     break;
                 }
 
-                if (command.equalsIgnoreCase("CHURCH")) {
+                if (myCommand.name.equalsIgnoreCase("CHURCH")) {
                     System.out.println("You approach the local shrine.");
                     System.out.println();
 
@@ -71,15 +66,7 @@ public class Village implements Location {
                     break;
                 }
 
-                if (command.equalsIgnoreCase("CEMETERY")) {
-                    System.out.println("You can mourn the dead here.");
-                    System.out.println();
-
-                    myGraveyard.visit(player);
-                    break;
-                }
-
-                if (command.equalsIgnoreCase("FOREST")) {
+                if (myCommand.name.equalsIgnoreCase("FOREST")) {
                     System.out.println("You have entered the forest.");
                     System.out.println();
 

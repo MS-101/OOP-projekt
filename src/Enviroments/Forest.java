@@ -2,13 +2,11 @@ package Enviroments;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 import Entities.Player.Mercenary;
 import Entities.Monsters.*;
 
-public class Forest implements Location {
+public class Forest extends Location {
     public void visit(Mercenary player) {
-        Scanner myScanner = new Scanner(System.in);
         int i;
 
         while (true) {
@@ -21,9 +19,9 @@ public class Forest implements Location {
             System.out.println();
 
             while (true) {
-                String command = myScanner.nextLine();
+                myCommand.readInput();
 
-                if (command.equalsIgnoreCase("HUNT")) {
+                if (myCommand.name.equalsIgnoreCase("HUNT")) {
                     Random randomNumber = new Random();
                     ArrayList<Monster> opponents = new ArrayList<Monster>();;
                     int monsterCount = randomNumber.nextInt(3) + 1;
@@ -39,7 +37,7 @@ public class Forest implements Location {
                     break;
                 }
 
-                if (command.equalsIgnoreCase("RETURN")) {
+                if (myCommand.name.equalsIgnoreCase("RETURN")) {
                     System.out.println("You have returned to the village.");
                     System.out.println();
                     return;

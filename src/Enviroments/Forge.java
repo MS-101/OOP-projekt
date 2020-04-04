@@ -10,7 +10,7 @@ import Items.Item;
 import Items.Weapons.*;
 import Items.Armor.*;
 
-public class Forge implements Location {
+public class Forge extends Location {
     ArrayList<Item> forgeInventory;
     ArrayList<Item> forgeLootTable;
     int forgeInventoryLimit;
@@ -47,22 +47,20 @@ public class Forge implements Location {
     }
 
     public void visit(Mercenary player) {
-        Scanner myScanner = new Scanner(System.in);
-
         while (true) {
             System.out.println("\"How may I help you, sir?\" the blacksmith asks.");
             System.out.println();
 
             System.out.println("Enter one of the following commands:");
-            System.out.println("TRADE - buy new equipment or sell something");
+            System.out.println("TRADE - replace your old equipment with new one");
             System.out.println("REPAIR - fix damaged equipment before it breaks permamently");
             System.out.println("RETURN - your business is concluded here");
             System.out.println();
 
             while (true) {
-                String command = myScanner.nextLine();
+                myCommand.readInput();
 
-                if (command.equalsIgnoreCase("TRADE")) {
+                if (myCommand.name.equalsIgnoreCase("TRADE")) {
                     System.out.println("\"What do you have for sale?\"");
                     System.out.println();
 
@@ -70,7 +68,7 @@ public class Forge implements Location {
                     break;
                 }
 
-                if (command.equalsIgnoreCase("REPAIR")) {
+                if (myCommand.name.equalsIgnoreCase("REPAIR")) {
                     System.out.println("\"My equipment could use some repairs.\"");
                     System.out.println();
 
@@ -78,7 +76,7 @@ public class Forge implements Location {
                     break;
                 }
 
-                if (command.equalsIgnoreCase("RETURN")) {
+                if (myCommand.name.equalsIgnoreCase("RETURN")) {
                     System.out.println("\"Farewell,\" he says as you leave the forge");
                     System.out.println();
                     return;
@@ -92,7 +90,6 @@ public class Forge implements Location {
     }
 
     private void trade(Mercenary player) {
-        Scanner myScanner = new Scanner(System.in);
         Item pickedItem;
         int i;
 
@@ -104,14 +101,14 @@ public class Forge implements Location {
             System.out.println("Blacksmith's inventory:");
             for (i = 0; i < this.forgeInventory.size(); i++) {
                 pickedItem = this.forgeInventory.get(i);
-                System.out.print(i+1 + ") " + pickedItem.name + " [" + pickedItem.cost + " gold]");
+                System.out.print(i+1 + ") " + pickedItem.name + " [" + pickedItem.cost + " gold]:");
 
                 if (pickedItem instanceof Weapon) {
                     if (((Weapon) pickedItem).lowPhysicalDmg != 0 || ((Weapon) pickedItem).highPhysicalDmg != 0) {
-                        System.out.print(" (" + ((Weapon) pickedItem).lowPhysicalDmg + " - " + ((Weapon) pickedItem).highPhysicalDmg + " physical dmg)");
+                        System.out.print(" (" + ((Weapon) pickedItem).lowPhysicalDmg + "-" + ((Weapon) pickedItem).highPhysicalDmg + " physical dmg)");
                     }
                     if (((Weapon) pickedItem).lowPiercingDmg != 0 || ((Weapon) pickedItem).highPiercingDmg != 0) {
-                        System.out.print(" (" + ((Weapon) pickedItem).lowPiercingDmg + " - " + ((Weapon) pickedItem).highPiercingDmg + " piercing dmg)");
+                        System.out.print(" (" + ((Weapon) pickedItem).lowPiercingDmg + "-" + ((Weapon) pickedItem).highPiercingDmg + " piercing dmg)");
                     }
                     System.out.println();
                 }
@@ -124,30 +121,17 @@ public class Forge implements Location {
             System.out.println();
 
             System.out.println("Enter one of the following commands:");
-            System.out.println("BUY 'itemIndex' - your gear's quality prolongs your longevity");
-            System.out.println("SELL 'itemIndex' - selling used, damaged equipment is not very profitable...");
+            System.out.println("BUY <itemIndex> - your gear's quality prolongs your longevity");
             System.out.println("FINISH - perhaps there is something else that you need");
             System.out.println();
 
             while (true) {
-                String command = myScanner.nextLine();
-                String commandParameter = null;
+                myCommand.readInput();
 
-                StringTokenizer st = new StringTokenizer(command," ");
-                int commandParameterInt = 0;
-
-                String commandName = st.nextToken();;
-                if (st.hasMoreTokens()) {
-                    commandParameter = st.nextToken();
-                    if (commandParameter.matches("[0-9]+")) {
-                        commandParameterInt = Integer.parseInt(commandParameter);
-                    }
-                }
-
-                if (commandName.equalsIgnoreCase("BUY")) {
-                    if (commandParameter != null) {
-                        if (commandParameterInt > 0 && commandParameterInt <= this.forgeInventory.size()) {
-                            pickedItem = this.forgeInventory.get(commandParameterInt - 1);
+                if (myCommand.name.equalsIgnoreCase("BUY")) {
+                    if (myCommand.param1Str != null) {
+                        if (myCommand.param1Int > 0 && myCommand.param1Int <= this.forgeInventory.size()) {
+                            pickedItem = this.forgeInventory.get(myCommand.param1Int - 1);
 
                             if (player.loot.gold >= pickedItem.cost) {
                                 System.out.println("\"Pleasure doing business with you,\" the smith says contentedly.");
@@ -160,7 +144,7 @@ public class Forge implements Location {
                                     player.setArmor((Armor) pickedItem);
                                 }
 
-                                this.forgeInventory.remove(commandParameterInt - 1);
+                                this.forgeInventory.remove(myCommand.param1Int - 1);
 
                                 break;
                             } else {
@@ -177,13 +161,7 @@ public class Forge implements Location {
                     }
                 }
 
-                if (commandName.equalsIgnoreCase("SELL")) {
-                    System.out.println("in development");
-                    System.out.println();
-                    break;
-                }
-
-                if (commandName.equalsIgnoreCase("FINISH")) {
+                if (myCommand.name.equalsIgnoreCase("FINISH")) {
                     System.out.println("Do I still need anything here?");
                     System.out.println();
                     return;
@@ -195,7 +173,6 @@ public class Forge implements Location {
     }
 
     private void repair(Mercenary player) {
-        Scanner myScanner = new Scanner(System.in);
         int weaponRepairCost = 0, armorRepairCost = 0;
 
         if (player.weapon != null && player.weapon.durability != player.weapon.maxDurability) {
@@ -222,9 +199,9 @@ public class Forge implements Location {
             System.out.println();
 
             while (true) {
-                String command = myScanner.nextLine();
+                myCommand.readInput();
 
-                if (weaponRepairCost != 0 && command.equalsIgnoreCase("WEAPON")) {
+                if (weaponRepairCost != 0 && myCommand.name.equalsIgnoreCase("WEAPON")) {
                     if (player.loot.gold >= weaponRepairCost) {
                         System.out.println("Smith repairs your weapon.");
                         System.out.println();
@@ -240,7 +217,7 @@ public class Forge implements Location {
                     break;
                 }
 
-                if (armorRepairCost != 0 && command.equalsIgnoreCase("ARMOR")) {
+                if (armorRepairCost != 0 && myCommand.name.equalsIgnoreCase("ARMOR")) {
                     if (player.loot.gold >= armorRepairCost) {
                         System.out.println("Smith repairs your armor.");
                         System.out.println();
@@ -256,7 +233,7 @@ public class Forge implements Location {
                     }
                 }
 
-                if (command.equalsIgnoreCase("FINISH")) {
+                if (myCommand.name.equalsIgnoreCase("FINISH")) {
                     System.out.println("Do I still need anything here?");
                     System.out.println();
                     return;

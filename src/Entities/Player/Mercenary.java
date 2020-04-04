@@ -20,7 +20,7 @@ public class Mercenary extends Entity {
         setName("Mercenary");
 
         this.stats = new PlayerStats(10, 10, 10);
-        this.consumables = new PlayerConsumables(3, 0, 60, 40);
+        this.consumables = new PlayerConsumables(3, 0);
         this.loot = new PlayerLoot(50);
 
         setWeapon(new Copper_Dagger());
