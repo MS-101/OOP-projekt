@@ -56,7 +56,8 @@ public class Entity {
     public boolean attack(Entity receiver) {
         int inflictedPhysicalDmg, remainingPhysicalDmg, absorbedPhysicalDmg;
         int inflictedPiercingDmg;
-        int weaponPhysicalDmg, weaponPiercingDmg, equipmentArmor;
+        int basePhysicalDmg = 0, basePiercingDmg = 0;
+        int weaponPhysicalDmg = 0, weaponPiercingDmg = 0, equipmentArmor;
         int totalArmor, totalDmg;
         double armorReduction;
         Random randomNumber = new Random();
@@ -73,7 +74,7 @@ public class Entity {
             totalArmor += equipmentArmor;
         }
 
-        inflictedPhysicalDmg = randomNumber.nextInt((this.highPhysicalDmg - this.lowPhysicalDmg) + 1) + lowPhysicalDmg;
+        basePhysicalDmg = randomNumber.nextInt((this.highPhysicalDmg - this.lowPhysicalDmg) + 1) + lowPhysicalDmg;
 
         if (this.weapon != null) {
             weaponPhysicalDmg = randomNumber.nextInt((this.weapon.highPhysicalDmg - this.weapon.lowPhysicalDmg) + 1) + this.weapon.lowPhysicalDmg;
@@ -81,47 +82,49 @@ public class Entity {
             if (this instanceof  Mercenary && this.weapon.durability <= 0.2 * this.weapon.maxDurability) {
                 weaponPhysicalDmg *= 0.5;
             }
-
-            inflictedPhysicalDmg += weaponPhysicalDmg;
         }
+
+        inflictedPhysicalDmg = basePhysicalDmg + weaponPhysicalDmg;
 
         if (this instanceof Mercenary) {
             inflictedPhysicalDmg *= ((Mercenary) this).stats.strength / 10;
         }
 
-        armorReduction = 0.3;
+        if (receiver.armor != null) {
+            armorReduction = 0.3;
 
-        remainingPhysicalDmg = inflictedPhysicalDmg - totalArmor;
+            remainingPhysicalDmg = inflictedPhysicalDmg - totalArmor;
 
-        if (remainingPhysicalDmg > 0) {
-            absorbedPhysicalDmg = totalArmor;
+            if (remainingPhysicalDmg > 0) {
+                absorbedPhysicalDmg = totalArmor;
 
-            inflictedPhysicalDmg = (int)(armorReduction * absorbedPhysicalDmg) + remainingPhysicalDmg;
-        } else {
-            absorbedPhysicalDmg = inflictedPhysicalDmg;
+                inflictedPhysicalDmg = (int)(armorReduction * absorbedPhysicalDmg) + remainingPhysicalDmg;
+            } else {
+                absorbedPhysicalDmg = inflictedPhysicalDmg;
 
-            inflictedPhysicalDmg = (int)(armorReduction * absorbedPhysicalDmg);
+                inflictedPhysicalDmg = (int)(armorReduction * absorbedPhysicalDmg);
+            }
         }
 
-        inflictedPiercingDmg = randomNumber.nextInt((this.highPiercingDmg - this.lowPiercingDmg) + 1) + this.lowPiercingDmg;
+        basePiercingDmg = randomNumber.nextInt((this.highPiercingDmg - this.lowPiercingDmg) + 1) + this.lowPiercingDmg;
 
         if (this.weapon != null) {
-            weaponPiercingDmg = randomNumber.nextInt((this.weapon.highPhysicalDmg - this.weapon.lowPhysicalDmg) + 1) + this.weapon.lowPhysicalDmg;
+            weaponPiercingDmg = randomNumber.nextInt((this.weapon.highPiercingDmg - this.weapon.lowPiercingDmg) + 1) + this.weapon.lowPiercingDmg;
 
             if (this instanceof  Mercenary && this.weapon.durability <= 0.2 * this.weapon.maxDurability) {
                 weaponPiercingDmg *= 0.5;
             }
-
-            inflictedPiercingDmg += weaponPiercingDmg;
         }
+
+        inflictedPiercingDmg = basePiercingDmg + weaponPiercingDmg;
 
         if (this instanceof Mercenary) {
             inflictedPiercingDmg *= ((Mercenary) this).stats.dexterity / 10;
         }
 
         totalDmg = inflictedPhysicalDmg + inflictedPiercingDmg;
-
         receiver.hp -= totalDmg;
+
         System.out.println(this.name + " deals " + totalDmg + " damage to " + receiver.name + ".");
 
         if (receiver.hp > 0) {
