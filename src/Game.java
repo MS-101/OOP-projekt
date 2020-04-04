@@ -6,8 +6,6 @@ public class Game {
         Mercenary player = new Mercenary();
         Village myVillage = new Village();
 
-        player.loot.addGold(10000);
-
         myVillage.visit(player);
     }
 }

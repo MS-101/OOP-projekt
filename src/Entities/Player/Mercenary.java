@@ -10,6 +10,7 @@ public class Mercenary extends Entity {
     public PlayerStats stats;
     public PlayerLoot loot;
     public ArrayList<Item> inventory;
+    public int lvl = 0;
 
     public Mercenary() {
         setMaxHp(200);
