@@ -9,7 +9,8 @@ public class Mercenary extends Entity {
     public PlayerConsumables consumables;
     public PlayerStats stats;
     public PlayerLoot loot;
-    public ArrayList<Item> inventory;
+    public PlayerSkills skills;
+
     public int lvl = 0, maxLvl = 6;
     public int lvlRequirement;
     public int attributePoints = 0, skillPoints = 0;
@@ -28,6 +29,7 @@ public class Mercenary extends Entity {
         this.stats = new PlayerStats(10, 10, 10);
         this.consumables = new PlayerConsumables(3, 0);
         this.loot = new PlayerLoot(50);
+        this.skills = new PlayerSkills(1, 0, 0);
 
         setWeapon(new Copper_Dagger());
     }
@@ -62,11 +64,7 @@ public class Mercenary extends Entity {
             prevHp = hp;
 
             this.consumables.hpPotions_amount--;
-            this.hp += this.consumables.hpPotion_heal;
-
-            if (this.hp > this.maxHp) {
-                this.hp = this.maxHp;
-            }
+            this.healHp(this.consumables.hpPotion_heal);
 
             healedHp = hp - prevHp;
 
@@ -87,11 +85,7 @@ public class Mercenary extends Entity {
             prevMp = mp;
 
             this.consumables.mpPotions_amount--;
-            this.mp += this.consumables.mpPotion_heal;
-
-            if (this.mp > this.maxMp) {
-                this.mp = this.maxMp;
-            }
+            this.healHp(this.consumables.mpPotion_heal);
 
             healedMp = mp - prevMp;
 

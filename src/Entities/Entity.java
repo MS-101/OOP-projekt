@@ -53,6 +53,27 @@ public class Entity {
         this.armor = armor;
     }
 
+    public void healHp(int amount) {
+        this.hp += amount;
+
+        if (this.hp > this.maxHp) {
+            this.hp = this.maxHp;
+        }
+    }
+
+    public void healMp(int amount) {
+        this.mp += amount;
+
+        if (this.mp > this.maxMp) {
+            this.mp = this.maxMp;
+        }
+    }
+
+    public void healAll(int amount) {
+        healHp(amount);
+        healMp(amount);
+    }
+
     public boolean attack(Entity receiver) {
         int inflictedPhysicalDmg, remainingPhysicalDmg, absorbedPhysicalDmg;
         int inflictedPiercingDmg;
@@ -87,7 +108,7 @@ public class Entity {
         inflictedPhysicalDmg = basePhysicalDmg + weaponPhysicalDmg;
 
         if (this instanceof Mercenary) {
-            inflictedPhysicalDmg *= ((Mercenary) this).stats.strength / 10;
+            inflictedPhysicalDmg *= (double)((Mercenary) this).stats.strength / 10;
         }
 
         if (receiver.armor != null) {
@@ -119,21 +140,17 @@ public class Entity {
         inflictedPiercingDmg = basePiercingDmg + weaponPiercingDmg;
 
         if (this instanceof Mercenary) {
-            inflictedPiercingDmg *= ((Mercenary) this).stats.dexterity / 10;
+            inflictedPiercingDmg *= (double)((Mercenary) this).stats.dexterity / 10;
         }
 
         totalDmg = inflictedPhysicalDmg + inflictedPiercingDmg;
         receiver.hp -= totalDmg;
 
         System.out.println(this.name + " deals " + totalDmg + " damage to " + receiver.name + ".");
-
-        if (receiver.hp > 0) {
-            System.out.println(receiver.name + " has " + receiver.hp + "/" + receiver.maxHp + " hp remaining.");
-            System.out.println();
-        } else {
+        if (receiver.hp <= 0) {
             System.out.println(receiver.name + " has died.");
-            System.out.println();
         }
+        System.out.println();
 
         if (this instanceof Mercenary && this.weapon != null) {
             this.weapon.durability--;
