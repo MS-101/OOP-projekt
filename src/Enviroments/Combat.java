@@ -180,12 +180,16 @@ public class Combat extends Location {
     }
 
     private void victory() {
-        this.player.loot.addExp(this.expGain);
-        this.player.loot.addGold(this.goldGain);
-
         System.out.println("You emerge victorious!");
-        System.out.println("You have gained " + this.expGain + " exp and " + this.goldGain + " gold");
-        System.out.println("You currently have " + this.player.loot.exp + " exp and " + this.player.loot.gold + " gold");
+
+        this.player.loot.addGold(this.goldGain);
+        if (this.player.lvl < this.player.maxLvl) {
+            this.player.loot.addExp(this.expGain);
+            this.player.checkLevelUp();
+        }
+
+        System.out.println("You have gained " + this.goldGain + " gold and " + this.expGain + " exp");
+        System.out.println("You currently have " + this.player.loot.gold + " gold and " + this.player.loot.exp + "/" + this.player.lvlRequirement + " exp");
         System.out.println();
     }
 

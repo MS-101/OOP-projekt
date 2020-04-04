@@ -16,7 +16,7 @@ public class Forest extends Location {
             System.out.println(player.name + " [lvl " + player.lvl + "] :");
             System.out.println("status: " + player.hp + "/" + player.maxHp + " hp, " + player.mp + "/" + player.maxMp + " mp");
             System.out.println("consumables: " + player.consumables.hpPotions_amount + "/" + player.consumables.hpPotions_maxAmount + " hp potions, " + player.consumables.mpPotions_amount + "/" + player.consumables.hpPotions_maxAmount + " mp potions");
-            System.out.println("loot: " + player.loot.gold + " gold, " + player.loot.exp + "/" + player.loot.exp + " exp");
+            System.out.println("loot: " + player.loot.gold + " gold, " + player.loot.exp + "/" + player.lvlRequirement + " exp");
             if (player.weapon != null) {
                 System.out.println("weapon (" + player.weapon.name + "): " + player.weapon.durability + "/" + player.weapon.maxDurability + " durability");
             } else {

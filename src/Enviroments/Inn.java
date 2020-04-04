@@ -24,6 +24,7 @@ public class Inn extends Location {
                 if (myCommand.name.equalsIgnoreCase("REST")) {
                     if (player.loot.gold >= roomCost) {
                         System.out.println("You decide to spend the night here.");
+                        player.loot.payGold(roomCost);
                         System.out.println();
 
                         player.hp += ((double)roomComfort / 100) * player.maxHp;
@@ -31,8 +32,6 @@ public class Inn extends Location {
                         if (player.hp > player.maxHp) {
                             player.hp = player.maxHp;
                         }
-
-                        player.loot.payGold(roomCost);
 
                         break;
                     } else {
