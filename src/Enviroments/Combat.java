@@ -128,27 +128,57 @@ public class Combat extends Location {
 
             if (myCommand.name.equalsIgnoreCase("SPELL")) {
                 if (myCommand.param1Str != null) {
-                    if (myCommand.param1Str.equalsIgnoreCase("fireball")) {
-                        if (myCommand.param2Str != null) {
-                            if (myCommand.param2Int > 0 && myCommand.param2Int <= opponents.size()) {
-                                int opponentIndex = myCommand.param2Int - 1;
-                                Monster selectedOpponent = opponents.get(opponentIndex);
+                    if (myCommand.param1Str.equalsIgnoreCase("help")) {
+                        System.out.println();
 
-                                player.skills.fireball.cast(player, selectedOpponent);
-                                break;
+                        if (player.skills.fireball.curLvl > 0) {
+                            System.out.println("Fireball <targetIndex> [lvl " + player.skills.fireball.curLvl + "] (" + player.skills.fireball.mpCost + " mp): Deal " +  player.skills.fireball.lowSpellDmg + "-" + player.skills.fireball.highSpellDmg + " dmg to a single target.");
+                        }
+
+                        if (player.skills.flamestrike.curLvl > 0) {
+                            System.out.println("Flamestrike [lvl " + player.skills.flamestrike.curLvl + "] (" + player.skills.flamestrike.mpCost + " mp): Deal " +  player.skills.flamestrike.lowSpellDmg + "-" + player.skills.flamestrike.highSpellDmg + " dmg to all targets.");
+                        }
+
+                        if (player.skills.heal.curLvl > 0) {
+                            System.out.println("Heal [lvl " + player.skills.heal.curLvl + "] (" + player.skills.heal.mpCost + " mp): Heal " +  player.skills.heal.mpCost + " hp.");
+                        }
+
+                        System.out.println();
+
+                        continue;
+                    }
+
+                    if (myCommand.param1Str.equalsIgnoreCase("fireball")) {
+                        if (player.skills.fireball.curLvl > 0) {
+                            if (player.mp >= player.skills.fireball.mpCost) {
+                                if (myCommand.param2Str != null) {
+                                    if (myCommand.param2Int > 0 && myCommand.param2Int <= opponents.size()) {
+                                        int opponentIndex = myCommand.param2Int - 1;
+                                        Monster selectedOpponent = opponents.get(opponentIndex);
+
+                                        player.skills.fireball.cast(player, selectedOpponent);
+                                        break;
+                                    } else {
+                                        System.out.println("Selected opponent does not exist.");
+                                        continue;
+                                    }
+                                } else {
+                                    System.out.println("You did not select an opponent.");
+                                    continue;
+                                }
                             } else {
-                                System.out.println("Selected opponent does not exist.");
+                                System.out.println("You don't have enough mana to cast this spell.");
                                 continue;
                             }
                         } else {
-                            System.out.println("You did not select an opponent.");
+                            System.out.println("You have not learnt this spell yet.");
                             continue;
                         }
                     }
 
                     if (myCommand.param1Str.equalsIgnoreCase("flamestrike")) {
                         if (player.skills.flamestrike.curLvl > 0) {
-                            if (player.mp >= player.skills.flamestrike.manaCost) {
+                            if (player.mp >= player.skills.flamestrike.mpCost) {
                                 player.skills.flamestrike.cast(player, opponents);
                                 break;
                             } else {
@@ -162,8 +192,18 @@ public class Combat extends Location {
                     }
 
                     if (myCommand.param1Str.equalsIgnoreCase("heal")) {
-                        player.skills.heal.cast(player);
-                        break;
+                        if (player.skills.heal.curLvl > 0) {
+                            if (player.mp >= player.skills.heal.mpCost) {
+                                player.skills.heal.cast(player);
+                                break;
+                            } else {
+                                System.out.println("You don't have enough mana to cast this spell.");
+                                continue;
+                            }
+                        } else {
+                            System.out.println("You have not learnt this spell yet.");
+                            continue;
+                        }
                     }
 
                     System.out.println("Invalid ability name.");

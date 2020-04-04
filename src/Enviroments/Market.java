@@ -12,7 +12,7 @@ public class Market extends Location {
 
             System.out.println("Enter one of the following commands:");
             System.out.println("HP <amount> - buy hp potions [" + this.hpCost + " gold each] (" + player.consumables.hpPotions_amount + "/" + player.consumables.hpPotions_maxAmount + ")");
-            System.out.println("MP <amount> - buy mp potions [" + this.mpCost + " gold each] (" + player.consumables.hpPotions_amount + "/" + player.consumables.hpPotions_maxAmount + ")");
+            System.out.println("MP <amount> - buy mp potions [" + this.mpCost + " gold each] (" + player.consumables.mpPotions_amount + "/" + player.consumables.mpPotions_maxAmount + ")");
             System.out.println("RETURN - your business is concluded here");
             System.out.println();
 

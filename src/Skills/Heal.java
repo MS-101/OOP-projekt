@@ -3,12 +3,12 @@ package Skills;
 import Entities.Entity;
 
 public class Heal extends Skill {
-    int healAmount;
+    public int healAmount;
 
     public Heal(int curLvl) {
         this.curLvl = curLvl;
         this.maxLvl = 3;
-        this.manaCost = 30;
+        this.mpCost = 30;
 
         this.healAmount = 50;
     }

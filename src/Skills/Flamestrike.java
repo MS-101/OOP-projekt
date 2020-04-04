@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Flamestrike extends Skill {
-    int lowSpellDmg, highSpellDmg;
+    public int lowSpellDmg, highSpellDmg;
 
     public Flamestrike(int curLvl) {
         this.curLvl = curLvl;
         this.maxLvl = 3;
-        this.manaCost = 40;
+        this.mpCost = 40;
 
         this.lowSpellDmg = 20;
         this.highSpellDmg = 25;
@@ -33,6 +33,7 @@ public class Flamestrike extends Skill {
 
         int i, spellDamage;
         Random randomNumber = new Random();
+
         for (i = 0; i < targets.size(); i++) {
             Entity selectedTarget = targets.get(i);
 
@@ -44,11 +45,14 @@ public class Flamestrike extends Skill {
 
             selectedTarget.hp -= spellDamage;
 
-            System.out.println("Flamestrike deals " + spellDamage + " damage to " + selectedTarget.name + " <" + i+1 + ">.");
+            int opponentIndex = i + 1;
+
+            System.out.println("Flamestrike deals " + spellDamage + " damage to " + selectedTarget.name + " <" + opponentIndex + ">.");
             if (selectedTarget.hp < 0) {
                 System.out.println(selectedTarget.name + " has died.");
             }
-            System.out.println();
         }
+
+        System.out.println();
     }
 }

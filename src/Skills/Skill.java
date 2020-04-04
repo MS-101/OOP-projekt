@@ -4,10 +4,10 @@ import Entities.Entity;
 
 public class Skill {
     public int curLvl, maxLvl;
-    public int manaCost;
+    public int mpCost;
 
     public void cast(Entity caster) {
-        caster.mp -= manaCost;
-        System.out.println("You spent " + this.manaCost + " mana.");
+        caster.mp -= mpCost;
+        System.out.println("You spent " + this.mpCost + " mana.");
     }
 }

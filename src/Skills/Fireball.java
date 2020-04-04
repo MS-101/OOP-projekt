@@ -6,12 +6,12 @@ import Entities.Player.Mercenary;
 import java.util.Random;
 
 public class Fireball extends Skill {
-    int lowSpellDmg, highSpellDmg;
+    public int lowSpellDmg, highSpellDmg;
 
     public Fireball(int curLvl) {
         this.curLvl = curLvl;
         this.maxLvl = 3;
-        this.manaCost = 30;
+        this.mpCost = 30;
 
         this.lowSpellDmg = 35;
         this.highSpellDmg = 45;
@@ -27,8 +27,6 @@ public class Fireball extends Skill {
     }
 
     public void cast(Entity caster, Entity target) {
-        super.cast(caster);
-
         super.cast(caster);
 
         int i, spellDamage;
