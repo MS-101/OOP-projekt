@@ -57,7 +57,7 @@ public class Combat extends Location {
             for (i = 0; i < this.opponents.size(); i++) {
                 Monster pickedOpponent = opponents.get(i);
 
-                if (pickedOpponent.hp < 0) {
+                if (pickedOpponent.hp <= 0) {
                     Random randomNumber = new Random();
                     int gainedGold;
 
@@ -244,10 +244,14 @@ public class Combat extends Location {
                 if (diceRoll < 60) {
                     System.out.println("You may live to fight another day.");
                     System.out.println();
+
+                    playerEscaped = true;
                     return;
                 } else {
                     System.out.println("You have failed to lose your pursuers.");
                     System.out.println();
+
+                    playerEscaped = false;
                     return;
                 }
 

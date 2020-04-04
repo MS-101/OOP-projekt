@@ -6,7 +6,7 @@ public class Inn extends Location {
     int roomCost = 25;
     int roomComfort = 30;
 
-    public void visit(Mercenary player) {
+    public void visit(Village myVillage, Mercenary player) {
         while (true) {
             System.out.println("\"How may I help you?\" the trader asks.");
             System.out.println("You currently have " + player.loot.gold + " gold.");
@@ -30,6 +30,8 @@ public class Inn extends Location {
 
                         int healAmount = (int)(((double)roomComfort / (double)100) * player.maxHp);
                         player.healAll(healAmount);
+
+                        myVillage.myForge.generateInventory();
 
                         break;
                     } else {

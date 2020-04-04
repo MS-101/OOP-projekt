@@ -1,6 +1,5 @@
 package Enviroments;
 
-import java.util.Scanner;
 import Entities.Player.Mercenary;
 
 public class Village extends Location {
@@ -38,7 +37,7 @@ public class Village extends Location {
                     System.out.println("You have entered the establishment.");
                     System.out.println();
 
-                    myInn.visit(player);
+                    myInn.visit(this, player);
                     break;
                 }
 

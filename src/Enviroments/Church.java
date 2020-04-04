@@ -155,6 +155,86 @@ public class Church extends Location {
     }
 
     private void skills(Mercenary player) {
+        while (true) {
+            System.out.println("You have " + player.skillPoints + " skill points.");
+            System.out.println();
 
+            System.out.println("Enter one of the following commands:");
+
+            System.out.println("FIREBALL [lvl " + player.skills.fireball.curLvl + "/" + player.skills.fireball.maxLvl + "] - deals dmg to a single target");
+            System.out.println("FLAMESTRIKE [lvl " + player.skills.flamestrike.curLvl + "/" + player.skills.flamestrike.maxLvl + "] - deal dmg to all targets");
+            System.out.println("HEAL [lvl " + player.skills.heal.curLvl + "/" + player.skills.heal.maxLvl + "] - heals hp");
+            System.out.println("FINISH - perhaps there is something else that you need");
+            System.out.println();
+
+            while (true) {
+                myCommand.readInput();
+
+                //I should probably improve the following code at some point...
+
+                if (myCommand.name.equalsIgnoreCase("FIREBALL")) {
+                    if (player.skillPoints > 0) {
+                        if (player.skills.fireball.curLvl < player.skills.fireball.maxLvl) {
+                            player.skills.fireball.upgrade();
+                            player.skillPoints--;
+
+                            System.out.print("You improved skill Fireball to lvl " + player.skills.fireball.curLvl + "/" + player.skills.fireball.maxLvl + ".");
+                            break;
+                        } else {
+                            System.out.println("This spell is at max lvl.");
+                            continue;
+                        }
+                    } else {
+                        System.out.println("Level up to get more skill points.");
+                        continue;
+                    }
+                }
+
+                if (myCommand.name.equalsIgnoreCase("FLAMESTRIKE")) {
+                    if (player.skillPoints > 0) {
+                        if (player.skills.flamestrike.curLvl < player.skills.flamestrike.maxLvl) {
+                            player.skills.flamestrike.upgrade();
+                            player.skillPoints--;
+
+                            System.out.print("You improved skill Flamestrike to lvl " + player.skills.flamestrike.curLvl + "/" + player.skills.flamestrike.maxLvl + ".");
+                            break;
+                        } else {
+                            System.out.println("This spell is at max lvl.");
+                            continue;
+                        }
+                    } else {
+                        System.out.println("Level up to get more skill points.");
+                        continue;
+                    }
+                }
+
+                if (myCommand.name.equalsIgnoreCase("HEAL")) {
+                    if (player.skillPoints > 0) {
+                        if (player.skills.heal.curLvl < player.skills.heal.maxLvl) {
+                            player.skills.heal.upgrade();
+                            player.skillPoints--;
+
+                            System.out.print("You improved skill Heal to lvl " + player.skills.heal.curLvl + "/" + player.skills.heal.maxLvl + ".");
+                            break;
+                        } else {
+                            System.out.println("This spell is at max lvl.");
+                            continue;
+                        }
+                    } else {
+                        System.out.println("Level up to get more skill points.");
+                        continue;
+                    }
+                }
+
+                if (myCommand.name.equalsIgnoreCase("FINISH")) {
+                    System.out.println("You finished reviewing your skills.");
+                    System.out.println();
+                    return;
+                }
+
+                System.out.println("Invalid command!");
+
+            }
+        }
     }
 }

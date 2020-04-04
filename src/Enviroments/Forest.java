@@ -20,14 +20,24 @@ public class Forest extends Location {
             if (player.weapon != null) {
                 System.out.println("weapon (" + player.weapon.name + "): " + player.weapon.durability + "/" + player.weapon.maxDurability + " durability");
             } else {
-                System.out.println("weapon: null");
+                System.out.println("weapon: N/A");
             }
             if (player.armor != null) {
                 System.out.println("armor (" + player.armor.name + "): " + player.armor.durability + "/" + player.armor.maxDurability + " durability");
             } else {
-                System.out.println("armor: null");
+                System.out.println("armor: N/A");
             }
             System.out.println();
+
+            if (player.attributePoints > 0 || player.skillPoints > 0) {
+                if (player.attributePoints > 0) {
+                    System.out.println("You have unallocated " + player.attributePoints + " attribute points!");
+                }
+                if (player.skillPoints > 0) {
+                    System.out.println("You have unallocated " + player.skillPoints + " skill points!");
+                }
+                System.out.println();
+            }
 
             System.out.println("Enter one of the following commands:");
             System.out.println("HUNT - find and attempt to slay some monsters");

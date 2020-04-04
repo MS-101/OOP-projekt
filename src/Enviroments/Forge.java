@@ -2,8 +2,6 @@ package Enviroments;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
-import java.util.StringTokenizer;
 
 import Entities.Player.Mercenary;
 import Items.Item;
@@ -27,10 +25,10 @@ public class Forge extends Location {
         forgeLootTable.add(new Leather_Armor());
 
         forgeInventoryLimit = 8;
-        generateLoot();
+        generateInventory();
     }
 
-    private void generateLoot() {
+    public void generateInventory() {
         Random randomNumber = new Random();
         Item newItem;
         int i, randomIndex;
@@ -96,6 +94,24 @@ public class Forge extends Location {
         while (true) {
             System.out.println("\"Have a look at my wares,\" he replies.");
             System.out.println("You currently have " + player.loot.gold + " gold.");
+            System.out.println();
+
+            System.out.println("Your inventory:");
+            if (player.weapon != null) {
+                System.out.print("weapon (" + player.weapon.name + "):");
+                System.out.print(" (" + player.weapon.lowPhysicalDmg + "-" + player.weapon.highPhysicalDmg + " physical dmg)");
+                System.out.print(" (" + player.weapon.lowPiercingDmg + "-" + player.weapon.highPiercingDmg + " piercing dmg)");
+                System.out.println();
+            } else {
+                System.out.println("weapon: N/A");
+            }
+            if (player.armor != null) {
+                System.out.print("armor (" + player.armor.name + "):");
+                System.out.print(" (" + player.armor.armorVal + " armor)");
+                System.out.println();
+            } else {
+                System.out.println("armor: N/A");
+            }
             System.out.println();
 
             System.out.println("Blacksmith's inventory:");
