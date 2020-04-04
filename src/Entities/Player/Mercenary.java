@@ -17,6 +17,10 @@ public class Mercenary extends Entity {
     int lvlRequirementInc;
 
     public Mercenary() {
+        reset();
+    }
+
+    public void reset() {
         setMaxHp(200);
         setMaxMp(100);
         setBasePhysicalDmg(4, 5);

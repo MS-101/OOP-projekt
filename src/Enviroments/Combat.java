@@ -287,7 +287,10 @@ public class Combat extends Location {
     }
 
     private void defeat() {
-        System.out.println("You have been defeated in combat.");
+        System.out.println("You have been defeated in combat!");
+        System.out.println("A new adventurer takes your place.");
         System.out.println();
+
+        this.player.reset();
     }
 }

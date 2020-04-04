@@ -4,8 +4,23 @@ import java.util.ArrayList;
 import java.util.Random;
 import Entities.Player.Mercenary;
 import Entities.Monsters.*;
+import Items.Item;
+import Items.Weapons.Copper_Dagger;
+import Items.Weapons.Copper_Gladius;
+import Items.Weapons.Copper_Spear;
 
 public class Forest extends Location {
+    ArrayList<Monster> monsterLootTable;
+
+    public Forest() {
+        monsterLootTable = new ArrayList<Monster>();
+
+        monsterLootTable.add(new Ghoul());
+        monsterLootTable.add(new Alghoul());
+        monsterLootTable.add(new Giant_Spider());
+        monsterLootTable.add(new Giant());
+    }
+
     public void visit(Mercenary player) {
         int i;
 
@@ -49,14 +64,19 @@ public class Forest extends Location {
 
                 if (myCommand.name.equalsIgnoreCase("HUNT")) {
                     Random randomNumber = new Random();
-                    ArrayList<Monster> opponents = new ArrayList<Monster>();;
+                    ArrayList<Monster> opponents = new ArrayList<Monster>();
+
                     int monsterCount = randomNumber.nextInt(3) + 1;
 
                     System.out.println("You have decided to hunt some monsters.");
                     System.out.println();
 
                     for (i = 0; i < monsterCount; i++) {
-                        opponents.add(new Ghoul());
+                        int randomIndex = randomNumber.nextInt(monsterLootTable.size());
+
+                        Monster newMonster = this.monsterLootTable.get(randomIndex).getCopy();
+
+                        opponents.add(newMonster);
                     }
 
                     new Combat(player, opponents);

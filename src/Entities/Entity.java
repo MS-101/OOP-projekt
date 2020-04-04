@@ -9,9 +9,9 @@ import java.util.Random;
 public class Entity {
     public int maxHp, hp;
     public int maxMp, mp;
-    int lowPhysicalDmg, highPhysicalDmg;
-    int lowPiercingDmg, highPiercingDmg;
-    int baseArmor;
+    public int lowPhysicalDmg, highPhysicalDmg;
+    public int lowPiercingDmg, highPiercingDmg;
+    public int baseArmor;
     public String name;
 
     public Weapon weapon;
