@@ -3,6 +3,8 @@ package Entities.Player;
 import Entities.Entity;
 import Items.Item;
 import Items.Weapons.Copper_Dagger;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Mercenary extends Entity {
