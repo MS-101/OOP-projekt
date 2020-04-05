@@ -111,7 +111,7 @@ public class Entity {
             inflictedPhysicalDmg *= (double)((Mercenary) this).stats.strength / 10;
         }
 
-        if (receiver.armor != null) {
+        if (totalArmor != 0) {
             armorReduction = 0.3;
 
             remainingPhysicalDmg = inflictedPhysicalDmg - totalArmor;

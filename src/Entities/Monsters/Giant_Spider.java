@@ -7,7 +7,7 @@ public class Giant_Spider extends Monster {
         setBasePhysicalDmg(8, 12);
         setBasePiercingDmg(8, 12);
         setBaseArmor(0);
-        setName("Giant");
+        setName("Giant Spider");
 
         setLoot(20, 20, 24);
     }

@@ -14,6 +14,7 @@ public class Forge extends Location {
     int forgeInventoryLimit;
 
     public Forge() {
+        int i;
         forgeInventory = new ArrayList<Item>();
         forgeLootTable = new ArrayList<Item>();
 

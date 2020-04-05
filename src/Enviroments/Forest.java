@@ -4,21 +4,26 @@ import java.util.ArrayList;
 import java.util.Random;
 import Entities.Player.Mercenary;
 import Entities.Monsters.*;
-import Items.Item;
-import Items.Weapons.Copper_Dagger;
-import Items.Weapons.Copper_Gladius;
-import Items.Weapons.Copper_Spear;
 
 public class Forest extends Location {
     ArrayList<Monster> monsterLootTable;
 
     public Forest() {
+        int i;
         monsterLootTable = new ArrayList<Monster>();
 
-        monsterLootTable.add(new Ghoul());
-        monsterLootTable.add(new Alghoul());
-        monsterLootTable.add(new Giant_Spider());
-        monsterLootTable.add(new Giant());
+        for (i = 0; i < 40; i++) {
+            monsterLootTable.add(new Ghoul());
+        }
+        for (i = 0; i < 25; i++) {
+            monsterLootTable.add(new Alghoul());
+        }
+        for (i = 0; i < 25; i++) {
+            monsterLootTable.add(new Giant_Spider());
+        }
+        for (i = 0; i < 10; i++) {
+            monsterLootTable.add(new Giant());
+        }
     }
 
     public void visit(Mercenary player) {

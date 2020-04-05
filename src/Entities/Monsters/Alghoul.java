@@ -7,7 +7,7 @@ public class Alghoul extends  Monster {
         setBasePhysicalDmg(14, 16);
         setBasePiercingDmg(4, 6);
         setBaseArmor(5);
-        setName("Ghoul");
+        setName("Alghoul");
 
         setLoot(20, 20, 24);
     }
