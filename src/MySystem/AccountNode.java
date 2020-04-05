@@ -1,4 +1,4 @@
-package System;
+package MySystem;
 
 import java.io.Serializable;
 

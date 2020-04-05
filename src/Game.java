@@ -6,17 +6,18 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 import java.io.*;
-import System.*;
+import MySystem.*;
 
 public class Game {
     public static void main(String[] args) throws IOException, ClassNotFoundException, NoSuchAlgorithmException {
         Mercenary myPlayer;
         Village myVillage;
         File accountsFile = new File("accounts.txt");
+        AccountHandler myAccountManager = new AccountHandler();
         AccountsHashTable myHashTable;
 
-        //createAccountsFile(accountsFile);
-        myHashTable = readAccountsFile(accountsFile);
+        //myAccountManager.createAccountsFile(accountsFile);
+        myHashTable = myAccountManager.readAccountsFile(accountsFile);
 
         Scanner myScanner = new Scanner(System.in);
 
@@ -38,12 +39,12 @@ public class Game {
 
                 if (consoleInput.equalsIgnoreCase("login")) {
                     System.out.println();
-                    login(myHashTable);
+                    login(accountsFile, myHashTable);
                     break;
                 }
 
                 if (consoleInput.equalsIgnoreCase("exit")) {
-                    return;
+                    System.exit(0);
                 }
 
                 System.out.println("Incorrect command!");
@@ -53,6 +54,7 @@ public class Game {
 
     private static void register(File accountsFile, AccountsHashTable myHashTable) throws NoSuchAlgorithmException, IOException {
         Scanner myScanner = new Scanner(System.in);
+        AccountHandler myAccountManager = new AccountHandler();
 
         System.out.print("username: ");
         String username = myScanner.nextLine();
@@ -68,16 +70,16 @@ public class Game {
             System.out.println("Registration succesfull!");
             System.out.println();
 
-            rewriteAccountsFile(accountsFile, myHashTable);
+            myAccountManager.rewriteAccountsFile(accountsFile, myHashTable);
 
             Village myVillage = registeredAccount.getAccountVillage();
             Mercenary myMercenary = registeredAccount.getAccountMercenary();
 
-            myVillage.visit(myMercenary);
+            myVillage.visit(accountsFile, myHashTable, myMercenary);
         }
     }
 
-    private static void login(AccountsHashTable myHashTable) throws NoSuchAlgorithmException {
+    private static void login(File accountsFile, AccountsHashTable myHashTable) throws NoSuchAlgorithmException, IOException {
         Scanner myScanner = new Scanner(System.in);
 
         System.out.print("username: ");
@@ -95,7 +97,7 @@ public class Game {
             Village myVillage = myAccount.getAccountVillage();
             Mercenary myMercenary = myAccount.getAccountMercenary();
 
-            myVillage.visit(myMercenary);
+            myVillage.visit(accountsFile, myHashTable, myMercenary);
         } else {
             System.out.println("Login fail!");
             System.out.println();
@@ -109,37 +111,6 @@ public class Game {
         String protectedPassword = bytesToHex(encodedhash);
 
         return protectedPassword;
-    }
-
-    private static void createAccountsFile(File accountsFile) throws FileNotFoundException, IOException {
-        AccountsHashTable newHashTable = new AccountsHashTable(1000);
-
-        FileOutputStream fo = new FileOutputStream(accountsFile);
-        ObjectOutputStream fileOutput = new ObjectOutputStream(fo);
-        fileOutput.writeObject(newHashTable);
-
-        fileOutput.close();
-        fo.close();
-    }
-
-    private static void rewriteAccountsFile(File accountsFile, AccountsHashTable myHashTable) throws FileNotFoundException, IOException {
-        FileOutputStream fo = new FileOutputStream(accountsFile);
-        ObjectOutputStream fileOutput = new ObjectOutputStream(fo);
-        fileOutput.writeObject(myHashTable);
-
-        fileOutput.close();
-        fo.close();
-    }
-
-    private static AccountsHashTable readAccountsFile(File accountsFile) throws FileNotFoundException, IOException, ClassNotFoundException {
-        FileInputStream fi = new FileInputStream(accountsFile);
-        ObjectInputStream input = new ObjectInputStream(fi);
-        AccountsHashTable myHashTable = (AccountsHashTable) input.readObject();
-
-        input.close();
-        fi.close();
-
-        return myHashTable;
     }
 
     private static String bytesToHex(byte[] hash) {

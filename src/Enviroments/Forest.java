@@ -1,10 +1,12 @@
 package Enviroments;
 
-import java.io.Serializable;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import Entities.Player.Mercenary;
 import Entities.Monsters.*;
+import MySystem.*;
 
 public class Forest extends Location {
     ArrayList<Monster> monsterLootTable;
@@ -27,7 +29,7 @@ public class Forest extends Location {
         }
     }
 
-    public void visit(Mercenary player) {
+    public void visit(File accountsFile, AccountsHashTable myHashtable, Mercenary player, Village myVillage) throws IOException {
         int i;
 
         while (true) {
@@ -85,7 +87,7 @@ public class Forest extends Location {
                         opponents.add(newMonster);
                     }
 
-                    new Combat(player, opponents);
+                    new Combat(accountsFile, myHashtable, player, opponents);
                     break;
                 }
 

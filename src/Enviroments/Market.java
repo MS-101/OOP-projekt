@@ -1,13 +1,13 @@
 package Enviroments;
 
 import Entities.Player.Mercenary;
-
-import java.io.Serializable;
+import MySystem.*;
+import java.io.File;
 
 public class Market extends Location {
     int hpCost = 40, mpCost = 40;
 
-    public void visit(Mercenary player) {
+    public void visit(File accountsFile, AccountsHashTable myHashtable, Mercenary player, Village myVillage) {
         while (true) {
             System.out.println("\"How may I help you?\" the trader asks.");
             System.out.println();

@@ -1,8 +1,9 @@
 package Enviroments;
 
 import Entities.Player.Mercenary;
-
-import java.io.Serializable;
+import MySystem.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Village extends Location {
     Inn myInn;
@@ -19,7 +20,7 @@ public class Village extends Location {
         myForest = new Forest();
     }
 
-    public void visit(Mercenary player) {
+    public void visit(File accountsFile, AccountsHashTable myHashtable, Mercenary player) throws IOException {
         while (true) {
             System.out.println("Choose a location of your next visit.");
             System.out.println();
@@ -39,7 +40,7 @@ public class Village extends Location {
                     System.out.println("You have entered the establishment.");
                     System.out.println();
 
-                    myInn.visit(this, player);
+                    myInn.visit(accountsFile, myHashtable, player, this);
                     break;
                 }
 
@@ -47,7 +48,7 @@ public class Village extends Location {
                     System.out.println("You decide to pay a visit to the local smith.");
                     System.out.println();
 
-                    myForge.visit(player);
+                    myForge.visit(accountsFile, myHashtable, player, this);
                     break;
                 }
 
@@ -55,7 +56,7 @@ public class Village extends Location {
                     System.out.println("You have decided to buy some necessities.");
                     System.out.println();
 
-                    myMarket.visit(player);
+                    myMarket.visit(accountsFile, myHashtable, player, this);
                     break;
                 }
 
@@ -63,7 +64,7 @@ public class Village extends Location {
                     System.out.println("You approach the local shrine.");
                     System.out.println();
 
-                    myChurch.visit(player);
+                    myChurch.visit(accountsFile, myHashtable, player, this);
                     break;
                 }
 
@@ -71,7 +72,7 @@ public class Village extends Location {
                     System.out.println("You have entered the forest.");
                     System.out.println();
 
-                    myForest.visit(player);
+                    myForest.visit(accountsFile, myHashtable, player, this);
                     break;
                 }
 

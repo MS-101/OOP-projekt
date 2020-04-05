@@ -2,10 +2,11 @@ package Enviroments;
 
 import Entities.Player.Mercenary;
 
-import java.io.Serializable;
+import java.io.File;
+import MySystem.*;
 
 public class Church extends Location {
-    public void visit(Mercenary player) {
+    public void visit(File accountsFile, AccountsHashTable myHashtable, Mercenary player, Village myVillage) {
         while (true) {
             System.out.println("\"What clouds you this time?\" the priest beckons you to confess.");
             System.out.println();

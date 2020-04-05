@@ -1,4 +1,4 @@
-package System;
+package MySystem;
 
 import Entities.Player.Mercenary;
 import Enviroments.Village;

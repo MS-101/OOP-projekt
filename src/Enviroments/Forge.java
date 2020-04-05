@@ -1,6 +1,6 @@
 package Enviroments;
 
-import java.io.Serializable;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -8,6 +8,7 @@ import Entities.Player.Mercenary;
 import Items.Item;
 import Items.Weapons.*;
 import Items.Armor.*;
+import MySystem.*;
 
 public class Forge extends Location {
     ArrayList<Item> forgeInventory;
@@ -46,7 +47,7 @@ public class Forge extends Location {
         }
     }
 
-    public void visit(Mercenary player) {
+    public void visit(File accountsFile, AccountsHashTable myHashtable, Mercenary player, Village myVillage) {
         while (true) {
             System.out.println("\"How may I help you, sir?\" the blacksmith asks.");
             System.out.println();

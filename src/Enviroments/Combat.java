@@ -3,8 +3,11 @@ package Enviroments;
 import Entities.Player.*;
 import Entities.Monsters.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import MySystem.*;
 
 public class Combat extends Location {
     Mercenary player;
@@ -12,7 +15,12 @@ public class Combat extends Location {
     int goldGain, expGain;
     boolean playerEscaped;
 
-    public Combat(Mercenary player, ArrayList<Monster> opponents) {
+    File accountsfile;
+    AccountsHashTable myHashTable;
+
+    public Combat(File accountsFile, AccountsHashTable myHashtable, Mercenary player, ArrayList<Monster> opponents) throws IOException {
+        this.accountsfile = accountsFile;
+        this.myHashTable = myHashtable;
         this.player = player;
         this.opponents = opponents;
 
@@ -22,7 +30,8 @@ public class Combat extends Location {
         start();
     }
 
-    private void start() {
+    private void start() throws IOException {
+        AccountHandler myAccountManager = new AccountHandler();
         int turnCounter = 1;
         int i;
 
@@ -51,6 +60,7 @@ public class Combat extends Location {
             playerTurn();
 
             if (this.playerEscaped) {
+                myAccountManager.rewriteAccountsFile(accountsfile, myHashTable);
                 return;
             }
 
@@ -72,6 +82,7 @@ public class Combat extends Location {
 
             if (this.opponents.size() == 0) {
                 victory();
+                myAccountManager.rewriteAccountsFile(accountsfile, myHashTable);
                 return;
             }
 
@@ -80,6 +91,7 @@ public class Combat extends Location {
 
                 if (this.player.hp <= 0) {
                     defeat();
+                    myAccountManager.rewriteAccountsFile(accountsfile, myHashTable);
                     return;
                 }
             }
