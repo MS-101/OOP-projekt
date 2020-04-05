@@ -38,7 +38,8 @@ public class Game {
 
                 if (consoleInput.equalsIgnoreCase("login")) {
                     System.out.println();
-                    login();
+                    login(myHashTable);
+                    break;
                 }
 
                 if (consoleInput.equalsIgnoreCase("exit")) {
@@ -48,8 +49,6 @@ public class Game {
                 System.out.println("Incorrect command!");
             }
         }
-
-        //myVillage.visit(myPlayer);
     }
 
     private static void register(File accountsFile, AccountsHashTable myHashTable) throws NoSuchAlgorithmException, IOException {
@@ -64,15 +63,43 @@ public class Game {
 
         System.out.println();
 
-        if (myHashTable.addAcount(username, securePassword)) {
+        Account registeredAccount = myHashTable.register(username, securePassword);
+        if (registeredAccount != null) {
             System.out.println("Registration succesfull!");
+            System.out.println();
+
             rewriteAccountsFile(accountsFile, myHashTable);
+
+            Village myVillage = registeredAccount.getAccountVillage();
+            Mercenary myMercenary = registeredAccount.getAccountMercenary();
+
+            myVillage.visit(myMercenary);
         }
-        System.out.println();
     }
 
-    private static void login() {
+    private static void login(AccountsHashTable myHashTable) throws NoSuchAlgorithmException {
+        Scanner myScanner = new Scanner(System.in);
 
+        System.out.print("username: ");
+        String username = myScanner.nextLine();
+
+        System.out.print("password: ");
+        String unprotectedPassword = myScanner.nextLine();
+        String securePassword = securePassword(unprotectedPassword);
+
+        Account myAccount = myHashTable.login(username, securePassword);
+        if (myAccount != null) {
+            System.out.println("Login succesfull!");
+            System.out.println();
+
+            Village myVillage = myAccount.getAccountVillage();
+            Mercenary myMercenary = myAccount.getAccountMercenary();
+
+            myVillage.visit(myMercenary);
+        } else {
+            System.out.println("Login fail!");
+            System.out.println();
+        }
     }
 
     private static String securePassword(String unprotectedPassword) throws NoSuchAlgorithmException {

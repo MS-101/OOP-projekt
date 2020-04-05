@@ -21,7 +21,7 @@ public class AccountsHashTable implements Serializable {
         }
     }
 
-    public boolean addAcount(String username, String securedPassword) {
+    public Account register(String username, String securedPassword) {
         int key = username.hashCode() % hashtableSize;
 
         AccountNode pickedAccountNode = this.accountHashTable.get(key);
@@ -31,7 +31,7 @@ public class AccountsHashTable implements Serializable {
             if (pickedAccountNode.curAccount.username.equals(username)) {
                 System.out.println("Account with this username already exists!");
 
-                return false;
+                return null;
             }
 
             pickedAccountNode = pickedAccountNode.nextAccount;
@@ -55,6 +55,25 @@ public class AccountsHashTable implements Serializable {
         System.out.println("chain index = " + chainIndex);
          */
 
-        return true;
+        return pickedAccount;
+    }
+
+    public Account login(String username, String securedPassword) {
+        int key = username.hashCode() % hashtableSize;
+
+        AccountNode pickedAccountNode = this.accountHashTable.get(key);
+
+        while (pickedAccountNode.curAccount != null) {
+            Account pickedAccount = pickedAccountNode.curAccount;
+            if (pickedAccount.username.equals(username)) {
+                if (pickedAccount.securedPassword.equals(securedPassword)) {
+                    return pickedAccount;
+                }
+            }
+
+            pickedAccountNode = pickedAccountNode.nextAccount;
+        }
+
+        return null;
     }
 }
