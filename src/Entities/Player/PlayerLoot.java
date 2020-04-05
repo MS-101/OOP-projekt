@@ -1,6 +1,8 @@
 package Entities.Player;
 
-public class PlayerLoot {
+import java.io.Serializable;
+
+public class PlayerLoot implements Serializable {
     public int gold;
     public int exp;
 

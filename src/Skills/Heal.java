@@ -3,6 +3,8 @@ package Skills;
 import Entities.Entity;
 import Entities.Player.Mercenary;
 
+import java.io.Serializable;
+
 public class Heal extends Skill {
     public int healAmount;
 

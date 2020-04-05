@@ -4,6 +4,7 @@ import Entities.Entity;
 import Entities.Monsters.Monster;
 import Entities.Player.Mercenary;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 

@@ -1,6 +1,8 @@
 package Entities.Player;
 
-public class PlayerStats {
+import java.io.Serializable;
+
+public class PlayerStats implements Serializable {
     public int strength;
     public int dexterity;
     public int intelligence;

@@ -2,6 +2,8 @@ package Enviroments;
 
 import Entities.Player.Mercenary;
 
+import java.io.Serializable;
+
 public class Church extends Location {
     public void visit(Mercenary player) {
         while (true) {

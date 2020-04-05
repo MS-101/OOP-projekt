@@ -1,9 +1,10 @@
 package Enviroments;
 
+import java.io.Serializable;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-public class Command {
+public class Command implements Serializable {
     String name;
 
     String param1Str;

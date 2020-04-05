@@ -30,7 +30,6 @@ public class AccountsHashTable implements Serializable {
         while (pickedAccountNode.curAccount != null) {
             if (pickedAccountNode.curAccount.username.equals(username)) {
                 System.out.println("Account with this username already exists!");
-                System.out.println();
 
                 return false;
             }

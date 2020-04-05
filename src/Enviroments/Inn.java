@@ -2,6 +2,8 @@ package Enviroments;
 
 import Entities.Player.Mercenary;
 
+import java.io.Serializable;
+
 public class Inn extends Location {
     int roomCost = 25;
     int roomComfort = 30;

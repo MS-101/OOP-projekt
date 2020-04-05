@@ -3,6 +3,7 @@ package Skills;
 import Entities.Entity;
 import Entities.Player.Mercenary;
 
+import java.io.Serializable;
 import java.util.Random;
 
 public class Fireball extends Skill {

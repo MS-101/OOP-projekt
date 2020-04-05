@@ -4,9 +4,10 @@ import Entities.Player.*;
 import Items.Weapons.Weapon;
 import Items.Armor.Armor;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Entity {
+public class Entity implements Serializable {
     public int maxHp, hp;
     public int maxMp, mp;
     public int lowPhysicalDmg, highPhysicalDmg;

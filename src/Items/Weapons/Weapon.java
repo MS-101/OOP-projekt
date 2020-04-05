@@ -2,7 +2,9 @@ package Items.Weapons;
 
 import Items.Item;
 
-public class Weapon extends Item {
+import java.io.Serializable;
+
+public class Weapon extends Item implements Serializable {
     public int lowPhysicalDmg, highPhysicalDmg;
     public int lowPiercingDmg, highPiercingDmg;
 

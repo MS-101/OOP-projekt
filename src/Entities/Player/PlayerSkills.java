@@ -2,7 +2,9 @@ package Entities.Player;
 
 import Skills.*;
 
-public class PlayerSkills {
+import java.io.Serializable;
+
+public class PlayerSkills implements Serializable {
     public Fireball fireball;
     public Flamestrike flamestrike;
     public Heal heal;

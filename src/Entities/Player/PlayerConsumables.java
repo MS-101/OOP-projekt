@@ -1,6 +1,8 @@
 package Entities.Player;
 
-public class PlayerConsumables {
+import java.io.Serializable;
+
+public class PlayerConsumables implements Serializable {
     public int hpPotions_amount;
     public int hpPotions_maxAmount;
     public int hpPotion_heal;

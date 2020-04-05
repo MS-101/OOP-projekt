@@ -15,7 +15,7 @@ public class Game {
         File accountsFile = new File("accounts.txt");
         AccountsHashTable myHashTable;
 
-        createAccountsFile(accountsFile);
+        //createAccountsFile(accountsFile);
         myHashTable = readAccountsFile(accountsFile);
 
         Scanner myScanner = new Scanner(System.in);
@@ -32,7 +32,7 @@ public class Game {
 
                 if (consoleInput.equalsIgnoreCase("register")) {
                     System.out.println();
-                    register(myHashTable);
+                    register(accountsFile, myHashTable);
                     break;
                 }
 
@@ -52,7 +52,7 @@ public class Game {
         //myVillage.visit(myPlayer);
     }
 
-    private static void register(AccountsHashTable myHashTable) throws NoSuchAlgorithmException {
+    private static void register(File accountsFile, AccountsHashTable myHashTable) throws NoSuchAlgorithmException, IOException {
         Scanner myScanner = new Scanner(System.in);
 
         System.out.print("username: ");
@@ -66,6 +66,7 @@ public class Game {
 
         if (myHashTable.addAcount(username, securePassword)) {
             System.out.println("Registration succesfull!");
+            rewriteAccountsFile(accountsFile, myHashTable);
         }
         System.out.println();
     }
@@ -89,6 +90,15 @@ public class Game {
         FileOutputStream fo = new FileOutputStream(accountsFile);
         ObjectOutputStream fileOutput = new ObjectOutputStream(fo);
         fileOutput.writeObject(newHashTable);
+
+        fileOutput.close();
+        fo.close();
+    }
+
+    private static void rewriteAccountsFile(File accountsFile, AccountsHashTable myHashTable) throws FileNotFoundException, IOException {
+        FileOutputStream fo = new FileOutputStream(accountsFile);
+        ObjectOutputStream fileOutput = new ObjectOutputStream(fo);
+        fileOutput.writeObject(myHashTable);
 
         fileOutput.close();
         fo.close();

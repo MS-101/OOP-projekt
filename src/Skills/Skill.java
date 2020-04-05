@@ -2,7 +2,9 @@ package Skills;
 
 import Entities.Entity;
 
-public class Skill {
+import java.io.Serializable;
+
+public class Skill implements Serializable {
     public int curLvl, maxLvl;
     public int mpCost;
 

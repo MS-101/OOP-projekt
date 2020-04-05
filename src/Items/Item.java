@@ -1,5 +1,7 @@
 package Items;
 
+import java.io.Serializable;
+
 public abstract class Item {
     public int cost, repairCost;
     public int durability, maxDurability;

@@ -2,6 +2,8 @@ package Enviroments;
 
 import Entities.Player.Mercenary;
 
+import java.io.Serializable;
+
 public class Market extends Location {
     int hpCost = 40, mpCost = 40;
 
