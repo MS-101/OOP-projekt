@@ -5,6 +5,7 @@ import Enviroments.Village;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import static java.lang.StrictMath.abs;
 
 public class AccountsHashTable implements Serializable {
     int hashtableSize;
@@ -22,7 +23,7 @@ public class AccountsHashTable implements Serializable {
     }
 
     public Account register(String username, String securedPassword) {
-        int key = username.hashCode() % hashtableSize;
+        int key = abs((username.hashCode())) % hashtableSize;
 
         AccountNode pickedAccountNode = this.accountHashTable.get(key);
 
