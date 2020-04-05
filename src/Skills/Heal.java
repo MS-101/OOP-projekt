@@ -1,6 +1,7 @@
 package Skills;
 
 import Entities.Entity;
+import Entities.Player.Mercenary;
 
 public class Heal extends Skill {
     public int healAmount;
@@ -25,6 +26,12 @@ public class Heal extends Skill {
         super.cast(caster);
 
         int prevHp, effectiveHeal;
+        int realHealAmount;
+
+        realHealAmount = healAmount;
+        if (caster instanceof Mercenary) {
+            realHealAmount *= (double)((Mercenary) caster).stats.intelligence / 10;
+        }
 
         prevHp = caster.hp;
         caster.healHp(healAmount);
