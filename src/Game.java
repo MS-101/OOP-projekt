@@ -1,52 +1,118 @@
 import Entities.Player.Mercenary;
 import Enviroments.Village;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 import java.io.*;
 import System.*;
 
 public class Game {
-    public static void main(String[] args) throws FileNotFoundException, IOException {
-        Mercenary player = new Mercenary();
-        Village myVillage = new Village();
-
-        //serialization input
+    public static void main(String[] args) throws IOException, ClassNotFoundException, NoSuchAlgorithmException {
+        Mercenary myPlayer;
+        Village myVillage;
         File accountsFile = new File("accounts.txt");
-        Account myAccount = new Account();
+        AccountsHashTable myHashTable;
+
+        createAccountsFile(accountsFile);
+        myHashTable = readAccountsFile(accountsFile);
+
+        Scanner myScanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Enter one of the following commands:");
+            System.out.println("REGISTER - create new account");
+            System.out.println("LOGIN - login to an existing account");
+            System.out.println("EXIT - terminate this app");
+            System.out.println();
+
+            while (true) {
+                String consoleInput = myScanner.nextLine();
+
+                if (consoleInput.equalsIgnoreCase("register")) {
+                    System.out.println();
+                    register(myHashTable);
+                    break;
+                }
+
+                if (consoleInput.equalsIgnoreCase("login")) {
+                    System.out.println();
+                    login();
+                }
+
+                if (consoleInput.equalsIgnoreCase("exit")) {
+                    return;
+                }
+
+                System.out.println("Incorrect command!");
+            }
+        }
+
+        //myVillage.visit(myPlayer);
+    }
+
+    private static void register(AccountsHashTable myHashTable) throws NoSuchAlgorithmException {
+        Scanner myScanner = new Scanner(System.in);
+
+        System.out.print("username: ");
+        String username = myScanner.nextLine();
+
+        System.out.print("password: ");
+        String unprotectedPassword = myScanner.nextLine();
+        String securePassword = securePassword(unprotectedPassword);
+
+        System.out.println();
+
+        if (myHashTable.addAcount(username, securePassword)) {
+            System.out.println("Registration succesfull!");
+        }
+        System.out.println();
+    }
+
+    private static void login() {
+
+    }
+
+    private static String securePassword(String unprotectedPassword) throws NoSuchAlgorithmException {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        byte[] encodedhash = digest.digest(unprotectedPassword.getBytes(StandardCharsets.UTF_8));
+
+        String protectedPassword = bytesToHex(encodedhash);
+
+        return protectedPassword;
+    }
+
+    private static void createAccountsFile(File accountsFile) throws FileNotFoundException, IOException {
+        AccountsHashTable newHashTable = new AccountsHashTable(1000);
 
         FileOutputStream fo = new FileOutputStream(accountsFile);
-        ObjectOutputStream output = new ObjectOutputStream(fo);
-        output.writeObject(myAccount);
+        ObjectOutputStream fileOutput = new ObjectOutputStream(fo);
+        fileOutput.writeObject(newHashTable);
 
-        output.close();
+        fileOutput.close();
         fo.close();
+    }
 
-        /*
-        //write to new file
-        try {
-            PrintWriter fileOutput = new PrintWriter(accountsFile);
+    private static AccountsHashTable readAccountsFile(File accountsFile) throws FileNotFoundException, IOException, ClassNotFoundException {
+        FileInputStream fi = new FileInputStream(accountsFile);
+        ObjectInputStream input = new ObjectInputStream(fi);
+        AccountsHashTable myHashTable = (AccountsHashTable) input.readObject();
 
-            fileOutput.println("myName");
-            fileOutput.println("myPassword");
-            fileOutput.close();
-        } catch (IOException ex) {
-            System.out.printf("ERROR: %s\n", ex);
+        input.close();
+        fi.close();
+
+        return myHashTable;
+    }
+
+    private static String bytesToHex(byte[] hash) {
+        StringBuffer hexString = new StringBuffer();
+        for (int i = 0; i < hash.length; i++) {
+            String hex = Integer.toHexString(0xff & hash[i]);
+            if(hex.length() == 1) hexString.append('0');
+            hexString.append(hex);
         }
 
-        //read from new file
-        try {
-            Scanner fileInput = new Scanner(accountsFile);
-
-            String name = fileInput.nextLine();
-            String  password = fileInput.nextLine();
-
-            System.out.println("account name: " + name);
-            System.out.println("account password: " + password);
-        } catch (FileNotFoundException ex) {
-            System.out.printf("ERROR: %s\n", ex);
-        }
-        */
-
-        //myVillage.visit(player);
+        return hexString.toString();
     }
 }
