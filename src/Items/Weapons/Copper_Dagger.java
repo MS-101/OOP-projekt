@@ -1,7 +1,5 @@
 package Items.Weapons;
 
-import java.io.Serializable;
-
 public class Copper_Dagger extends Weapon {
     public Copper_Dagger() {
         setPhysicalDmg(5, 6);

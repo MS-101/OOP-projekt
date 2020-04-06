@@ -1,11 +1,8 @@
 package Items.Armor;
 
 import Items.Item;
-import Items.Weapons.Weapon;
 
-import java.io.Serializable;
-
-public class Armor extends Item implements Serializable {
+public class Armor extends Item {
     public int armorVal;
 
     void setArmor(int armorVal) {

@@ -2,7 +2,7 @@ package Items;
 
 import java.io.Serializable;
 
-public abstract class Item {
+public abstract class Item implements Serializable {
     public int cost, repairCost;
     public int durability, maxDurability;
     public String name;
