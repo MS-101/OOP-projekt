@@ -181,7 +181,8 @@ public class Church extends Location {
                             player.skills.fireball.upgrade();
                             player.skillPoints--;
 
-                            System.out.print("You improved skill Fireball to lvl " + player.skills.fireball.curLvl + "/" + player.skills.fireball.maxLvl + ".");
+                            System.out.println("You improved skill Fireball to lvl " + player.skills.fireball.curLvl + "/" + player.skills.fireball.maxLvl + ".");
+                            System.out.println();
                             break;
                         } else {
                             System.out.println("This spell is at max lvl.");
@@ -199,7 +200,8 @@ public class Church extends Location {
                             player.skills.flamestrike.upgrade();
                             player.skillPoints--;
 
-                            System.out.print("You improved skill Flamestrike to lvl " + player.skills.flamestrike.curLvl + "/" + player.skills.flamestrike.maxLvl + ".");
+                            System.out.println("You improved skill Flamestrike to lvl " + player.skills.flamestrike.curLvl + "/" + player.skills.flamestrike.maxLvl + ".");
+                            System.out.println();
                             break;
                         } else {
                             System.out.println("This spell is at max lvl.");
@@ -217,7 +219,8 @@ public class Church extends Location {
                             player.skills.heal.upgrade();
                             player.skillPoints--;
 
-                            System.out.print("You improved skill Heal to lvl " + player.skills.heal.curLvl + "/" + player.skills.heal.maxLvl + ".");
+                            System.out.println("You improved skill Heal to lvl " + player.skills.heal.curLvl + "/" + player.skills.heal.maxLvl + ".");
+                            System.out.println();
                             break;
                         } else {
                             System.out.println("This spell is at max lvl.");

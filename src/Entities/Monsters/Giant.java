@@ -2,13 +2,13 @@ package Entities.Monsters;
 
 public class Giant extends Monster {
     public Giant() {
-        setMaxHp(120);
+        setMaxHp(100);
         setMaxMp(0);
-        setBasePhysicalDmg(25, 40);
+        setBasePhysicalDmg(15, 25);
         setBasePiercingDmg(0, 0);
-        setBaseArmor(15);
+        setBaseArmor(8);
         setName("Giant");
 
-        setLoot(50, 50, 70);
+        setLoot(50, 40, 60);
     }
 }

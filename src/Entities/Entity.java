@@ -145,6 +145,11 @@ public class Entity implements Serializable {
         }
 
         totalDmg = inflictedPhysicalDmg + inflictedPiercingDmg;
+
+        if (totalDmg < 1) {
+            totalDmg = 1;
+        }
+
         receiver.hp -= totalDmg;
 
         System.out.println(this.name + " deals " + totalDmg + " damage to " + receiver.name + ".");
@@ -170,7 +175,7 @@ public class Entity implements Serializable {
             }
         }
 
-        if (receiver instanceof Mercenary && this.armor != null) {
+        if (receiver instanceof Mercenary && receiver.armor != null) {
             receiver.armor.durability--;
 
             if (receiver.armor.durability == 0) {

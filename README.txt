@@ -32,7 +32,7 @@ Combat is turn based, player always starts first.
 
 During player turn, the player can decide to do one of the following:
 - attack - deal damage with your weapon
-- skill - use an ability
+- spell - use an ability
 - hp - use hp potion
 - mp - use mp potion
 - skip - skip your turn

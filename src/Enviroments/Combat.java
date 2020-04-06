@@ -63,7 +63,7 @@ public class Combat extends Location {
                 return;
             }
 
-            for (i = 0; i < this.opponents.size(); i++) {
+            for (i = this.opponents.size() - 1; i >= 0; i--) {
                 Monster pickedOpponent = opponents.get(i);
 
                 if (pickedOpponent.hp <= 0) {

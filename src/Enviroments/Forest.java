@@ -15,7 +15,7 @@ public class Forest extends Location {
         int i;
         monsterLootTable = new ArrayList<Monster>();
 
-        for (i = 0; i < 40; i++) {
+        for (i = 0; i < 45; i++) {
             monsterLootTable.add(new Ghoul());
         }
         for (i = 0; i < 25; i++) {
@@ -24,7 +24,7 @@ public class Forest extends Location {
         for (i = 0; i < 25; i++) {
             monsterLootTable.add(new Giant_Spider());
         }
-        for (i = 0; i < 10; i++) {
+        for (i = 0; i < 5; i++) {
             monsterLootTable.add(new Giant());
         }
     }

@@ -2,13 +2,13 @@ package Entities.Monsters;
 
 public class Alghoul extends  Monster {
     public Alghoul() {
-        setMaxHp(70);
+        setMaxHp(60);
         setMaxMp(0);
-        setBasePhysicalDmg(14, 16);
-        setBasePiercingDmg(4, 6);
-        setBaseArmor(5);
+        setBasePhysicalDmg(7, 9);
+        setBasePiercingDmg(3, 5);
+        setBaseArmor(3);
         setName("Alghoul");
 
-        setLoot(20, 20, 24);
+        setLoot(15, 20, 25);
     }
 }
