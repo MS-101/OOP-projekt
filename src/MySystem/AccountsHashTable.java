@@ -60,7 +60,7 @@ public class AccountsHashTable implements Serializable {
     }
 
     public Account login(String username, String securedPassword) {
-        int key = username.hashCode() % hashtableSize;
+        int key = abs(username.hashCode()) % hashtableSize;
 
         AccountNode pickedAccountNode = this.accountHashTable.get(key);
 

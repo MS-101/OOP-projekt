@@ -252,7 +252,7 @@ public class Combat extends Location {
                 Random randomNumber = new Random();
                 int diceRoll = randomNumber.nextInt(100);
 
-                if (diceRoll < 60) {
+                if (diceRoll < 70) {
                     System.out.println("You may live to fight another day.");
                     System.out.println();
 
