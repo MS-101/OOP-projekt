@@ -89,7 +89,7 @@ public class Entity implements Serializable {
         if (receiver.armor != null) {
             equipmentArmor = receiver.armor.armorVal;
 
-            if (this instanceof Mercenary && this.armor.durability <= 0.2 * this.weapon.maxDurability) {
+            if (receiver instanceof Mercenary && receiver.armor.durability <= 0.2 * receiver.armor.maxDurability) {
                 equipmentArmor *= 0.5;
             }
 
