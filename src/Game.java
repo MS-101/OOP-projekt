@@ -16,7 +16,7 @@ public class Game {
         AccountHandler myAccountManager = new AccountHandler();
         AccountsHashTable myHashTable;
 
-        //myAccountManager.createAccountsFile(accountsFile);
+        myAccountManager.createAccountsFile(accountsFile);
         myHashTable = myAccountManager.readAccountsFile(accountsFile);
 
         Scanner myScanner = new Scanner(System.in);

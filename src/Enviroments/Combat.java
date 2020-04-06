@@ -31,7 +31,6 @@ public class Combat extends Location {
     }
 
     private void start() throws IOException {
-        AccountHandler myAccountManager = new AccountHandler();
         int turnCounter = 1;
         int i;
 
@@ -60,7 +59,7 @@ public class Combat extends Location {
             playerTurn();
 
             if (this.playerEscaped) {
-                myAccountManager.rewriteAccountsFile(accountsfile, myHashTable);
+                myAccountHandler.rewriteAccountsFile(accountsfile, myHashTable);
                 return;
             }
 
@@ -82,7 +81,7 @@ public class Combat extends Location {
 
             if (this.opponents.size() == 0) {
                 victory();
-                myAccountManager.rewriteAccountsFile(accountsfile, myHashTable);
+                myAccountHandler.rewriteAccountsFile(accountsfile, myHashTable);
                 return;
             }
 
@@ -91,7 +90,7 @@ public class Combat extends Location {
 
                 if (this.player.hp <= 0) {
                     defeat();
-                    myAccountManager.rewriteAccountsFile(accountsfile, myHashTable);
+                    myAccountHandler.rewriteAccountsFile(accountsfile, myHashTable);
                     return;
                 }
             }

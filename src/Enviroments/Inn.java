@@ -10,8 +10,6 @@ public class Inn extends Location {
     int roomComfort = 30;
 
     public void visit(File accountsFile, AccountsHashTable myHashtable, Mercenary player, Village myVillage) throws IOException {
-        AccountHandler myAccountManager = new AccountHandler();
-
         while (true) {
             System.out.println("\"How may I help you?\" the trader asks.");
             System.out.println("You currently have " + player.loot.gold + " gold.");
@@ -51,7 +49,7 @@ public class Inn extends Location {
                     System.out.println("Game progress saved!");
                     System.out.println();
 
-                    myAccountManager.rewriteAccountsFile(accountsFile, myHashtable);
+                    myAccountHandler.rewriteAccountsFile(accountsFile, myHashtable);
                     break;
                 }
 
