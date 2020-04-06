@@ -5,7 +5,7 @@ import MySystem.*;
 import java.io.File;
 
 public class Market extends Location {
-    int hpCost = 40, mpCost = 40;
+    int hpCost = 20, mpCost = 20;
 
     public void visit(File accountsFile, AccountsHashTable myHashtable, Mercenary player, Village myVillage) {
         while (true) {
