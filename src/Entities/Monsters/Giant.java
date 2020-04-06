@@ -9,6 +9,6 @@ public class Giant extends Monster {
         setBaseArmor(8);
         setName("Giant");
 
-        setLoot(50, 40, 60);
+        setLoot(40, 40, 60);
     }
 }
