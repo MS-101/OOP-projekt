@@ -33,8 +33,11 @@ public class Inn extends Location {
                         player.loot.payGold(roomCost);
                         System.out.println();
 
-                        int healAmount = (int)(((double)roomComfort / (double)100) * player.maxHp);
-                        player.healAll(healAmount);
+                        int healHpAmount = (int)(((double)roomComfort / (double)100) * player.maxHp);
+                        int healMpAmount = (int)(((double)roomComfort / (double)100) * player.maxMp);
+
+                        player.healHp(healHpAmount);
+                        player.healMp(healMpAmount);
 
                         myVillage.myForge.generateInventory();
 
