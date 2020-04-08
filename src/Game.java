@@ -8,7 +8,7 @@ public class Game extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("GUI/UserLogin.fxml"));
         primaryStage.setTitle("Mercenary Hunter");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, 400, 300));
         primaryStage.show();
     }
 

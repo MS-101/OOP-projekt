@@ -1,4 +1,37 @@
-<?import javafx.scene.layout.GridPane?>
-<GridPane fx:controller="GUI.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-</GridPane>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="28.0" layoutY="214.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="Login">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button layoutX="250.0" layoutY="214.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="125.0" text="Register">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <TextField layoutX="25.0" layoutY="135.0" prefHeight="30.0" prefWidth="350.0" />
+      <Label layoutX="28.0" layoutY="102.0" text="Password">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="25.0" layoutY="28.0" text="Username">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField layoutX="25.0" layoutY="61.0" prefHeight="30.0" prefWidth="350.0" />
+      <Label layoutX="28.0" layoutY="175.0" text="Incorrect password or username!" textFill="RED" visible="false">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
