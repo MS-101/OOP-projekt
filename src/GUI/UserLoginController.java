@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -18,6 +19,9 @@ import javafx.event.ActionEvent;
 import MySystem.*;
 import Enviroments.Village;
 import Entities.Player.Mercenary;
+import javafx.stage.*;
+
+import javax.xml.transform.Source;
 
 public class UserLoginController implements Initializable {
     File accountsFile = new File("accounts.txt");
@@ -44,6 +48,7 @@ public class UserLoginController implements Initializable {
             Village myVillage = myAccount.getAccountVillage();
             Mercenary myMercenary = myAccount.getAccountMercenary();
 
+            ((Node)(event.getSource())).getScene().getWindow().hide();
             myVillage.visit(accountsFile, myHashTable, myMercenary);
         } else {
             label_error.setText("Incorrect password or username!");
@@ -63,6 +68,7 @@ public class UserLoginController implements Initializable {
             Village myVillage = registeredAccount.getAccountVillage();
             Mercenary myMercenary = registeredAccount.getAccountMercenary();
 
+            ((Node)(event.getSource())).getScene().getWindow().hide();
             myVillage.visit(accountsFile, myHashTable, myMercenary);
         } else {
             label_error.setText("Username is already in use!");
