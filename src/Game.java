@@ -1,15 +1,21 @@
-import Entities.Player.Mercenary;
-import Enviroments.Village;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Scanner;
-import java.io.*;
-import MySystem.*;
+public class Game extends Application {
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/UserLogin.fxml"));
+        primaryStage.setTitle("Mercenary Hunter");
+        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.show();
+    }
 
-public class Game {
-    public static void main(String[] args) throws IOException, ClassNotFoundException, NoSuchAlgorithmException {
+    public static void main(String[] args) {
+        launch(args);
+    }
+        /*
         Mercenary myPlayer;
         Village myVillage;
         File accountsFile = new File("accounts.txt");
@@ -126,4 +132,5 @@ public class Game {
 
         return hexString.toString();
     }
+    */
 }
