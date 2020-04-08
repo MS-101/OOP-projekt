@@ -1,5 +1,7 @@
 package GUI;
 
+//Functions bytesToHex and securePassword use code from the following website: https://www.baeldung.com/sha-256-hashing-java (8.4.2020)
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -19,9 +21,6 @@ import javafx.event.ActionEvent;
 import MySystem.*;
 import Enviroments.Village;
 import Entities.Player.Mercenary;
-import javafx.stage.*;
-
-import javax.xml.transform.Source;
 
 public class UserLoginController implements Initializable {
     File accountsFile = new File("accounts.txt");
