@@ -1,6 +1,14 @@
+Instructions for the project Mercenary Hunter:
+
 Functions bytesToHex and securePassword from AccountsHashTable use code from the following website: https://www.baeldung.com/sha-256-hashing-java (8.4.2020)
 
-When you first launch the game you will be asked to register an account. The next time you start the game you will be able to log in to that account.
+Example of inheritance - class Ghouls is a child class of Monster, which is a child class of Entity.
+Example of polymorphism - class Item has abstract function getCopy() and its child classes Weapon and Armor overwrite this function. (used for generating random forge inventory)
+Example of aggregation - class Mercenary contains references to classes PlayerConsumables, PlayerLoot, PlayerSkills and PlayerStats.
+
+When you first launch the game you will be asked to register an account.
+The next time you start the game you will be able to log in to that account.
+All passwords are encrypted using SHA-512 with salt and pepper.
 
 In game you can visit the following locations:
 Inn - you can rest to restore hp and mp there, save or quit the game
@@ -16,11 +24,11 @@ strength - increases physical damage
 dexterity - increases piercing damage
 intelligence - increases skill power
 
-Players can learn and upgrade skills. They can also buy better equipment and consumables.
+Players can learn and upgrade skills. They can also buy equipment and consumables.
 
 Consumables explained
 - they can be used in combat only
-- you can have at most 10 potions of each type
+- you can have at most 10 consumables of each type
 - there are currently 2 consumables - hp potion (heals hp) and mp potion (heals mp)
 
 Items explained
@@ -31,6 +39,7 @@ Items explained
 
 Combat mechanics:
 Combat is turn based, player always starts first.
+In combat you can fight at most 3 opponents at a time.
 
 During player turn, the player can decide to do one of the following:
 - attack - deal damage with your weapon
