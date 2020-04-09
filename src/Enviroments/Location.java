@@ -1,10 +1,10 @@
 package Enviroments;
 
-import MySystem.AccountHandler;
+import MySystem.AccountsFileHandler;
 
 import java.io.Serializable;
 
 public class Location implements Serializable {
-    AccountHandler myAccountHandler = new AccountHandler();
+    AccountsFileHandler myAccountsFileHandler = new AccountsFileHandler();
     Command myCommand = new Command();
 }

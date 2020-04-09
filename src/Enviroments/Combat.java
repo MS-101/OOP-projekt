@@ -59,7 +59,7 @@ public class Combat extends Location {
             playerTurn();
 
             if (this.playerEscaped) {
-                myAccountHandler.rewriteAccountsFile(accountsfile, myHashTable);
+                myAccountsFileHandler.rewriteAccountsFile(accountsfile, myHashTable);
                 return;
             }
 
@@ -81,7 +81,7 @@ public class Combat extends Location {
 
             if (this.opponents.size() == 0) {
                 victory();
-                myAccountHandler.rewriteAccountsFile(accountsfile, myHashTable);
+                myAccountsFileHandler.rewriteAccountsFile(accountsfile, myHashTable);
                 return;
             }
 
@@ -90,7 +90,7 @@ public class Combat extends Location {
 
                 if (this.player.hp <= 0) {
                     defeat();
-                    myAccountHandler.rewriteAccountsFile(accountsfile, myHashTable);
+                    myAccountsFileHandler.rewriteAccountsFile(accountsfile, myHashTable);
                     return;
                 }
             }

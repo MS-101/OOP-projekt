@@ -8,6 +8,8 @@ import java.io.Serializable;
 public class Account implements Serializable {
     String username;
     String securedPassword;
+    String salt;
+
     Village accountVillage;
     Mercenary accountMercenary;
 
@@ -17,6 +19,10 @@ public class Account implements Serializable {
 
     public void setPasswordHash(String securedPassword) {
         this.securedPassword = securedPassword;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public void setAccountVillage(Village accountVillage) {
@@ -33,6 +39,10 @@ public class Account implements Serializable {
 
     public String getPasswordHash() {
         return securedPassword;
+    }
+
+    public String getSalt() {
+        return salt;
     }
 
     public Village getAccountVillage() {

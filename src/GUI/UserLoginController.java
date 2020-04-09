@@ -1,12 +1,8 @@
 package GUI;
 
-//Functions bytesToHex and securePassword use code from the following website: https://www.baeldung.com/sha-256-hashing-java (8.4.2020)
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 
@@ -24,7 +20,7 @@ import Entities.Player.Mercenary;
 
 public class UserLoginController implements Initializable {
     File accountsFile = new File("accounts.txt");
-    AccountHandler myAccountManager = new AccountHandler();
+    AccountsFileHandler myAccountManager = new AccountsFileHandler();
     AccountsHashTable myHashTable;
 
     @FXML
@@ -39,9 +35,8 @@ public class UserLoginController implements Initializable {
     public void pressLoginButton (ActionEvent event) throws NoSuchAlgorithmException, IOException {
         String username = tf_username.getText();
         String unprotectedPassword = pf_password.getText();
-        String securePassword = securePassword(unprotectedPassword);
 
-        Account myAccount = myHashTable.login(username, securePassword);
+        Account myAccount = myHashTable.login(username, unprotectedPassword);
 
         if (myAccount != null) {
             Village myVillage = myAccount.getAccountVillage();
@@ -58,9 +53,8 @@ public class UserLoginController implements Initializable {
     public void pressRegisterButton (ActionEvent event) throws NoSuchAlgorithmException, IOException {
         String username = tf_username.getText();
         String unprotectedPassword = pf_password.getText();
-        String securePassword = securePassword(unprotectedPassword);
 
-        Account registeredAccount = myHashTable.register(username, securePassword);
+        Account registeredAccount = myHashTable.register(username, unprotectedPassword);
         if (registeredAccount != null) {
             myAccountManager.rewriteAccountsFile(accountsFile, myHashTable);
 
@@ -73,26 +67,6 @@ public class UserLoginController implements Initializable {
             label_error.setText("Username is already in use!");
             label_error.setVisible(true);
         }
-    }
-
-    private static String securePassword(String unprotectedPassword) throws NoSuchAlgorithmException {
-        MessageDigest digest = MessageDigest.getInstance("SHA-256");
-        byte[] encodedHash = digest.digest(unprotectedPassword.getBytes(StandardCharsets.UTF_8));
-
-        String protectedPassword = bytesToHex(encodedHash);
-
-        return protectedPassword;
-    }
-
-    private static String bytesToHex(byte[] hash) {
-        StringBuffer hexString = new StringBuffer();
-        for (int i = 0; i < hash.length; i++) {
-            String hex = Integer.toHexString(0xff & hash[i]);
-            if(hex.length() == 1) hexString.append('0');
-            hexString.append(hex);
-        }
-
-        return hexString.toString();
     }
 
     @Override

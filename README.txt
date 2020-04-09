@@ -1,3 +1,5 @@
+Functions bytesToHex and securePassword from AccountsHashTable use code from the following website: https://www.baeldung.com/sha-256-hashing-java (8.4.2020)
+
 When you first launch the game you will be asked to register an account. The next time you start the game you will be able to log in to that account.
 
 In game you can visit the following locations:

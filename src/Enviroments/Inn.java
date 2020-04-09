@@ -52,7 +52,7 @@ public class Inn extends Location {
                     System.out.println("Game progress saved!");
                     System.out.println();
 
-                    myAccountHandler.rewriteAccountsFile(accountsFile, myHashtable);
+                    myAccountsFileHandler.rewriteAccountsFile(accountsFile, myHashtable);
                     break;
                 }
 

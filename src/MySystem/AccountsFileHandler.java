@@ -2,7 +2,7 @@ package MySystem;
 
 import java.io.*;
 
-public class AccountHandler implements Serializable {
+public class AccountsFileHandler implements Serializable {
     public void createAccountsFile(File accountsFile) throws FileNotFoundException, IOException {
         AccountsHashTable newHashTable = new AccountsHashTable(1000);
 
