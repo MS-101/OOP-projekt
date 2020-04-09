@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 public class Account implements Serializable {
     String username;
-    String securedPassword;
+    String protectedPassword;
     String salt;
 
     Village accountVillage;
@@ -17,8 +17,8 @@ public class Account implements Serializable {
         this.username = username;
     }
 
-    public void setPasswordHash(String securedPassword) {
-        this.securedPassword = securedPassword;
+    public void setProtectedPassword(String protectedPassword) {
+        this.protectedPassword = protectedPassword;
     }
 
     public void setSalt(String salt) {
@@ -37,8 +37,8 @@ public class Account implements Serializable {
         return username;
     }
 
-    public String getPasswordHash() {
-        return securedPassword;
+    public String getProtectedPassword() {
+        return protectedPassword;
     }
 
     public String getSalt() {

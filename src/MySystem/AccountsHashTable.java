@@ -51,10 +51,10 @@ public class AccountsHashTable implements Serializable {
         String salt = generateSalt();
         char pepper = generatePepper();
 
-        String securedPassword = securePassword(unprotectedPassword, salt, pepper);
+        String protectedPassword = securePassword(unprotectedPassword, salt, pepper);
 
         pickedAccount.setUsername(username);
-        pickedAccount.setPasswordHash(securedPassword);
+        pickedAccount.setProtectedPassword(protectedPassword);
         pickedAccount.setSalt(salt);
         pickedAccount.setAccountVillage(new Village());
         pickedAccount.setAccountMercenary(new Mercenary());
@@ -74,9 +74,9 @@ public class AccountsHashTable implements Serializable {
                 char pepper;
 
                 for (pepper = 'a'; pepper <= 'z'; pepper++) {
-                    String securedPassword = securePassword(unprotectedPassword, salt, pepper);
+                    String protectedPassword = securePassword(unprotectedPassword, salt, pepper);
 
-                    if (pickedAccount.securedPassword.equals(securedPassword)) {
+                    if (pickedAccount.protectedPassword.equals(protectedPassword)) {
                         return pickedAccount;
                     }
                 }
@@ -91,7 +91,7 @@ public class AccountsHashTable implements Serializable {
     private static String securePassword(String unprotectedPassword, String salt, char pepper) throws NoSuchAlgorithmException {
         String appendedPassword = unprotectedPassword + salt + pepper;
 
-        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        MessageDigest digest = MessageDigest.getInstance("SHA-512");
         byte[] passwordBytes = appendedPassword.getBytes(StandardCharsets.UTF_8);
         int i, passwordStrength = 100;
 
