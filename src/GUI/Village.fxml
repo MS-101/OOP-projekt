@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="1000.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.VillageController">
+   <children>
+      <SplitPane dividerPositions="0.65" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TitledPane alignment="CENTER" animated="false" collapsible="false" contentDisplay="CENTER" prefHeight="398.0" prefWidth="296.0" text="Village" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="458.0" prefWidth="294.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="10000.0" prefWidth="10000.0" text="Inn">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Button layoutX="30.0" layoutY="30.0" mnemonicParsing="false" prefHeight="10000.0" prefWidth="10000.0" text="Forge">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Button layoutX="30.0" layoutY="229.0" mnemonicParsing="false" prefHeight="10000.0" prefWidth="10000.0" text="Market">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Button layoutX="10.0" layoutY="302.0" mnemonicParsing="false" prefHeight="10000.0" prefWidth="10000.0" text="Church">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Button layoutX="10.0" layoutY="328.0" mnemonicParsing="false" prefHeight="10000.0" prefWidth="10000.0" text="Forest">
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                           </children></AnchorPane>
+                    </content>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TitledPane>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TitledPane animated="false" collapsible="false" prefHeight="498.0" prefWidth="206.0" text="PlayerName [lvl 0]" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="458.0" prefWidth="204.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <SplitPane dividerPositions="0.1" layoutX="10.0" layoutY="10.0" prefHeight="160.0" prefWidth="200.0">
+                                       <items>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="70.0" prefHeight="158.0" prefWidth="89.0" text="Exp:" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                             <children>
+                                                <ProgressBar prefHeight="158.0" prefWidth="117.0" progress="0.53" style="-fx-accent: lightgreen;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="158.0" prefWidth="215.0" text="10/50" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                             </children>
+                                          </AnchorPane>
+                                       </items>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </SplitPane>
+                                    <SplitPane dividerPositions="0.1" prefHeight="160.0" prefWidth="200.0">
+                                      <items>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="70.0" prefHeight="158.0" prefWidth="89.0" text="HP:" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                             </children>
+                                          </AnchorPane>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                             <children>
+                                                <ProgressBar prefHeight="158.0" prefWidth="117.0" progress="1.0" style="-fx-accent: red;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="158.0" prefWidth="215.0" text="200/200" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                             </children>
+                                          </AnchorPane>
+                                      </items>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </SplitPane>
+                                    <SplitPane dividerPositions="0.1" layoutX="10.0" layoutY="10.0" prefHeight="160.0" prefWidth="200.0">
+                                       <items>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="70.0" prefHeight="158.0" prefWidth="89.0" text="MP:" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                             <children>
+                                                <ProgressBar prefHeight="158.0" prefWidth="117.0" progress="1.0" style="-fx-accent: lightblue;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="158.0" prefWidth="215.0" text="100/100" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                             </children>
+                                          </AnchorPane>
+                                       </items>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </SplitPane>
+                                    <SplitPane dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0">
+                                      <items>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <TitledPane animated="false" collapsible="false" prefHeight="158.0" prefWidth="187.0" text="Weapon: Copper Dagger" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="200.0">
+                                                         <children>
+                                                            <VBox prefHeight="128.0" prefWidth="185.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <children>
+                                                                  <SplitPane dividerPositions="0.3" orientation="VERTICAL" prefHeight="80.0" prefWidth="160.0">
+                                                                    <items>
+                                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="80.0" prefWidth="160.0">
+                                                                           <children>
+                                                                              <Label text="Durability:" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                                           <children>
+                                                                              <ProgressBar prefHeight="64.0" prefWidth="155.0" progress="1.0" style="-fx-accent: yellow;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                              <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="155.0" text="40/40" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                    </items>
+                                                                  </SplitPane>
+                                                                  <Label text="Physical damage: 4-5">
+                                                                     <padding>
+                                                                        <Insets bottom="5.0" top="5.0" />
+                                                                     </padding>
+                                                                  </Label>
+                                                                  <Label text="Piercing damage: 2-3">
+                                                                     <padding>
+                                                                        <Insets top="5.0" />
+                                                                     </padding>
+                                                                  </Label>
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                  </content>
+                                                </TitledPane>
+                                             </children>
+                                          </AnchorPane>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                             <children>
+                                                <TitledPane animated="false" collapsible="false" prefHeight="132.0" prefWidth="152.0" text="Armor: Leather Armor" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                         <children>
+                                                            <VBox prefHeight="168.0" prefWidth="185.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <children>
+                                                                  <SplitPane dividerPositions="0.3" orientation="VERTICAL" prefHeight="80.0" prefWidth="157.0">
+                                                                     <items>
+                                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="80.0" prefWidth="160.0">
+                                                                           <children>
+                                                                              <Label text="Durability:" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                                           <children>
+                                                                              <ProgressBar prefHeight="50.0" prefWidth="155.0" progress="1.0" style="-fx-accent: yellow;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="155.0" text="100/100" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                     </items>
+                                                                  </SplitPane>
+                                                                  <Label text="Armor: 10">
+                                                                     <padding>
+                                                                        <Insets bottom="5.0" top="5.0" />
+                                                                     </padding>
+                                                                  </Label>
+                                                               </children>
+                                                            </VBox>
+                                                         </children></AnchorPane>
+                                                  </content>
+                                                </TitledPane>
+                                             </children>
+                                          </AnchorPane>
+                                      </items>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </SplitPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TitledPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

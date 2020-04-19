@@ -10,6 +10,7 @@ public class Game extends Application {
         primaryStage.setTitle("Mercenary Hunter");
         primaryStage.setScene(new Scene(root, 400, 300));
         primaryStage.show();
+
     }
 
     public static void main(String[] args) {
