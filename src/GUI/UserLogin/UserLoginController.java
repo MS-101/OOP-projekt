@@ -6,16 +6,15 @@ import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 
+import GUI.Game.VillageController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 
@@ -23,7 +22,6 @@ import MySystem.*;
 import Enviroments.Village;
 import Entities.Player.Mercenary;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class UserLoginController implements Initializable {
@@ -31,7 +29,8 @@ public class UserLoginController implements Initializable {
     AccountsFileHandler myAccountManager = new AccountsFileHandler();
     AccountsHashTable myHashTable;
 
-    @FXML private AnchorPane ap;
+    @FXML
+    private AnchorPane ap;
 
     @FXML
     private TextField tf_username;
@@ -82,8 +81,14 @@ public class UserLoginController implements Initializable {
 
     private void startGame(File accountsFile, AccountsHashTable myHashTable, Mercenary myMercenary, Village myVillage) throws IOException {
         Stage primaryStage = (Stage) ap.getScene().getWindow();
-        Parent villageRoot = FXMLLoader.load(getClass().getResource("../Game/Village.fxml"));
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Game/Village.fxml"));
+        Parent villageRoot = (Parent) loader.load();
+        VillageController controller = loader.getController();
+
+        controller.passUserData(accountsFile, myHashTable, myVillage, myMercenary);
         primaryStage.setScene(new Scene(villageRoot, 1200, 1000));
+        controller.updatePlayer_All();
     }
 
     @Override

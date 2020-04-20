@@ -1,4 +1,5 @@
 package GUI.Game;
 
-public class VillageController {
+public class VillageController extends GameController {
+
 }
