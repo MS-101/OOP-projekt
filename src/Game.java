@@ -6,11 +6,10 @@ import javafx.stage.Stage;
 
 public class Game extends Application {
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/UserLogin.fxml"));
+        Parent loginRoot = FXMLLoader.load(getClass().getResource("GUI/UserLogin/UserLogin.fxml"));
         primaryStage.setTitle("Mercenary Hunter");
-        primaryStage.setScene(new Scene(root, 400, 300));
+        primaryStage.setScene(new Scene(loginRoot, 400, 300));
         primaryStage.show();
-
     }
 
     public static void main(String[] args) {
