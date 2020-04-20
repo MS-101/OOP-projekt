@@ -70,7 +70,6 @@ public class UserLoginController implements Initializable {
             Village myVillage = registeredAccount.getAccountVillage();
             Mercenary myMercenary = registeredAccount.getAccountMercenary();
 
-            ((Node)(event.getSource())).getScene().getWindow().hide();
             startGame(accountsFile, myHashTable, myMercenary, myVillage);
             //myVillage.visit(accountsFile, myHashTable, myMercenary);
         } else {
@@ -88,18 +87,24 @@ public class UserLoginController implements Initializable {
 
         controller.passUserData(accountsFile, myHashTable, myVillage, myMercenary);
         primaryStage.setScene(new Scene(villageRoot, 1200, 1000));
+
+        //testing
+        myMercenary.hp -= 50;
+        myMercenary.stats.attributePoints = 10;
+        myMercenary.skills.skillPoints = 10;
+
         controller.updatePlayer_All();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)  {
-        if (!accountsFile.exists()) {
+        //if (!accountsFile.exists()) {
             try {
                 myAccountManager.createAccountsFile(accountsFile);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        //}
 
         try {
             myHashTable = myAccountManager.readAccountsFile(accountsFile);

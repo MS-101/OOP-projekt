@@ -5,6 +5,8 @@ import Skills.*;
 import java.io.Serializable;
 
 public class PlayerSkills implements Serializable {
+    public int skillPoints;
+
     public Fireball fireball;
     public Flamestrike flamestrike;
     public Heal heal;

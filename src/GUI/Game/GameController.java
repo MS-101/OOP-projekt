@@ -2,11 +2,14 @@ package GUI.Game;
 
 import Entities.Player.Mercenary;
 import Entities.Player.PlayerConsumables;
+import Entities.Player.PlayerSkills;
+import Entities.Player.PlayerStats;
 import Enviroments.Village;
 import Items.Armor.Armor;
 import Items.Weapons.Weapon;
 import MySystem.Account;
 import MySystem.AccountsHashTable;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -115,6 +118,80 @@ public class GameController implements Initializable {
         this.myMercenary = myMercenary;
     }
 
+    public void pressHpPotionButton (ActionEvent event) {
+        myMercenary.useHpPotion();
+        updatePlayer_hp();
+        updatePlayer_hpPotions();
+    }
+
+    public void pressMpPotionButton (ActionEvent event) {
+        myMercenary.useMpPotion();
+        updatePlayer_mp();
+        updatePlayer_mpPotions();
+    }
+
+    public void pressStrengthButton (ActionEvent event) {
+        PlayerStats myStats = myMercenary.stats;
+
+        myStats.attributePoints--;
+        myStats.strength++;
+
+        myMercenary.maxHp += 5;
+        myMercenary.hp += 5;
+
+        updatePlayer_attributes();
+        updatePlayer_hp();
+    }
+
+    public void pressDexterityButton (ActionEvent event) {
+        PlayerStats myStats = myMercenary.stats;
+
+        myStats.attributePoints--;
+        myStats.dexterity++;
+
+        updatePlayer_attributes();
+    }
+
+    public void pressIntelligenceButton (ActionEvent event) {
+        PlayerStats myStats = myMercenary.stats;
+
+        myStats.attributePoints--;
+        myStats.intelligence++;
+
+        myMercenary.maxMp += 5;
+        myMercenary.mp += 5;
+
+        updatePlayer_attributes();
+        updatePlayer_mp();
+    }
+
+    public void pressFireballButton (ActionEvent event) {
+        PlayerSkills mySkills = myMercenary.skills;
+
+        mySkills.skillPoints--;
+        mySkills.fireball.upgrade();
+
+        updatePlayer_skills();
+    }
+
+    public void pressFlamestrikeButton (ActionEvent event) {
+        PlayerSkills mySkills = myMercenary.skills;
+
+        mySkills.skillPoints--;
+        mySkills.flamestrike.upgrade();
+
+        updatePlayer_skills();
+    }
+
+    public void pressHealButton (ActionEvent event) {
+        PlayerSkills mySkills = myMercenary.skills;
+
+        mySkills.skillPoints--;
+        mySkills.heal.upgrade();
+
+        updatePlayer_skills();
+    }
+
     public void updatePlayer_All() {
         updatePlayer_nameLevel();
 
@@ -209,7 +286,7 @@ public class GameController implements Initializable {
         PlayerConsumables myConsumables = myMercenary.consumables;
 
         hpPotionLabel.setText("hp potions: " + myConsumables.hpPotions_amount + "/" + myConsumables.hpPotions_maxAmount);
-        if (myConsumables.hpPotions_amount > 0) {
+        if (myConsumables.hpPotions_amount > 0 && myMercenary.hp < myMercenary.maxHp) {
             hpPotionBtn.setDisable(false);
         } else {
             hpPotionBtn.setDisable(true);
@@ -220,7 +297,7 @@ public class GameController implements Initializable {
         PlayerConsumables myConsumables = myMercenary.consumables;
 
         mpPotionLabel.setText("mp potions: " + myConsumables.mpPotions_amount + "/" + myConsumables.mpPotions_maxAmount);
-        if (myConsumables.mpPotions_amount > 0) {
+        if (myConsumables.mpPotions_amount > 0 && myMercenary.mp < myMercenary.maxMp) {
             mpPotionBtn.setDisable(false);
         } else {
             mpPotionBtn.setDisable(true);
@@ -228,13 +305,15 @@ public class GameController implements Initializable {
     }
 
     public void updatePlayer_attributes() {
-        attrPtsLabel.setText("You have " + myMercenary.attributePoints + " points remaining.");
+        PlayerStats myStats = myMercenary.stats;
 
-        strLabel.setText("Strength: " + myMercenary.stats.strength);
-        dexLabel.setText("Dexterity: " + myMercenary.stats.dexterity);
-        intLabel.setText("Intelligence: " + myMercenary.stats.intelligence);
+        attrPtsLabel.setText("You have " + myStats.attributePoints + " points remaining.");
 
-        if (myMercenary.attributePoints > 0) {
+        strLabel.setText("Strength: " + myStats.strength);
+        dexLabel.setText("Dexterity: " + myStats.dexterity);
+        intLabel.setText("Intelligence: " + myStats.intelligence);
+
+        if (myStats.attributePoints > 0) {
             strBtn.setDisable(false);
             dexBtn.setDisable(false);
             intBtn.setDisable(false);
@@ -246,16 +325,32 @@ public class GameController implements Initializable {
     }
 
     public void updatePlayer_skills() {
-        skillPtsLabel.setText("You have " + myMercenary.skillPoints + " points remaining.");
+        PlayerSkills mySkills = myMercenary.skills;
 
-        fireballLabel.setText("Fireball: " + myMercenary.skills.fireball.curLvl + "/" + myMercenary.skills.fireball.maxLvl);
-        flamestrikeLabel.setText("Flamestrike: " + myMercenary.skills.flamestrike.curLvl + "/" + myMercenary.skills.flamestrike.maxLvl);
-        healLabel.setText("Heal: " + myMercenary.skills.heal.curLvl + "/" + myMercenary.skills.heal.maxLvl);
+        skillPtsLabel.setText("You have " + mySkills.skillPoints + " points remaining.");
 
-        if (myMercenary.skillPoints > 0) {
-            fireballBtn.setDisable(false);
-            flamestrikeBtn.setDisable(false);
-            healBtn.setDisable(false);
+        fireballLabel.setText("Fireball: " + mySkills.fireball.curLvl + "/" + mySkills.fireball.maxLvl);
+        flamestrikeLabel.setText("Flamestrike: " + mySkills.flamestrike.curLvl + "/" + mySkills.flamestrike.maxLvl);
+        healLabel.setText("Heal: " + mySkills.heal.curLvl + "/" + mySkills.heal.maxLvl);
+
+        if (mySkills.skillPoints > 0) {
+            if (mySkills.fireball.curLvl == mySkills.fireball.maxLvl) {
+                fireballBtn.setDisable(true);
+            } else {
+                fireballBtn.setDisable(false);
+            }
+
+            if (mySkills.flamestrike.curLvl == mySkills.flamestrike.maxLvl) {
+                flamestrikeBtn.setDisable(true);
+            } else {
+                flamestrikeBtn.setDisable(false);
+            }
+
+            if (mySkills.heal.curLvl == mySkills.heal.maxLvl) {
+                healBtn.setDisable(true);
+            } else {
+                healBtn.setDisable(false);
+            }
         } else {
             fireballBtn.setDisable(true);
             flamestrikeBtn.setDisable(true);

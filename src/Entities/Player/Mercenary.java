@@ -11,7 +11,6 @@ public class Mercenary extends Entity {
 
     public int lvl = 0, maxLvl = 6;
     public int lvlRequirement;
-    public int attributePoints = 0, skillPoints = 0;
     int lvlRequirementInc;
 
     public Mercenary() {
@@ -46,8 +45,8 @@ public class Mercenary extends Entity {
             System.out.println("LEVEL UP!");
 
             this.lvl++;
-            this.attributePoints += 2;
-            this.skillPoints += 1;
+            this.stats.attributePoints += 2;
+            this.skills.skillPoints += 1;
 
             if (this.lvl < this.maxLvl) {
                 this.loot.exp -= this.lvlRequirement;
@@ -59,46 +58,13 @@ public class Mercenary extends Entity {
         }
     }
 
-    public boolean useHpPotion() {
-        if (hp < maxHp) {
-            int prevHp, healedHp;
-
-            prevHp = hp;
-
-            this.consumables.hpPotions_amount--;
-            this.healHp(this.consumables.hpPotion_heal);
-
-            healedHp = hp - prevHp;
-
-            System.out.println("You used a health potion. You healed for " + healedHp + " hp.");
-            System.out.println("You have " + hp + "/" + maxHp + " hp.");
-
-            return true;
-        } else {
-            System.out.println("You have max hp!");
-            return false;
-        }
+    public void useHpPotion() {
+        this.consumables.hpPotions_amount--;
+        this.healHp(this.consumables.hpPotion_heal);
     }
 
-    public boolean useMpPotion() {
-        if (mp < maxMp) {
-            int prevMp, healedMp;
-
-            prevMp = mp;
-
-            this.consumables.mpPotions_amount--;
-            this.healHp(this.consumables.mpPotion_heal);
-
-            healedMp = mp - prevMp;
-
-            System.out.println("You used a mana potion. You healed for " + healedMp + " mp.");
-            System.out.println("You have " + mp + "/" + maxMp + " mp remaining.");
-            System.out.println();
-
-            return true;
-        } else {
-            System.out.println("You have max mp!");
-            return false;
-        }
+    public void useMpPotion() {
+        this.consumables.mpPotions_amount--;
+        this.healMp(this.consumables.mpPotion_heal);
     }
 }

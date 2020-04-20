@@ -30,6 +30,7 @@ public class Forest extends Location {
     }
 
     public void visit(File accountsFile, AccountsHashTable myHashtable, Mercenary player, Village myVillage) throws IOException {
+        /*
         int i;
 
         while (true) {
@@ -106,5 +107,7 @@ public class Forest extends Location {
                 System.out.println("Incorrect command!");
             }
         }
+
+         */
     }
 }

@@ -226,19 +226,25 @@ public class Combat extends Location {
             }
 
             if (this.player.consumables.hpPotions_amount > 0 && myCommand.name.equalsIgnoreCase("HP")) {
+                /*
                 if (this.player.useHpPotion()) {
                     return;
                 } else {
                     continue;
                 }
+
+                 */
             }
 
             if (this.player.consumables.mpPotions_amount > 0 && myCommand.name.equalsIgnoreCase("MP")) {
+             /*
                 if (this.player.useMpPotion()) {
                     return;
                 } else {
                     continue;
                 }
+
+              */
             }
 
             if (myCommand.name.equalsIgnoreCase("SKIP")) {

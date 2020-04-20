@@ -9,14 +9,12 @@ public class Village extends Location {
     Inn myInn;
     Forge myForge;
     Market myMarket;
-    Church myChurch;
     Forest myForest;
 
     public Village() {
         myInn = new Inn();
         myForge = new Forge();
         myMarket = new Market();
-        myChurch = new Church();
         myForest = new Forest();
     }
 
@@ -57,14 +55,6 @@ public class Village extends Location {
                     System.out.println();
 
                     myMarket.visit(accountsFile, myHashtable, player, this);
-                    break;
-                }
-
-                if (myCommand.name.equalsIgnoreCase("CHURCH")) {
-                    System.out.println("You approach the local shrine.");
-                    System.out.println();
-
-                    myChurch.visit(accountsFile, myHashtable, player, this);
                     break;
                 }
 
