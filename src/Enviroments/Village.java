@@ -6,10 +6,10 @@ import java.io.File;
 import java.io.IOException;
 
 public class Village extends Location {
-    Inn myInn;
-    Forge myForge;
-    Market myMarket;
-    Forest myForest;
+    public Inn myInn;
+    public Forge myForge;
+    public Market myMarket;
+    public Forest myForest;
 
     public Village() {
         myInn = new Inn();
@@ -27,7 +27,6 @@ public class Village extends Location {
             System.out.println("INN - you may spend the night here or acquire new contracts");
             System.out.println("FORGE - local smith can sell you his goods or repair your equipment");
             System.out.println("MARKET - a place where you can purchase consumables");
-            System.out.println("CHURCH - allocate your points here after gaining a new level");
             System.out.println("FOREST - find and slay monsters from your contracts here");
             System.out.println();
 

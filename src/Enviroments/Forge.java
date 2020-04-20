@@ -11,9 +11,9 @@ import Items.Armor.*;
 import MySystem.*;
 
 public class Forge extends Location {
-    ArrayList<Item> forgeInventory;
-    ArrayList<Item> forgeLootTable;
-    int forgeInventoryLimit;
+    public ArrayList<Item> forgeInventory;
+    public ArrayList<Item> forgeLootTable;
+    public int forgeInventoryLimit;
 
     public Forge() {
         int i;
