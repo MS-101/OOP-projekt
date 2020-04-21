@@ -29,8 +29,8 @@ public class PlayerConsumables implements Serializable {
     }
 
     public void useMpPotion(Mercenary user) {
-        hpPotions_amount--;
-        hpPotionData.use(user);
+        mpPotions_amount--;
+        mpPotionData.use(user);
     }
 
     public void addHpPotions(int amount) {

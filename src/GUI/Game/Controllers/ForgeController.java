@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 
@@ -129,9 +130,21 @@ public class ForgeController extends GameController {
             double durProgress = (double) myWeapon.durability / (double) myWeapon.maxDurability;
 
             repairWeaponName.setText(myWeapon.name);
-            repairWeaponCost.setText("cost: " + String.valueOf(repairCost));
+            repairWeaponCost.setText("cost: " + String.valueOf(repairCost) + " gold");
             repairWeaponDurLabel.setText(myWeapon.durability + "/" + myWeapon.maxDurability);
             repairWeaponDurBar.setProgress(durProgress);
+
+            if (myWeapon.durability <= 0.2 * myWeapon.maxDurability) {
+                repairWeaponDurLabel.setTextFill(Color.web("red"));
+            } else {
+                repairWeaponDurLabel.setTextFill(Color.web("black"));
+            }
+
+            if (myMercenary.loot.gold < repairCost) {
+                repairWeaponCost.setTextFill(Color.web("red"));
+            } else {
+                repairWeaponCost.setTextFill(Color.web("black"));
+            }
 
             if (myWeapon.durability < myWeapon.maxDurability && myMercenary.loot.gold >= repairCost) {
                 repairWeaponBtn.setDisable(false);
@@ -140,9 +153,13 @@ public class ForgeController extends GameController {
             }
         } else {
             repairWeaponName.setText("N/A");
-            repairWeaponCost.setText("N/A");
+            repairWeaponCost.setText("cost: N/A gold");
             repairWeaponDurLabel.setText("N/A");
             repairWeaponDurBar.setProgress(0);
+
+            repairWeaponDurLabel.setTextFill(Color.web("black"));
+            repairWeaponCost.setTextFill(Color.web("black"));
+
             repairWeaponBtn.setDisable(true);
         }
     }
@@ -155,9 +172,21 @@ public class ForgeController extends GameController {
             double durProgress = (double)myArmor.durability / (double)myArmor.maxDurability;
 
             repairArmorName.setText(myArmor.name);
-            repairArmorCost.setText("cost: " + String.valueOf(repairCost));
+            repairArmorCost.setText("cost: " + String.valueOf(repairCost) + " gold");
             repairArmorDurLabel.setText(myArmor.durability + "/" + myArmor.maxDurability);
             repairArmorDurBar.setProgress(durProgress);
+
+            if (myArmor.durability <= 0.2 * myArmor.maxDurability) {
+                repairArmorDurLabel.setTextFill(Color.web("red"));
+            } else {
+                repairArmorDurLabel.setTextFill(Color.web("black"));
+            }
+
+            if (myMercenary.loot.gold < repairCost) {
+                repairArmorCost.setTextFill(Color.web("red"));
+            } else {
+                repairArmorCost.setTextFill(Color.web("black"));
+            }
 
             if (myArmor.durability < myArmor.maxDurability && myMercenary.loot.gold >= repairCost) {
                 repairArmorBtn.setDisable(false);
@@ -166,9 +195,13 @@ public class ForgeController extends GameController {
             }
         } else {
             repairArmorName.setText("N/A");
-            repairArmorCost.setText("cost: N/A");
+            repairArmorCost.setText("cost: N/A gold");
             repairArmorDurLabel.setText("N/A");
             repairArmorDurBar.setProgress(0);
+
+            repairArmorDurLabel.setTextFill(Color.web("black"));
+            repairArmorCost.setTextFill(Color.web("black"));
+
             repairArmorBtn.setDisable(true);
         }
     }

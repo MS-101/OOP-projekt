@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 
@@ -88,6 +89,18 @@ public class MarketController extends GameController {
         hpPotion_descr.setText("heals " + myConsumables.hpPotionData.hpHeal + " hp");
         hpPotion_cost.setText("cost: " + myConsumables.hpPotionData.cost);
 
+        if (myConsumables.hpPotions_amount < myConsumables.hpPotions_maxAmount) {
+            hpPotion_name.setTextFill(Color.web("black"));
+        } else {
+            hpPotion_name.setTextFill(Color.web("red"));
+        }
+
+        if (myMercenary.loot.gold > myConsumables.hpPotionData.cost) {
+            hpPotion_cost.setTextFill(Color.web("black"));
+        } else {
+            hpPotion_cost.setTextFill(Color.web("red"));
+        }
+
         if (myConsumables.hpPotions_amount < myConsumables.hpPotions_maxAmount && myMercenary.loot.gold >= myConsumables.hpPotionData.cost) {
             hpPotion_btn.setDisable(false);
         } else {
@@ -101,6 +114,18 @@ public class MarketController extends GameController {
         mpPotion_name.setText("mp potion [" + myConsumables.mpPotions_amount + "/" + myConsumables.mpPotions_maxAmount + "]");
         mpPotion_descr.setText("heals " + myConsumables.mpPotionData.mpHeal + " mp");
         mpPotion_cost.setText("cost: " + myConsumables.mpPotionData.cost);
+
+        if (myConsumables.mpPotions_amount < myConsumables.mpPotions_maxAmount) {
+            mpPotion_name.setTextFill(Color.web("black"));
+        } else {
+            mpPotion_name.setTextFill(Color.web("red"));
+        }
+
+        if (myMercenary.loot.gold > myConsumables.mpPotionData.cost) {
+            mpPotion_cost.setTextFill(Color.web("black"));
+        } else {
+            mpPotion_cost.setTextFill(Color.web("red"));
+        }
 
         if (myConsumables.mpPotions_amount < myConsumables.mpPotions_maxAmount && myMercenary.loot.gold >= myConsumables.mpPotionData.cost) {
             mpPotion_btn.setDisable(false);

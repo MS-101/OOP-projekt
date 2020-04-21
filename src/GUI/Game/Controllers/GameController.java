@@ -118,19 +118,19 @@ public class GameController implements Initializable {
         this.myMercenary = myMercenary;
     }
 
-    public void pressHpPotionButton (ActionEvent event) {
+    public void pressHpPotionBtn (ActionEvent event) {
         myMercenary.consumables.useHpPotion(myMercenary);
         updatePlayer_hp();
         updatePlayer_hpPotions();
     }
 
-    public void pressMpPotionButton (ActionEvent event) {
+    public void pressMpPotionBtn (ActionEvent event) {
         myMercenary.consumables.useMpPotion(myMercenary);
         updatePlayer_mp();
         updatePlayer_mpPotions();
     }
 
-    public void pressStrengthButton (ActionEvent event) {
+    public void pressStrengthBtn (ActionEvent event) {
         PlayerStats myStats = myMercenary.stats;
 
         myStats.attributePoints--;
@@ -143,7 +143,7 @@ public class GameController implements Initializable {
         updatePlayer_hp();
     }
 
-    public void pressDexterityButton (ActionEvent event) {
+    public void pressDexterityBtn (ActionEvent event) {
         PlayerStats myStats = myMercenary.stats;
 
         myStats.attributePoints--;
@@ -152,7 +152,7 @@ public class GameController implements Initializable {
         updatePlayer_attributes();
     }
 
-    public void pressIntelligenceButton (ActionEvent event) {
+    public void pressIntelligenceBtn (ActionEvent event) {
         PlayerStats myStats = myMercenary.stats;
 
         myStats.attributePoints--;
@@ -165,7 +165,7 @@ public class GameController implements Initializable {
         updatePlayer_mp();
     }
 
-    public void pressFireballButton (ActionEvent event) {
+    public void pressFireballBtn (ActionEvent event) {
         PlayerSkills mySkills = myMercenary.skills;
 
         mySkills.skillPoints--;
@@ -174,7 +174,7 @@ public class GameController implements Initializable {
         updatePlayer_skills();
     }
 
-    public void pressFlamestrikeButton (ActionEvent event) {
+    public void pressFlamestrikeBtn (ActionEvent event) {
         PlayerSkills mySkills = myMercenary.skills;
 
         mySkills.skillPoints--;
@@ -183,7 +183,7 @@ public class GameController implements Initializable {
         updatePlayer_skills();
     }
 
-    public void pressHealButton (ActionEvent event) {
+    public void pressHealBtn (ActionEvent event) {
         PlayerSkills mySkills = myMercenary.skills;
 
         mySkills.skillPoints--;

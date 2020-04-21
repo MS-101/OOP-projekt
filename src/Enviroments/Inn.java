@@ -6,8 +6,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class Inn extends Location {
-    int roomCost = 25;
-    int roomComfort = 30;
+    public int roomCost = 25;
+    public double roomComfort = 0.4;
 
     public void visit(File accountsFile, AccountsHashTable myHashtable, Mercenary player, Village myVillage) throws IOException {
         while (true) {

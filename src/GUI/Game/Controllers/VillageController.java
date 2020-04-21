@@ -7,8 +7,18 @@ import javafx.scene.Scene;
 import java.io.IOException;
 
 public class VillageController extends GameController {
-    public void goToInn() {
+    public void goToInn() throws IOException {
+        Scene myScene = (Scene)ap.getScene();
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Inn.fxml"));
+        Parent innRoot = (Parent)loader.load();
+
+        InnController myController = loader.getController();
+        myController.passUserData(accountsFile, myHashtable, myVillage, myMercenary);
+        myController.updateInn_all();
+        myController.updatePlayer_all();
+
+        myScene.setRoot(innRoot);
     }
 
     public void goToForge() throws IOException {

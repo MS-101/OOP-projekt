@@ -442,7 +442,7 @@
                                                                                                 </AnchorPane>
                                                                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                                                     <children>
-                                                                                                        <Button fx:id="hpPotionBtn" mnemonicParsing="false" onAction="#pressHpPotionButton" prefHeight="65.0" prefWidth="136.0" text="Use" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                        <Button fx:id="hpPotionBtn" mnemonicParsing="false" onAction="#pressHpPotionBtn" prefHeight="65.0" prefWidth="136.0" text="Use" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                                                                     </children>
                                                                                                 </AnchorPane>
                                                                                             </items>
@@ -460,7 +460,7 @@
                                                                                                 </AnchorPane>
                                                                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                                                     <children>
-                                                                                                        <Button fx:id="mpPotionBtn" mnemonicParsing="false" onAction="#pressMpPotionButton" prefHeight="65.0" prefWidth="136.0" text="Use" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                        <Button fx:id="mpPotionBtn" mnemonicParsing="false" onAction="#pressMpPotionBtn" prefHeight="65.0" prefWidth="136.0" text="Use" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                                                                     </children>
                                                                                                 </AnchorPane>
                                                                                             </items>
@@ -611,7 +611,7 @@
                                                                                                                 </AnchorPane>
                                                                                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                                                                     <children>
-                                                                                                                        <Button fx:id="strBtn" mnemonicParsing="false" onAction="#pressStrengthButton" prefHeight="34.0" prefWidth="33.0" text="+" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                                        <Button fx:id="strBtn" mnemonicParsing="false" onAction="#pressStrengthBtn" prefHeight="34.0" prefWidth="33.0" text="+" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                                                                                     </children>
                                                                                                                 </AnchorPane>
                                                                                                             </items>
@@ -629,7 +629,7 @@
                                                                                                                 </AnchorPane>
                                                                                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                                                                     <children>
-                                                                                                                        <Button fx:id="dexBtn" mnemonicParsing="false" onAction="#pressDexterityButton" prefHeight="34.0" prefWidth="33.0" text="+" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                                        <Button fx:id="dexBtn" mnemonicParsing="false" onAction="#pressDexterityBtn" prefHeight="34.0" prefWidth="33.0" text="+" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                                                                                     </children>
                                                                                                                 </AnchorPane>
                                                                                                             </items>
@@ -647,7 +647,7 @@
                                                                                                                 </AnchorPane>
                                                                                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                                                                     <children>
-                                                                                                                        <Button fx:id="intBtn" mnemonicParsing="false" onAction="#pressIntelligenceButton" prefHeight="34.0" prefWidth="33.0" text="+" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                                        <Button fx:id="intBtn" mnemonicParsing="false" onAction="#pressIntelligenceBtn" prefHeight="34.0" prefWidth="33.0" text="+" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                                                                                     </children>
                                                                                                                 </AnchorPane>
                                                                                                             </items>
@@ -689,7 +689,7 @@
                                                                                                                 </AnchorPane>
                                                                                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                                                                     <children>
-                                                                                                                        <Button fx:id="fireballBtn" mnemonicParsing="false" onAction="#pressFireballButton" prefHeight="34.0" prefWidth="33.0" text="+" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                                        <Button fx:id="fireballBtn" mnemonicParsing="false" onAction="#pressFireballBtn" prefHeight="34.0" prefWidth="33.0" text="+" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                                                                                     </children>
                                                                                                                 </AnchorPane>
                                                                                                             </items>
@@ -707,7 +707,7 @@
                                                                                                                 </AnchorPane>
                                                                                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                                                                     <children>
-                                                                                                                        <Button fx:id="flamestrikeBtn" mnemonicParsing="false" onAction="#pressFlamestrikeButton" prefHeight="34.0" prefWidth="33.0" text="+" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                                        <Button fx:id="flamestrikeBtn" mnemonicParsing="false" onAction="#pressFlamestrikeBtn" prefHeight="34.0" prefWidth="33.0" text="+" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                                                                                     </children>
                                                                                                                 </AnchorPane>
                                                                                                             </items>
@@ -725,7 +725,7 @@
                                                                                                                 </AnchorPane>
                                                                                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                                                                     <children>
-                                                                                                                        <Button fx:id="healBtn" mnemonicParsing="false" onAction="#pressHealButton" prefHeight="34.0" prefWidth="33.0" text="+" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                                        <Button fx:id="healBtn" mnemonicParsing="false" onAction="#pressHealBtn" prefHeight="34.0" prefWidth="33.0" text="+" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                                                                                     </children>
                                                                                                                 </AnchorPane>
                                                                                                             </items>
