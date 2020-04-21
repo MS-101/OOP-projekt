@@ -1,5 +1,7 @@
 package Enviroments;
 
-public class Market {
+import java.io.Serializable;
+
+public class Market implements Serializable {
 
 }

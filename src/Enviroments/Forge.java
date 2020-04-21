@@ -1,6 +1,7 @@
 package Enviroments;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -10,7 +11,7 @@ import Items.Weapons.*;
 import Items.Armor.*;
 import MySystem.*;
 
-public class Forge {
+public class Forge implements Serializable {
     public ArrayList<Item> forgeInventory;
     public ArrayList<Item> forgeLootTable;
     public int forgeInventoryLimit;
