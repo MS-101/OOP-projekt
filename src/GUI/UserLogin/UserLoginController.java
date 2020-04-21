@@ -6,7 +6,7 @@ import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 
-import GUI.Game.VillageController;
+import GUI.Game.Controllers.VillageController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -80,7 +80,7 @@ public class UserLoginController implements Initializable {
     private void startGame(File accountsFile, AccountsHashTable myHashTable, Mercenary myMercenary, Village myVillage) throws IOException {
         Stage primaryStage = (Stage) ap.getScene().getWindow();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Game/Village.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Game/FXML/Village.fxml"));
         Parent villageRoot = (Parent) loader.load();
         VillageController controller = loader.getController();
 

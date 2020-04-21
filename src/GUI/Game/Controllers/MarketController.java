@@ -1,4 +1,4 @@
-package GUI.Game;
+package GUI.Game.Controllers;
 
 import Consumables.HpPotion;
 import Consumables.MpPotion;
@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-import java.awt.*;
 import java.io.IOException;
 
 public class MarketController extends GameController {
@@ -35,7 +34,7 @@ public class MarketController extends GameController {
     public void returnToVillage() throws IOException {
         Scene myScene = (Scene) ap.getScene();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Village.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Village.fxml"));
         Parent villageRoot = (Parent) loader.load();
 
         VillageController myController = loader.getController();

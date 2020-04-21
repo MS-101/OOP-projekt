@@ -1,4 +1,4 @@
-package GUI.Game;
+package GUI.Game.Controllers;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,7 +14,7 @@ public class VillageController extends GameController {
     public void goToForge() throws IOException {
         Scene myScene = (Scene)ap.getScene();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Forge.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Forge.fxml"));
         Parent forgeRoot = (Parent)loader.load();
 
         ForgeController myController = loader.getController();
@@ -28,7 +28,7 @@ public class VillageController extends GameController {
     public void goToMarket() throws IOException {
         Scene myScene = (Scene)ap.getScene();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Market.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Market.fxml"));
         Parent marketRoot = (Parent)loader.load();
 
         MarketController myController = loader.getController();

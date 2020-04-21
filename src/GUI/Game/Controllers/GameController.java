@@ -1,4 +1,4 @@
-package GUI.Game;
+package GUI.Game.Controllers;
 
 import Entities.Player.Mercenary;
 import Entities.Player.PlayerConsumables;
