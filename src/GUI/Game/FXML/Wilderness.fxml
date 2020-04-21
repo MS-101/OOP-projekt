@@ -1,14 +1,470 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="GUI.Game.Controllers.WildernessController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane fx:id="ap" prefHeight="1000.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Game.Controllers.WildernessController">
+    <children>
+        <SplitPane dividerPositions="0.65" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    <children>
+                        <TitledPane alignment="CENTER" animated="false" collapsible="false" contentDisplay="CENTER" prefHeight="398.0" prefWidth="296.0" text="Wilderness" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                    <children>
+                                        <VBox prefHeight="958.0" prefWidth="774.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <children>
+                                                <Button mnemonicParsing="false" onAction="#goToForest" prefHeight="200.0" prefWidth="5000.0" text="Forest">
+                                                    <VBox.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                    </VBox.margin>
+                                                    <padding>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                    </padding>
+                                                    <font>
+                                                        <Font size="18.0" />
+                                                    </font>
+                                                </Button>
+                                                <Button mnemonicParsing="false" onAction="#returnToVillage" prefHeight="200.0" prefWidth="5000.0" text="Return">
+                                                    <VBox.margin>
+                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                    </VBox.margin>
+                                                    <font>
+                                                        <Font size="18.0" />
+                                                    </font>
+                                                </Button>
+                                            </children>
+                                        </VBox>
+                                    </children></AnchorPane>
+                            </content>
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </TitledPane>
+                    </children>
+                </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    <children>
+                        <TitledPane fx:id="playerPane" animated="false" collapsible="false" prefHeight="498.0" prefWidth="206.0" text="PlayerName [lvl x]" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                    <children>
+                                        <SplitPane dividerPositions="0.1, 0.2, 0.3, 0.5, 0.7, 0.95" orientation="VERTICAL" prefHeight="958.0" prefWidth="414.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <items>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                    <children>
+                                                        <SplitPane dividerPositions="0.1" prefHeight="1000.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <items>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                    <children>
+                                                                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="70.0" prefHeight="158.0" prefWidth="89.0" text="Exp:" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                    </children>
+                                                                </AnchorPane>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                    <children>
+                                                                        <ProgressBar fx:id="expBar" prefHeight="158.0" prefWidth="117.0" progress="0.5" style="-fx-accent: lightgreen;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                        <Label fx:id="expLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="158.0" prefWidth="215.0" text="a/b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </items>
+                                                        </SplitPane>
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                    <children>
+                                                        <SplitPane dividerPositions="0.1" focusTraversable="false" prefHeight="0.0" prefWidth="384.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <items>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                    <children>
+                                                                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="70.0" prefHeight="158.0" prefWidth="89.0" text="HP:" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                    </children>
+                                                                </AnchorPane>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                    <children>
+                                                                        <ProgressBar fx:id="hpBar" prefHeight="158.0" prefWidth="117.0" progress="0.5" style="-fx-accent: red;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                        <Label fx:id="hpLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="158.0" prefWidth="215.0" text="a/b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </items>
+                                                        </SplitPane>
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                    <children>
+                                                        <SplitPane dividerPositions="0.1" prefHeight="0.0" prefWidth="384.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <items>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                    <children>
+                                                                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="70.0" prefHeight="158.0" prefWidth="89.0" text="MP:" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                    </children>
+                                                                </AnchorPane>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                    <children>
+                                                                        <ProgressBar fx:id="mpBar" prefHeight="158.0" prefWidth="117.0" progress="0.5" style="-fx-accent: lightblue;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                        <Label fx:id="mpLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="158.0" prefWidth="215.0" text="a/b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </items>
+                                                        </SplitPane>
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                    <children>
+                                                        <TitledPane alignment="CENTER" animated="false" collapsible="false" contentDisplay="CENTER" prefHeight="1000.0" prefWidth="1000.0" text="Consumables" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <content>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                                    <children>
+                                                                        <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="174.0" prefWidth="384.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                            <items>
+                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                                                    <children>
+                                                                                        <SplitPane dividerPositions="0.6" prefHeight="174.0" prefWidth="384.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                            <items>
+                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                                                    <children>
+                                                                                                        <Label fx:id="hpPotionLabel" alignment="CENTER" prefHeight="158.0" prefWidth="225.0" text="hp potions: a/b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                    </children>
+                                                                                                </AnchorPane>
+                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                                                    <children>
+                                                                                                        <Button fx:id="hpPotionBtn" mnemonicParsing="false" onAction="#pressHpPotionBtn" prefHeight="65.0" prefWidth="136.0" text="Use" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                    </children>
+                                                                                                </AnchorPane>
+                                                                                            </items>
+                                                                                        </SplitPane>
+                                                                                    </children>
+                                                                                </AnchorPane>
+                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                                                    <children>
+                                                                                        <SplitPane dividerPositions="0.6" prefHeight="67.0" prefWidth="354.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                            <items>
+                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                                                    <children>
+                                                                                                        <Label fx:id="mpPotionLabel" alignment="CENTER" prefHeight="158.0" prefWidth="225.0" text="mp potions: a/b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                    </children>
+                                                                                                </AnchorPane>
+                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                                                    <children>
+                                                                                                        <Button fx:id="mpPotionBtn" mnemonicParsing="false" onAction="#pressMpPotionBtn" prefHeight="65.0" prefWidth="136.0" text="Use" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                    </children>
+                                                                                                </AnchorPane>
+                                                                                            </items>
+                                                                                        </SplitPane>
+                                                                                    </children>
+                                                                                </AnchorPane>
+                                                                            </items>
+                                                                        </SplitPane>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </content>
+                                                        </TitledPane>
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                    <children>
+                                                        <SplitPane dividerPositions="0.5" prefHeight="1000.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <items>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="100.0">
+                                                                    <children>
+                                                                        <TitledPane fx:id="weaponPane" alignment="CENTER" animated="false" collapsible="false" contentDisplay="CENTER" prefHeight="158.0" prefWidth="187.0" text="Weapon: x" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                            <content>
+                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="200.0">
+                                                                                    <children>
+                                                                                        <SplitPane fx:id="weaponDescr" dividerPositions="0.2, 0.5" orientation="VERTICAL" prefHeight="144.0" prefWidth="184.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                            <items>
+                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                                                                    <children>
+                                                                                                        <Label prefHeight="0.0" prefWidth="154.0" text="Durability:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                                            <padding>
+                                                                                                                <Insets left="5.0" />
+                                                                                                            </padding></Label>
+                                                                                                    </children>
+                                                                                                </AnchorPane>
+                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                                                                    <children>
+                                                                                                        <ProgressBar fx:id="weaponDurBar" prefHeight="0.0" prefWidth="154.0" progress="0.5" style="-fx-accent: yellow;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                        <Label fx:id="weaponDurLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="154.0" text="a/b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                    </children>
+                                                                                                </AnchorPane>
+                                                                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                                                                    <children>
+                                                                                                        <VBox prefHeight="200.0" prefWidth="154.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                                            <children>
+                                                                                                                <Label fx:id="weapon_physDmg" text="Physical damage: a-b">
+                                                                                                                    <padding>
+                                                                                                                        <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                                                                                    </padding>
+                                                                                                                    <VBox.margin>
+                                                                                                                        <Insets />
+                                                                                                                    </VBox.margin>
+                                                                                                                </Label>
+                                                                                                                <Label fx:id="weapon_piercDmg" text="Piercing damage: a-b">
+                                                                                                                    <padding>
+                                                                                                                        <Insets left="5.0" top="5.0" />
+                                                                                                                    </padding>
+                                                                                                                    <VBox.margin>
+                                                                                                                        <Insets />
+                                                                                                                    </VBox.margin>
+                                                                                                                </Label>
+                                                                                                            </children>
+                                                                                                        </VBox>
+                                                                                                    </children>
+                                                                                                </AnchorPane>
+                                                                                            </items>
+                                                                                        </SplitPane>
+                                                                                    </children>
+                                                                                </AnchorPane>
+                                                                            </content>
+                                                                        </TitledPane>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                    <children>
+                                                                        <TitledPane fx:id="armorPane" alignment="CENTER" animated="false" collapsible="false" contentDisplay="CENTER" prefHeight="132.0" prefWidth="152.0" text="Armor: x" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                            <content>
+                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                                                    <children>
+                                                                                        <SplitPane fx:id="armorDescr" dividerPositions="0.2, 0.5" orientation="VERTICAL" prefHeight="144.0" prefWidth="184.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                            <items>
+                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                                                                    <children>
+                                                                                                        <Label prefHeight="0.0" prefWidth="154.0" text="Durability:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                                            <padding>
+                                                                                                                <Insets left="5.0" />
+                                                                                                            </padding></Label>
+                                                                                                    </children>
+                                                                                                </AnchorPane>
+                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                                                                    <children>
+                                                                                                        <ProgressBar fx:id="armorDurBar" prefHeight="0.0" prefWidth="154.0" progress="0.5" style="-fx-accent: yellow;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                        <Label fx:id="armorDurLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="154.0" text="a/b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                    </children>
+                                                                                                </AnchorPane>
+                                                                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                                                                    <children>
+                                                                                                        <VBox prefHeight="200.0" prefWidth="154.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                                            <children>
+                                                                                                                <Label fx:id="armor_armorVal" text="Armor: x">
+                                                                                                                    <padding>
+                                                                                                                        <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                                                                                    </padding>
+                                                                                                                </Label>
+                                                                                                            </children>
+                                                                                                        </VBox>
+                                                                                                    </children>
+                                                                                                </AnchorPane>
+                                                                                            </items>
+                                                                                        </SplitPane>
+                                                                                    </children>
+                                                                                </AnchorPane>
+                                                                            </content>
+                                                                        </TitledPane>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </items>
+                                                        </SplitPane>
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                    <children>
+                                                        <SplitPane dividerPositions="0.5" prefHeight="222.0" prefWidth="384.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <items>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                    <children>
+                                                                        <TitledPane alignment="CENTER" animated="false" collapsible="false" prefHeight="220.0" prefWidth="186.0" text="Attributes" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                            <content>
+                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                                                    <children>
+                                                                                        <SplitPane dividerPositions="0.1, 0.4, 0.7" orientation="VERTICAL" prefHeight="190.0" prefWidth="184.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                            <items>
+                                                                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                                                                    <children>
+                                                                                                        <Label fx:id="attrPtsLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="154.0" text="x attribute points" textFill="ORANGE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                                            <font>
+                                                                                                                <Font name="System Bold" size="12.0" />
+                                                                                                            </font></Label>
+                                                                                                    </children>
+                                                                                                </AnchorPane>
+                                                                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                                                                    <children>
+                                                                                                        <SplitPane dividerPositions="0.75" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                                            <items>
+                                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                                                                    <children>
+                                                                                                                        <Label fx:id="strLabel" alignment="CENTER" prefHeight="34.0" prefWidth="109.0" text="Strength: x" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                                    </children>
+                                                                                                                </AnchorPane>
+                                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                                                                    <children>
+                                                                                                                        <Button fx:id="strBtn" mnemonicParsing="false" onAction="#pressStrengthBtn" prefHeight="34.0" prefWidth="33.0" text="+" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                                    </children>
+                                                                                                                </AnchorPane>
+                                                                                                            </items>
+                                                                                                        </SplitPane>
+                                                                                                    </children>
+                                                                                                </AnchorPane>
+                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                                                                    <children>
+                                                                                                        <SplitPane dividerPositions="0.75" prefHeight="35.0" prefWidth="154.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                                            <items>
+                                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                                                                    <children>
+                                                                                                                        <Label fx:id="dexLabel" alignment="CENTER" prefHeight="34.0" prefWidth="109.0" text="Dexterity: x" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                                    </children>
+                                                                                                                </AnchorPane>
+                                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                                                                    <children>
+                                                                                                                        <Button fx:id="dexBtn" mnemonicParsing="false" onAction="#pressDexterityBtn" prefHeight="34.0" prefWidth="33.0" text="+" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                                    </children>
+                                                                                                                </AnchorPane>
+                                                                                                            </items>
+                                                                                                        </SplitPane>
+                                                                                                    </children>
+                                                                                                </AnchorPane>
+                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                                                                    <children>
+                                                                                                        <SplitPane dividerPositions="0.75" prefHeight="42.0" prefWidth="154.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                                            <items>
+                                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                                                                    <children>
+                                                                                                                        <Label fx:id="intLabel" alignment="CENTER" prefHeight="34.0" prefWidth="109.0" text="Intelligence: x" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                                    </children>
+                                                                                                                </AnchorPane>
+                                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                                                                    <children>
+                                                                                                                        <Button fx:id="intBtn" mnemonicParsing="false" onAction="#pressIntelligenceBtn" prefHeight="34.0" prefWidth="33.0" text="+" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                                    </children>
+                                                                                                                </AnchorPane>
+                                                                                                            </items>
+                                                                                                        </SplitPane>
+                                                                                                    </children>
+                                                                                                </AnchorPane>
+                                                                                            </items>
+                                                                                        </SplitPane>
+                                                                                    </children>
+                                                                                </AnchorPane>
+                                                                            </content>
+                                                                        </TitledPane>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                    <children>
+                                                                        <TitledPane alignment="CENTER" animated="false" collapsible="false" prefHeight="220.0" prefWidth="186.0" text="Skills" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                            <content>
+                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                                                    <children>
+                                                                                        <SplitPane dividerPositions="0.1, 0.4, 0.7" orientation="VERTICAL" prefHeight="190.0" prefWidth="184.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                            <items>
+                                                                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                                                                    <children>
+                                                                                                        <Label fx:id="skillPtsLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="154.0" text="x skills points" textFill="ORANGE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                                            <font>
+                                                                                                                <Font name="System Bold" size="12.0" />
+                                                                                                            </font></Label>
+                                                                                                    </children>
+                                                                                                </AnchorPane>
+                                                                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                                                                    <children>
+                                                                                                        <SplitPane dividerPositions="0.75" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                                            <items>
+                                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                                                                    <children>
+                                                                                                                        <Label fx:id="fireballLabel" alignment="CENTER" prefHeight="34.0" prefWidth="109.0" text="Fireball: a/b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                                    </children>
+                                                                                                                </AnchorPane>
+                                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                                                                    <children>
+                                                                                                                        <Button fx:id="fireballBtn" mnemonicParsing="false" onAction="#pressFireballBtn" prefHeight="34.0" prefWidth="33.0" text="+" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                                    </children>
+                                                                                                                </AnchorPane>
+                                                                                                            </items>
+                                                                                                        </SplitPane>
+                                                                                                    </children>
+                                                                                                </AnchorPane>
+                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                                                                    <children>
+                                                                                                        <SplitPane dividerPositions="0.75" prefHeight="35.0" prefWidth="154.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                                            <items>
+                                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                                                                    <children>
+                                                                                                                        <Label fx:id="flamestrikeLabel" alignment="CENTER" prefHeight="34.0" prefWidth="109.0" text="Flamestrike: a/b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                                    </children>
+                                                                                                                </AnchorPane>
+                                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                                                                    <children>
+                                                                                                                        <Button fx:id="flamestrikeBtn" mnemonicParsing="false" onAction="#pressFlamestrikeBtn" prefHeight="34.0" prefWidth="33.0" text="+" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                                    </children>
+                                                                                                                </AnchorPane>
+                                                                                                            </items>
+                                                                                                        </SplitPane>
+                                                                                                    </children>
+                                                                                                </AnchorPane>
+                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                                                                                    <children>
+                                                                                                        <SplitPane dividerPositions="0.75" prefHeight="42.0" prefWidth="154.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                                            <items>
+                                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                                                                    <children>
+                                                                                                                        <Label fx:id="healLabel" alignment="CENTER" prefHeight="34.0" prefWidth="109.0" text="Heal: a/b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                                    </children>
+                                                                                                                </AnchorPane>
+                                                                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                                                                                    <children>
+                                                                                                                        <Button fx:id="healBtn" mnemonicParsing="false" onAction="#pressHealBtn" prefHeight="34.0" prefWidth="33.0" text="+" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                                                    </children>
+                                                                                                                </AnchorPane>
+                                                                                                            </items>
+                                                                                                        </SplitPane>
+                                                                                                    </children>
+                                                                                                </AnchorPane>
+                                                                                            </items>
+                                                                                        </SplitPane>
+                                                                                    </children>
+                                                                                </AnchorPane>
+                                                                            </content>
+                                                                        </TitledPane>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </items>
+                                                        </SplitPane>
+                                                    </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                    <children>
+                                                        <VBox prefHeight="200.0" prefWidth="384.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <children>
+                                                                <Label fx:id="goldLabel" alignment="TOP_LEFT" contentDisplay="TOP" text="Gold: x">
+                                                                    <font>
+                                                                        <Font size="18.0" />
+                                                                    </font>
+                                                                    <padding>
+                                                                        <Insets left="5.0" />
+                                                                    </padding>
+                                                                </Label>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </AnchorPane>
+                                            </items>
+                                        </SplitPane>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </TitledPane>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
 </AnchorPane>

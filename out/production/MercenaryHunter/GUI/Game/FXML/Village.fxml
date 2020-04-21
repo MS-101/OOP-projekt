@@ -46,7 +46,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="forestBtn" layoutX="10.0" layoutY="328.0" mnemonicParsing="false" onAction="#goToForest" prefHeight="200.0" prefWidth="10000.0" text="Forest">
+                                    <Button fx:id="forestBtn" layoutX="10.0" layoutY="328.0" mnemonicParsing="false" onAction="#goToForest" prefHeight="200.0" prefWidth="10000.0" text="Wilderness">
                                        <VBox.margin>
                                           <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
                                        </VBox.margin>

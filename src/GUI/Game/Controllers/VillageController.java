@@ -49,7 +49,16 @@ public class VillageController extends GameController {
         myScene.setRoot(marketRoot);
     }
 
-    public void goToForest() {
+    public void goToForest() throws IOException {
+        Scene myScene = (Scene)ap.getScene();
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Wilderness.fxml"));
+        Parent forestRoot = (Parent)loader.load();
+
+        WildernessController myController = loader.getController();
+        myController.passUserData(accountsFile, myHashtable, myVillage, myMercenary);
+        myController.updatePlayer_all();
+
+        myScene.setRoot(forestRoot);
     }
 }
