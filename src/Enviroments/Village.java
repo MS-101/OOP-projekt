@@ -49,14 +49,6 @@ public class Village extends Location {
                     break;
                 }
 
-                if (myCommand.name.equalsIgnoreCase("MARKET")) {
-                    System.out.println("You have decided to buy some necessities.");
-                    System.out.println();
-
-                    myMarket.visit(accountsFile, myHashtable, player, this);
-                    break;
-                }
-
                 if (myCommand.name.equalsIgnoreCase("FOREST")) {
                     System.out.println("You have entered the forest.");
                     System.out.println();

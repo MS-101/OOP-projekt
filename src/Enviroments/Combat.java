@@ -106,12 +106,6 @@ public class Combat extends Location {
         System.out.println("Enter one of the following commands:");
         System.out.println("ATTACK <enemyIndex> - deal damage to a specific opponent");
         System.out.println("SPELL <spellName> {spellTarget} - use 'spell help' to view all available spells");
-        if (this.player.consumables.hpPotions_amount > 0) {
-            System.out.println("HP - use hp potion [heals " + this.player.consumables.hpPotion_heal + " hp] (" + this.player.consumables.hpPotions_amount + " remaining)");
-        }
-        if (this.player.consumables.mpPotions_amount > 0) {
-            System.out.println("MP - use mp potion [heals " + this.player.consumables.mpPotion_heal + " mp] (" + this.player.consumables.mpPotions_amount + " remaining)");
-        }
         System.out.println("SKIP - if you are feeling suicidal");
         System.out.println("FLEE - disengage from combat (may be unsuccessful)");
         System.out.println();

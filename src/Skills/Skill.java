@@ -10,6 +10,5 @@ public class Skill implements Serializable {
 
     public void cast(Entity caster) {
         caster.mp -= mpCost;
-        System.out.println("You spent " + this.mpCost + " mana.");
     }
 }

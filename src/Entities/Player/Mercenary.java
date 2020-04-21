@@ -57,14 +57,4 @@ public class Mercenary extends Entity {
             }
         }
     }
-
-    public void useHpPotion() {
-        this.consumables.hpPotions_amount--;
-        this.healHp(this.consumables.hpPotion_heal);
-    }
-
-    public void useMpPotion() {
-        this.consumables.mpPotions_amount--;
-        this.healMp(this.consumables.mpPotion_heal);
-    }
 }

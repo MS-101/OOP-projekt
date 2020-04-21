@@ -7,18 +7,15 @@ import Entities.Player.PlayerStats;
 import Enviroments.Village;
 import Items.Armor.Armor;
 import Items.Weapons.Weapon;
-import MySystem.Account;
 import MySystem.AccountsHashTable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+import javafx.scene.paint.Color;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,6 +27,9 @@ public class GameController implements Initializable {
 
     Village myVillage;
     Mercenary myMercenary;
+
+    @FXML
+    AnchorPane ap;
 
     @FXML
     private TitledPane playerPane;
@@ -119,13 +119,13 @@ public class GameController implements Initializable {
     }
 
     public void pressHpPotionButton (ActionEvent event) {
-        myMercenary.useHpPotion();
+        myMercenary.consumables.useHpPotion(myMercenary);
         updatePlayer_hp();
         updatePlayer_hpPotions();
     }
 
     public void pressMpPotionButton (ActionEvent event) {
-        myMercenary.useMpPotion();
+        myMercenary.consumables.useMpPotion(myMercenary);
         updatePlayer_mp();
         updatePlayer_mpPotions();
     }
@@ -192,7 +192,7 @@ public class GameController implements Initializable {
         updatePlayer_skills();
     }
 
-    public void updatePlayer_All() {
+    public void updatePlayer_all() {
         updatePlayer_nameLevel();
 
         updatePlayer_exp();
@@ -208,7 +208,7 @@ public class GameController implements Initializable {
         updatePlayer_attributes();
         updatePlayer_skills();
 
-        updatePlayer_Gold();
+        updatePlayer_gold();
     }
 
     public void updatePlayer_nameLevel() {
@@ -248,15 +248,21 @@ public class GameController implements Initializable {
             weaponPane.setText("Weapon: " + myWeapon.name);
 
             weaponDurLabel.setText(myWeapon.durability + "/" + myWeapon.maxDurability);
-            double progress = (double)myWeapon.durability / (double)myWeapon.maxDurability;
-            weaponDurBar.setProgress(progress);
+            if (myWeapon.durability <= 0.2 * myWeapon.maxDurability) {
+                weaponDurLabel.setTextFill(Color.web("red"));
+            } else {
+                weaponDurLabel.setTextFill(Color.web("black"));
+            }
+
+            double durProgress = (double)myWeapon.durability / (double)myWeapon.maxDurability;
+            weaponDurBar.setProgress(durProgress);
 
             weapon_physDmg.setText("Physical damage: " + myWeapon.lowPhysicalDmg + "-" + myWeapon.highPhysicalDmg);
             weapon_piercDmg.setText("Piercing damage: " + myWeapon.lowPiercingDmg + "-" + myWeapon.highPiercingDmg);
 
             weaponDescr.setVisible(true);
         } else {
-            weaponPane.setText("Weapon: null");
+            weaponPane.setText("Weapon: N/A");
 
             weaponDescr.setVisible(false);
         }
@@ -269,14 +275,20 @@ public class GameController implements Initializable {
             armorPane.setText("Armor: " + myArmor.name);
 
             armorDurLabel.setText(myArmor.durability + "/" + myArmor.maxDurability);
-            double progress = (double)myArmor.durability / (double)myArmor.maxDurability;
-            armorDurBar.setProgress(progress);
+            if (myArmor.durability <= 0.2 * myArmor.maxDurability) {
+                armorDurLabel.setTextFill(Color.web("red"));
+            } else {
+                armorDurLabel.setTextFill(Color.web("black"));
+            }
+
+            double durProgress = (double)myArmor.durability / (double)myArmor.maxDurability;
+            armorDurBar.setProgress(durProgress);
 
             armor_armorVal.setText("Armor: " + myArmor.armorVal);
 
             armorDescr.setVisible(true);
         } else {
-            armorPane.setText("Armor: null");
+            armorPane.setText("Armor: N/A");
 
             armorDescr.setVisible(false);
         }
@@ -307,7 +319,7 @@ public class GameController implements Initializable {
     public void updatePlayer_attributes() {
         PlayerStats myStats = myMercenary.stats;
 
-        attrPtsLabel.setText("You have " + myStats.attributePoints + " points remaining.");
+        attrPtsLabel.setText(myStats.attributePoints + " attribute points");
 
         strLabel.setText("Strength: " + myStats.strength);
         dexLabel.setText("Dexterity: " + myStats.dexterity);
@@ -327,7 +339,7 @@ public class GameController implements Initializable {
     public void updatePlayer_skills() {
         PlayerSkills mySkills = myMercenary.skills;
 
-        skillPtsLabel.setText("You have " + mySkills.skillPoints + " points remaining.");
+        skillPtsLabel.setText(mySkills.skillPoints + " skill points");
 
         fireballLabel.setText("Fireball: " + mySkills.fireball.curLvl + "/" + mySkills.fireball.maxLvl);
         flamestrikeLabel.setText("Flamestrike: " + mySkills.flamestrike.curLvl + "/" + mySkills.flamestrike.maxLvl);
@@ -358,7 +370,7 @@ public class GameController implements Initializable {
         }
     }
 
-    public void updatePlayer_Gold() {
+    public void updatePlayer_gold() {
         goldLabel.setText("Gold: " + myMercenary.loot.gold);
     }
 

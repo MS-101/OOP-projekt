@@ -21,6 +21,5 @@ public class PlayerLoot implements Serializable {
 
     public void payGold(int payment) {
         this.gold -= payment;
-        System.out.println("You paid " + payment + " gold");
     }
 }

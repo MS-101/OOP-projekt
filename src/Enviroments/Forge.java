@@ -69,14 +69,6 @@ public class Forge extends Location {
                     break;
                 }
 
-                if (myCommand.name.equalsIgnoreCase("REPAIR")) {
-                    System.out.println("\"My equipment could use some repairs.\"");
-                    System.out.println();
-
-                    this.repair(player);
-                    break;
-                }
-
                 if (myCommand.name.equalsIgnoreCase("RETURN")) {
                     System.out.println("\"Farewell,\" he says as you leave the forge");
                     System.out.println();
@@ -176,78 +168,6 @@ public class Forge extends Location {
                         }
                     } else {
                         System.out.println("You did not select an item.");
-                        continue;
-                    }
-                }
-
-                if (myCommand.name.equalsIgnoreCase("FINISH")) {
-                    System.out.println("Do I still need anything here?");
-                    System.out.println();
-                    return;
-                }
-
-                System.out.println("Incorrect command!");
-            }
-        }
-    }
-
-    private void repair(Mercenary player) {
-        int weaponRepairCost = 0, armorRepairCost = 0;
-
-        if (player.weapon != null && player.weapon.durability != player.weapon.maxDurability) {
-            weaponRepairCost = (int)(((double)(player.weapon.maxDurability - player.weapon.durability) / (double)player.weapon.maxDurability) * player.weapon.repairCost);
-        }
-
-        if (player.armor != null && player.armor.durability != player.armor.maxDurability) {
-            armorRepairCost = (int)((double)(player.armor.maxDurability - player.armor.durability) / (double)player.armor.maxDurability * player.armor.repairCost);
-        }
-
-        while (true) {
-            System.out.println("\"What do you need repaired?\" the blacksmith asks.");
-            System.out.println("You currently have " + player.loot.gold + " gold.");
-            System.out.println();
-
-            System.out.println("Enter one of the following commands:");
-            if (weaponRepairCost != 0) {
-                System.out.println("WEAPON - repair your currently equipped weapon (" + player.weapon.durability + "/" + player.weapon.maxDurability + " durability) [" + weaponRepairCost + " gold]");
-            }
-            if (armorRepairCost != 0) {
-                System.out.println("ARMOR - repair your currently worn armor (" + player.armor.durability + "/" + player.armor.maxDurability + " durability) [" + armorRepairCost + " gold]");
-            }
-            System.out.println("FINISH - perhaps there is something else that you need");
-            System.out.println();
-
-            while (true) {
-                myCommand.readInput();
-
-                if (weaponRepairCost != 0 && myCommand.name.equalsIgnoreCase("WEAPON")) {
-                    if (player.loot.gold >= weaponRepairCost) {
-                        System.out.println("Smith repairs your weapon.");
-                        System.out.println();
-
-                        player.loot.payGold(weaponRepairCost);
-                        weaponRepairCost = 0;
-                        player.weapon.repairItem();
-                    } else {
-                        System.out.println("You don't have enough gold to pay for this.");
-                        System.out.println();
-                    }
-
-                    break;
-                }
-
-                if (armorRepairCost != 0 && myCommand.name.equalsIgnoreCase("ARMOR")) {
-                    if (player.loot.gold >= armorRepairCost) {
-                        System.out.println("Smith repairs your armor.");
-                        System.out.println();
-
-                        player.loot.payGold(armorRepairCost);
-                        armorRepairCost = 0;
-                        player.armor.repairItem();
-
-                        break;
-                    } else {
-                        System.out.println("You don't have enough gold to pay for this.");
                         continue;
                     }
                 }

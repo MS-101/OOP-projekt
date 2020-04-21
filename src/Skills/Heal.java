@@ -11,7 +11,7 @@ public class Heal extends Skill {
         this.maxLvl = 3;
         this.mpCost = 30;
 
-        this.healAmount = 50;
+        this.healAmount = 80;
     }
 
     public void upgrade() {
@@ -26,11 +26,9 @@ public class Heal extends Skill {
         super.cast(caster);
 
         int prevHp, effectiveHeal;
-        int realHealAmount;
 
-        realHealAmount = healAmount;
         if (caster instanceof Mercenary) {
-            realHealAmount *= (double)((Mercenary) caster).stats.intelligence / 10;
+            healAmount *= (double)((Mercenary) caster).stats.intelligence / 10;
         }
 
         prevHp = caster.hp;

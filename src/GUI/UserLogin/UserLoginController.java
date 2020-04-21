@@ -10,7 +10,6 @@ import GUI.Game.VillageController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -90,10 +89,11 @@ public class UserLoginController implements Initializable {
 
         //testing
         myMercenary.hp -= 50;
+        myMercenary.weapon.durability = 1;
         myMercenary.stats.attributePoints = 10;
         myMercenary.skills.skillPoints = 10;
 
-        controller.updatePlayer_All();
+        controller.updatePlayer_all();
     }
 
     @Override
