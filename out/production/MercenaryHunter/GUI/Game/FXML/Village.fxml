@@ -46,7 +46,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="forestBtn" layoutX="10.0" layoutY="328.0" mnemonicParsing="false" onAction="#goToForest" prefHeight="200.0" prefWidth="10000.0" text="Wilderness">
+                                    <Button fx:id="forestBtn" layoutX="10.0" layoutY="328.0" mnemonicParsing="false" onAction="#goToForest" prefHeight="200.0" prefWidth="10000.0" text="Forest">
                                        <VBox.margin>
                                           <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
                                        </VBox.margin>
@@ -131,7 +131,7 @@
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <TitledPane alignment="CENTER" animated="false" collapsible="false" contentDisplay="CENTER" prefHeight="1000.0" prefWidth="1000.0" text="Consumables" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TitledPane fx:id="consumablesPane" alignment="CENTER" animated="false" collapsible="false" contentDisplay="CENTER" prefHeight="1000.0" prefWidth="1000.0" text="Consumables" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <content>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                    <children>
@@ -292,7 +292,7 @@
                                             <items>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                    <children>
-                                                      <TitledPane alignment="CENTER" animated="false" collapsible="false" prefHeight="220.0" prefWidth="186.0" text="Attributes" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <TitledPane fx:id="attrsPane" alignment="CENTER" animated="false" collapsible="false" prefHeight="220.0" prefWidth="186.0" text="Attributes" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                         <content>
                                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                                <children>
@@ -370,7 +370,7 @@
                                                 </AnchorPane>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                    <children>
-                                                      <TitledPane alignment="CENTER" animated="false" collapsible="false" prefHeight="220.0" prefWidth="186.0" text="Skills" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <TitledPane fx:id="skillsPane" alignment="CENTER" animated="false" collapsible="false" prefHeight="220.0" prefWidth="186.0" text="Skills" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <content>
                                                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                                <children>

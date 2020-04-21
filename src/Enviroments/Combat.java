@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.Random;
 import MySystem.*;
 
-public class Combat extends Location {
+public class Combat {
+    /*
     Mercenary player;
     ArrayList<Monster> opponents;
     int goldGain, expGain;
@@ -220,25 +221,19 @@ public class Combat extends Location {
             }
 
             if (this.player.consumables.hpPotions_amount > 0 && myCommand.name.equalsIgnoreCase("HP")) {
-                /*
                 if (this.player.useHpPotion()) {
                     return;
                 } else {
                     continue;
                 }
-
-                 */
             }
 
             if (this.player.consumables.mpPotions_amount > 0 && myCommand.name.equalsIgnoreCase("MP")) {
-             /*
                 if (this.player.useMpPotion()) {
                     return;
                 } else {
                     continue;
                 }
-
-              */
             }
 
             if (myCommand.name.equalsIgnoreCase("SKIP")) {
@@ -304,4 +299,5 @@ public class Combat extends Location {
 
         this.player.reset();
     }
+     */
 }

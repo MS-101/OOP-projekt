@@ -1,5 +1,5 @@
 package Enviroments;
 
-public class Market extends Location {
+public class Market {
 
 }

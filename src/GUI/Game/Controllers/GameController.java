@@ -34,6 +34,12 @@ public class GameController implements Initializable {
     @FXML
     private TitledPane playerPane;
     @FXML
+    private TitledPane consumablesPane;
+    @FXML
+    private TitledPane attrsPane;
+    @FXML
+    private TitledPane skillsPane;
+    @FXML
     private TitledPane weaponPane;
     @FXML
     private TitledPane armorPane;
@@ -116,6 +122,18 @@ public class GameController implements Initializable {
 
         this.myVillage = myVillage;
         this.myMercenary = myMercenary;
+    }
+
+    public void disablePlayerButtons() {
+        attrsPane.setDisable(true);
+        skillsPane.setDisable(true);
+        consumablesPane.setDisable(true);
+    }
+
+    public void enablePlayerButtons() {
+        attrsPane.setDisable(false);
+        skillsPane.setDisable(false);
+        consumablesPane.setDisable(false);
     }
 
     public void pressHpPotionBtn (ActionEvent event) {

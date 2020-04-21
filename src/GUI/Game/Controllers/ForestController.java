@@ -6,11 +6,7 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 
-public class WildernessController extends GameController {
-    public void goToForest() {
-
-    }
-
+public class ForestController extends GameController {
     public void returnToVillage() throws IOException {
         Scene myScene = (Scene) ap.getScene();
 

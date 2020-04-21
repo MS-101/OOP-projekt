@@ -52,12 +52,13 @@ public class VillageController extends GameController {
     public void goToForest() throws IOException {
         Scene myScene = (Scene)ap.getScene();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Wilderness.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Forest.fxml"));
         Parent forestRoot = (Parent)loader.load();
 
-        WildernessController myController = loader.getController();
+        ForestController myController = loader.getController();
         myController.passUserData(accountsFile, myHashtable, myVillage, myMercenary);
         myController.updatePlayer_all();
+        myController.disablePlayerButtons();
 
         myScene.setRoot(forestRoot);
     }
