@@ -37,6 +37,9 @@ public class ForestController extends GameController {
     }
 
     public void combat_pressHpPotionBtn(ActionEvent event) {
+        combat_attackBtn.setSelected(false);
+        combat_fireballBtn.setSelected(false);
+
         pressHpPotionBtn(event);
 
         updateForest_hpPotion();
@@ -45,6 +48,9 @@ public class ForestController extends GameController {
     }
 
     public void combat_pressMpPotionBtn(ActionEvent event) {
+        combat_attackBtn.setSelected(false);
+        combat_fireballBtn.setSelected(false);
+
         pressMpPotionBtn(event);
 
         updateForest_mpPotion();
@@ -61,6 +67,9 @@ public class ForestController extends GameController {
     public void combat_pressFlamestrikeBtn(ActionEvent event) {
         PlayerSkills mySkills = myMercenary.skills;
 
+        combat_attackBtn.setSelected(false);
+        combat_fireballBtn.setSelected(false);
+
         updatePlayer_mp();
 
         updateForest_mpPotion();
@@ -72,6 +81,9 @@ public class ForestController extends GameController {
 
     public void combat_pressHealBtn(ActionEvent event) {
         PlayerSkills mySkills = myMercenary.skills;
+
+        combat_attackBtn.setSelected(false);
+        combat_fireballBtn.setSelected(false);
 
         mySkills.heal.cast(myMercenary);
 
