@@ -34,8 +34,5 @@ public class Heal extends Skill {
         prevHp = caster.hp;
         caster.healHp(healAmount);
         effectiveHeal = caster.hp - prevHp;
-
-        System.out.println("You healed for " + effectiveHeal + " hp.");
-        System.out.println();
     }
 }

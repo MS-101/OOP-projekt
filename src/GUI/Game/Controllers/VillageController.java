@@ -58,7 +58,7 @@ public class VillageController extends GameController {
         ForestController myController = loader.getController();
         myController.passUserData(accountsFile, myHashtable, myVillage, myMercenary);
         myController.updatePlayer_all();
-        myController.disablePlayerButtons();
+        myController.setForestButtons();
 
         myScene.setRoot(forestRoot);
     }

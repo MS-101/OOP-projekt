@@ -8,6 +8,7 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -45,22 +46,25 @@
                                                         <items>
                                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                <children>
-                                                                  <ToggleButton layoutX="46.0" layoutY="65.0" mnemonicParsing="false" prefHeight="129.0" prefWidth="180.0" text="Attack" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                  <ToggleButton fx:id="combat_attackBtn" layoutX="46.0" layoutY="65.0" mnemonicParsing="false" onAction="#combat_pressAttackBtn" prefHeight="129.0" prefWidth="180.0" text="Attack" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                     <toggleGroup>
+                                                                        <ToggleGroup fx:id="targetAbility" />
+                                                                     </toggleGroup></ToggleButton>
                                                                </children>
                                                             </AnchorPane>
                                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                <children>
-                                                                  <Button layoutX="55.0" layoutY="52.0" mnemonicParsing="false" prefHeight="129.0" prefWidth="175.0" text="HP Potion (x)" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                  <Button fx:id="combat_hpPotionBtn" layoutX="55.0" layoutY="52.0" mnemonicParsing="false" onAction="#combat_pressHpPotionBtn" prefHeight="129.0" prefWidth="175.0" text="HP Potion (x)" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                                                <children>
-                                                                  <Button layoutX="62.0" layoutY="52.0" mnemonicParsing="false" prefHeight="129.0" prefWidth="175.0" text="MP Potion (x)" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                  <Button fx:id="combat_mpPotionBtn" layoutX="62.0" layoutY="52.0" mnemonicParsing="false" onAction="#combat_pressMpPotionBtn" prefHeight="129.0" prefWidth="175.0" text="MP Potion (x)" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                                                <children>
-                                                                  <Button layoutX="56.0" layoutY="40.0" mnemonicParsing="false" prefHeight="129.0" prefWidth="180.0" text="Hunt" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                  <Button fx:id="huntBtn" layoutX="56.0" layoutY="40.0" mnemonicParsing="false" onAction="#hunt" prefHeight="129.0" prefWidth="180.0" text="Hunt" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                                </children>
                                                             </AnchorPane>
                                                         </items>
@@ -73,22 +77,22 @@
                                                         <items>
                                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                <children>
-                                                                  <ToggleButton layoutX="46.0" layoutY="52.0" mnemonicParsing="false" prefHeight="129.0" prefWidth="180.0" text="Fireball" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                  <ToggleButton fx:id="combat_fireballBtn" layoutX="46.0" layoutY="52.0" mnemonicParsing="false" onAction="#combat_pressFireballBtn" prefHeight="129.0" prefWidth="180.0" text="Fireball [lvl x]" toggleGroup="$targetAbility" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                                </children>
                                                             </AnchorPane>
                                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                <children>
-                                                                  <Button layoutX="62.0" layoutY="52.0" mnemonicParsing="false" prefHeight="129.0" prefWidth="175.0" text="Flamestrike" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                  <Button fx:id="combat_flamestrikeBtn" layoutX="62.0" layoutY="52.0" mnemonicParsing="false" onAction="#combat_pressFlamestrikeBtn" prefHeight="129.0" prefWidth="175.0" text="Flamestrike [lvl x]" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                                                <children>
-                                                                  <Button layoutX="62.0" layoutY="52.0" mnemonicParsing="false" prefHeight="129.0" prefWidth="175.0" text="Heal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                  <Button fx:id="combat_healBtn" layoutX="62.0" layoutY="52.0" mnemonicParsing="false" onAction="#combat_pressHealBtn" prefHeight="129.0" prefWidth="175.0" text="Heal [lvl x]" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                                </children>
                                                             </AnchorPane>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                                                <children>
-                                                                  <Button layoutX="58.0" layoutY="40.0" mnemonicParsing="false" onAction="#returnToVillage" prefHeight="129.0" prefWidth="180.0" text="Return" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                  <Button fx:id="returnBtn" layoutX="58.0" layoutY="40.0" mnemonicParsing="false" onAction="#returnToVillage" prefHeight="129.0" prefWidth="180.0" text="Return" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                                </children>
                                                             </AnchorPane>
                                                         </items>
