@@ -189,7 +189,7 @@ public class ForestController extends GameController {
     public  void updateForest_fireball() {
         PlayerSkills mySkills = myMercenary.skills;
 
-        combat_fireballBtn.setText("fireball [lvl " + mySkills.fireball.curLvl + "]");
+        combat_fireballBtn.setText("Fireball [lvl " + mySkills.fireball.curLvl + "]");
 
         if (mySkills.fireball.curLvl > 0 && myMercenary.mp > mySkills.fireball.mpCost) {
             combat_fireballBtn.setDisable(false);
@@ -201,7 +201,7 @@ public class ForestController extends GameController {
     public  void updateForest_flamestrike() {
         PlayerSkills mySkills = myMercenary.skills;
 
-        combat_flamestrikeBtn.setText("flamestrike [lvl " + mySkills.flamestrike.curLvl + "]");
+        combat_flamestrikeBtn.setText("Flamestrike [lvl " + mySkills.flamestrike.curLvl + "]");
 
         if (mySkills.flamestrike.curLvl > 0 && myMercenary.mp > mySkills.flamestrike.mpCost) {
             combat_flamestrikeBtn.setDisable(false);
@@ -213,7 +213,7 @@ public class ForestController extends GameController {
     public  void updateForest_heal() {
         PlayerSkills mySkills = myMercenary.skills;
 
-        combat_healBtn.setText("heal [lvl " + mySkills.heal.curLvl + "]");
+        combat_healBtn.setText("Heal [lvl " + mySkills.heal.curLvl + "]");
 
         if (mySkills.heal.curLvl > 0 && myMercenary.mp > mySkills.heal.mpCost && myMercenary.hp < myMercenary.maxHp) {
             combat_healBtn.setDisable(false);
@@ -225,7 +225,7 @@ public class ForestController extends GameController {
     public void updateForest_hpPotion() {
         PlayerConsumables myConsumables = myMercenary.consumables;
 
-        combat_hpPotionBtn.setText("hp potion (" + myConsumables.hpPotions_amount + ")");
+        combat_hpPotionBtn.setText("Hp Potion (" + myConsumables.hpPotions_amount + ")");
 
         if (myConsumables.hpPotions_amount > 0 && myMercenary.hp < myMercenary.maxHp) {
             combat_hpPotionBtn.setDisable(false);
@@ -237,7 +237,7 @@ public class ForestController extends GameController {
     public void updateForest_mpPotion() {
         PlayerConsumables myConsumables = myMercenary.consumables;
 
-        combat_mpPotionBtn.setText("mp potion (" + myConsumables.mpPotions_amount + ")");
+        combat_mpPotionBtn.setText("Mp Potion (" + myConsumables.mpPotions_amount + ")");
 
         if (myConsumables.mpPotions_amount > 0 && myMercenary.mp < myMercenary.maxMp) {
             combat_mpPotionBtn.setDisable(false);

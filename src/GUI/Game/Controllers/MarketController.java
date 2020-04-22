@@ -95,7 +95,7 @@ public class MarketController extends GameController {
             hpPotion_name.setTextFill(Color.web("red"));
         }
 
-        if (myMercenary.loot.gold > myConsumables.hpPotionData.cost) {
+        if (myMercenary.loot.gold >= myConsumables.hpPotionData.cost) {
             hpPotion_cost.setTextFill(Color.web("black"));
         } else {
             hpPotion_cost.setTextFill(Color.web("red"));
@@ -121,7 +121,7 @@ public class MarketController extends GameController {
             mpPotion_name.setTextFill(Color.web("red"));
         }
 
-        if (myMercenary.loot.gold > myConsumables.mpPotionData.cost) {
+        if (myMercenary.loot.gold >= myConsumables.mpPotionData.cost) {
             mpPotion_cost.setTextFill(Color.web("black"));
         } else {
             mpPotion_cost.setTextFill(Color.web("red"));
