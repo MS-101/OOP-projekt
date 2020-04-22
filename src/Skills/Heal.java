@@ -25,14 +25,10 @@ public class Heal extends Skill {
     public void cast(Entity caster) {
         super.cast(caster);
 
-        int prevHp, effectiveHeal;
-
         if (caster instanceof Mercenary) {
             healAmount *= (double)((Mercenary) caster).stats.intelligence / 10;
         }
 
-        prevHp = caster.hp;
         caster.healHp(healAmount);
-        effectiveHeal = caster.hp - prevHp;
     }
 }

@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Button;
 
@@ -32,6 +33,9 @@ public class ForestController extends GameController {
     @FXML
     Button returnBtn;
 
+    @FXML
+    ListView<String> combatLog;
+
     public void combat_pressAttackBtn(ActionEvent event) {
 
     }
@@ -40,7 +44,12 @@ public class ForestController extends GameController {
         combat_attackBtn.setSelected(false);
         combat_fireballBtn.setSelected(false);
 
+        int prevHp = myMercenary.hp;
+
         pressHpPotionBtn(event);
+
+        int effectiveHeal = myMercenary.hp - prevHp;
+        combatLog.getItems().add("You drank hp potion and restored " + effectiveHeal + " hp.");
 
         updateForest_hpPotion();
 
@@ -51,7 +60,12 @@ public class ForestController extends GameController {
         combat_attackBtn.setSelected(false);
         combat_fireballBtn.setSelected(false);
 
+        int prevMp = myMercenary.mp;
+
         pressMpPotionBtn(event);
+
+        int effectiveHeal = myMercenary.mp - prevMp;
+        combatLog.getItems().add("You drank mp potion and restored " + effectiveHeal + " mp.");
 
         updateForest_mpPotion();
 
@@ -85,7 +99,12 @@ public class ForestController extends GameController {
         combat_attackBtn.setSelected(false);
         combat_fireballBtn.setSelected(false);
 
+        int prevHp = myMercenary.hp;
+
         mySkills.heal.cast(myMercenary);
+
+        int effectiveHeal = myMercenary.hp - prevHp;
+        combatLog.getItems().add("You cast a spell and healed yourself for " + effectiveHeal + " hp.");
 
         updatePlayer_hp();
         updatePlayer_mp();
