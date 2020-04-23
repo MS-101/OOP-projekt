@@ -4,19 +4,25 @@ import Enviroments.Forge;
 import Items.Armor.Armor;
 import Items.Item;
 import Items.Weapons.Weapon;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+import javax.swing.event.ChangeListener;
 import java.io.IOException;
 
 public class ForgeController extends GameController {
+    @FXML
+    VBox tradeVBox;
+
     @FXML
     Button repairWeaponBtn;
     @FXML
@@ -91,10 +97,10 @@ public class ForgeController extends GameController {
     }
 
     public void returnToVillage() throws IOException {
-        Scene myScene = (Scene) ap.getScene();
+        Scene myScene = ap.getScene();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Village.fxml"));
-        Parent villageRoot = (Parent) loader.load();
+        Parent villageRoot = loader.load();
 
         VillageController myController = loader.getController();
         myController.passUserData(accountsFile, myHashtable, myVillage, myMercenary);
@@ -113,7 +119,80 @@ public class ForgeController extends GameController {
         Forge myForge = myVillage.myForge;
 
         for (i = 0; i < myForge.forgeInventory.size(); i++) {
+            Item pickedItem = myForge.forgeInventory.get(i);
 
+            SplitPane forgeItem = new SplitPane();
+
+            AnchorPane itemNameAnchor = new AnchorPane();
+            Label itemName = new Label();
+            itemName.setText(pickedItem.name);
+            itemName.setAlignment(Pos.CENTER);
+            itemNameAnchor.getChildren().add(itemName);
+
+            itemNameAnchor.setTopAnchor(itemName, 0.0);
+            itemNameAnchor.setLeftAnchor(itemName, 0.0);
+            itemNameAnchor.setRightAnchor(itemName, 0.0);
+            itemNameAnchor.setBottomAnchor(itemName, 0.0);
+
+            AnchorPane itemDescrAnchor = new AnchorPane();
+            ListView<String> itemDescr = new ListView<String>();
+            if (pickedItem instanceof Weapon) {
+                Weapon pickedWeapon = (Weapon) pickedItem;
+
+                if (pickedWeapon.lowPhysicalDmg != 0 && pickedWeapon.highPhysicalDmg != 0) {
+                    itemDescr.getItems().add("physical damage: " + pickedWeapon.lowPhysicalDmg + " - " + pickedWeapon.highPhysicalDmg);
+                }
+
+                if (pickedWeapon.lowPiercingDmg != 0 && pickedWeapon.highPiercingDmg != 0) {
+                    itemDescr.getItems().add("piercing damage: " + pickedWeapon.lowPiercingDmg + " - " + pickedWeapon.highPiercingDmg);
+                }
+            }
+            if (pickedItem instanceof Armor) {
+                Armor pickedArmor = (Armor) pickedItem;
+
+                itemDescr.getItems().add("armor: " + pickedArmor.armorVal);
+            }
+            itemDescr.setMouseTransparent(true);
+            itemDescr.setFocusTraversable(false);
+            itemDescrAnchor.getChildren().add(itemDescr);
+
+            itemDescrAnchor.setTopAnchor(itemDescr, 0.0);
+            itemDescrAnchor.setLeftAnchor(itemDescr, 0.0);
+            itemDescrAnchor.setRightAnchor(itemDescr, 0.0);
+            itemDescrAnchor.setBottomAnchor(itemDescr, 0.0);
+
+            AnchorPane itemBtnAnchor = new AnchorPane();
+            Button itemBtn = new Button();
+            itemBtn.setText("Buy");
+            itemBtnAnchor.getChildren().add(itemBtn);
+
+            itemBtnAnchor.setTopAnchor(itemBtn, 0.0);
+            itemBtnAnchor.setLeftAnchor(itemBtn, 0.0);
+            itemBtnAnchor.setRightAnchor(itemBtn, 0.0);
+            itemBtnAnchor.setBottomAnchor(itemBtn, 0.0);
+
+            AnchorPane itemCostAnchor = new AnchorPane();
+            Label itemCost = new Label();
+            itemCost.setText("Cost: " + pickedItem.cost + " gold");
+            itemCost.setAlignment(Pos.CENTER);
+            itemCostAnchor.getChildren().add(itemCost);
+
+            itemCostAnchor.setTopAnchor(itemCost, 0.0);
+            itemCostAnchor.setLeftAnchor(itemCost, 0.0);
+            itemCostAnchor.setRightAnchor(itemCost, 0.0);
+            itemCostAnchor.setBottomAnchor(itemCost, 0.0);
+
+            forgeItem.getItems().addAll(itemNameAnchor, itemDescrAnchor, itemBtnAnchor, itemCostAnchor);
+
+            itemName.maxWidthProperty().bind(forgeItem.widthProperty().multiply(0.2));
+            itemDescr.maxWidthProperty().bind(forgeItem.widthProperty().multiply(0.3));
+            itemBtn.maxWidthProperty().bind(forgeItem.widthProperty().multiply(0.25));
+            itemCost.maxWidthProperty().bind(forgeItem.widthProperty().multiply(0.25));
+
+            forgeItem.setPrefHeight(80);
+            forgeItem.setDividerPositions(0.2, 0.5, 0.75);
+
+            tradeVBox.getChildren().add(forgeItem);
         }
     }
 
@@ -130,7 +209,7 @@ public class ForgeController extends GameController {
             double durProgress = (double) myWeapon.durability / (double) myWeapon.maxDurability;
 
             repairWeaponName.setText(myWeapon.name);
-            repairWeaponCost.setText("cost: " + String.valueOf(repairCost) + " gold");
+            repairWeaponCost.setText("cost: " + repairCost + " gold");
             repairWeaponDurLabel.setText(myWeapon.durability + "/" + myWeapon.maxDurability);
             repairWeaponDurBar.setProgress(durProgress);
 
@@ -146,11 +225,7 @@ public class ForgeController extends GameController {
                 repairWeaponCost.setTextFill(Color.web("black"));
             }
 
-            if (myWeapon.durability < myWeapon.maxDurability && myMercenary.loot.gold >= repairCost) {
-                repairWeaponBtn.setDisable(false);
-            } else {
-                repairWeaponBtn.setDisable(true);
-            }
+            repairWeaponBtn.setDisable(myWeapon.durability >= myWeapon.maxDurability || myMercenary.loot.gold < repairCost);
         } else {
             repairWeaponName.setText("N/A");
             repairWeaponCost.setText("cost: N/A gold");
@@ -172,7 +247,7 @@ public class ForgeController extends GameController {
             double durProgress = (double)myArmor.durability / (double)myArmor.maxDurability;
 
             repairArmorName.setText(myArmor.name);
-            repairArmorCost.setText("cost: " + String.valueOf(repairCost) + " gold");
+            repairArmorCost.setText("cost: " + repairCost + " gold");
             repairArmorDurLabel.setText(myArmor.durability + "/" + myArmor.maxDurability);
             repairArmorDurBar.setProgress(durProgress);
 
@@ -188,11 +263,7 @@ public class ForgeController extends GameController {
                 repairArmorCost.setTextFill(Color.web("black"));
             }
 
-            if (myArmor.durability < myArmor.maxDurability && myMercenary.loot.gold >= repairCost) {
-                repairArmorBtn.setDisable(false);
-            } else {
-                repairArmorBtn.setDisable(true);
-            }
+            repairArmorBtn.setDisable(myArmor.durability >= myArmor.maxDurability || myMercenary.loot.gold < repairCost);
         } else {
             repairArmorName.setText("N/A");
             repairArmorCost.setText("cost: N/A gold");
