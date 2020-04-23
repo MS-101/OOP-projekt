@@ -26,6 +26,7 @@ public class InnController extends GameController {
         myMercenary.healHp(healHpAmount);
         myMercenary.healMp(healMpAmount);
         myMercenary.loot.payGold(roomCost);
+        myVillage.myForge.generateInventory();
 
         updatePlayer_hp();
         updatePlayer_mp();

@@ -90,7 +90,7 @@ public class UserLoginController implements Initializable {
         //testing
         myMercenary.hp = 50;
         myMercenary.mp = 50;
-        myMercenary.loot.gold = 10000;
+        myMercenary.loot.gold = 200;
         myMercenary.consumables.hpPotions_amount = 5;
         myMercenary.consumables.mpPotions_amount = 5;
         myMercenary.weapon.durability = 1;

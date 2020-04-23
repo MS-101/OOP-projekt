@@ -6,6 +6,9 @@ import Items.Item;
 import Items.Weapons.Weapon;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.WeakEventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -80,6 +83,7 @@ public class ForgeController extends GameController {
 
         updatePlayer_gold();
         updatePlayer_weapon();
+        updateForge_trade();
         updateForge_repairAll();
     }
 
@@ -93,6 +97,7 @@ public class ForgeController extends GameController {
 
         updatePlayer_gold();
         updatePlayer_armor();
+        updateForge_trade();
         updateForge_repairAll();
     }
 
@@ -115,11 +120,13 @@ public class ForgeController extends GameController {
     }
 
     public void updateForge_trade() {
-        int i;
+        int itemIndex;
         Forge myForge = myVillage.myForge;
 
-        for (i = 0; i < myForge.forgeInventory.size(); i++) {
-            Item pickedItem = myForge.forgeInventory.get(i);
+        tradeVBox.getChildren().clear();
+
+        for (itemIndex = 0; itemIndex < myForge.forgeInventory.size(); itemIndex++) {
+            Item pickedItem = myForge.forgeInventory.get(itemIndex);
 
             SplitPane forgeItem = new SplitPane();
 
@@ -161,16 +168,6 @@ public class ForgeController extends GameController {
             itemDescrAnchor.setRightAnchor(itemDescr, 0.0);
             itemDescrAnchor.setBottomAnchor(itemDescr, 0.0);
 
-            AnchorPane itemBtnAnchor = new AnchorPane();
-            Button itemBtn = new Button();
-            itemBtn.setText("Buy");
-            itemBtnAnchor.getChildren().add(itemBtn);
-
-            itemBtnAnchor.setTopAnchor(itemBtn, 0.0);
-            itemBtnAnchor.setLeftAnchor(itemBtn, 0.0);
-            itemBtnAnchor.setRightAnchor(itemBtn, 0.0);
-            itemBtnAnchor.setBottomAnchor(itemBtn, 0.0);
-
             AnchorPane itemCostAnchor = new AnchorPane();
             Label itemCost = new Label();
             itemCost.setText("Cost: " + pickedItem.cost + " gold");
@@ -181,6 +178,53 @@ public class ForgeController extends GameController {
             itemCostAnchor.setLeftAnchor(itemCost, 0.0);
             itemCostAnchor.setRightAnchor(itemCost, 0.0);
             itemCostAnchor.setBottomAnchor(itemCost, 0.0);
+
+            AnchorPane itemBtnAnchor = new AnchorPane();
+            Button itemBtn = new Button();
+            itemBtn.setText("Buy");
+
+            if (myMercenary.loot.gold >= pickedItem.cost) {
+                int finalItemIndex = itemIndex;
+
+                itemBtn.setOnAction(new EventHandler() {
+                    @Override
+                    public void handle(Event event) {
+                        if (pickedItem instanceof Weapon) {
+                            Weapon pickedWeapon = (Weapon)pickedItem;
+
+                            myMercenary.setWeapon(pickedWeapon);
+                            updatePlayer_weapon();
+                        }
+
+                        if (pickedItem instanceof Armor) {
+                            Armor pickedArmor = (Armor)pickedItem;
+
+                            myMercenary.setArmor(pickedArmor);
+                            updatePlayer_armor();
+                        }
+
+                        myMercenary.loot.payGold(pickedItem.cost);
+
+                        myForge.forgeInventory.remove(finalItemIndex);
+
+                        updatePlayer_gold();
+                        updateForge_trade();
+                        updateForge_repairAll();
+                    }
+                });
+
+                itemCost.setTextFill(Color.web("black"));
+            } else {
+                itemBtn.setDisable(true);
+                itemCost.setTextFill(Color.web("red"));
+            }
+
+            itemBtnAnchor.getChildren().add(itemBtn);
+
+            itemBtnAnchor.setTopAnchor(itemBtn, 0.0);
+            itemBtnAnchor.setLeftAnchor(itemBtn, 0.0);
+            itemBtnAnchor.setRightAnchor(itemBtn, 0.0);
+            itemBtnAnchor.setBottomAnchor(itemBtn, 0.0);
 
             forgeItem.getItems().addAll(itemNameAnchor, itemDescrAnchor, itemBtnAnchor, itemCostAnchor);
 
