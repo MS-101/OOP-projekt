@@ -53,61 +53,24 @@ public class ForestController extends GameController {
         updateForest_monsterHBox();
     }
 
-    public void combat_pressHpPotionBtn(ActionEvent event) {
-        int prevHp = myMercenary.hp;
-        pressHpPotionBtn(event);
-        int effectiveHeal = myMercenary.hp - prevHp;
-
-        sendMessage("You drank hp potion and restored " + effectiveHeal + " hp.");
-
-        updateForest_hpPotion();
-
-        updateForest_heal();
-    }
-
-    public void combat_pressMpPotionBtn(ActionEvent event) {
-        int prevMp = myMercenary.mp;
-        pressMpPotionBtn(event);
-        int effectiveHeal = myMercenary.mp - prevMp;
-
-        sendMessage("You drank mp potion and restored " + effectiveHeal + " mp.");
-
-        updateForest_mpPotion();
-
-        updateForest_skills();
-    }
-
     public void combat_pressFireballBtn(ActionEvent event) {
         updateForest_monsterHBox();
     }
 
+    public void combat_pressHpPotionBtn(ActionEvent event) {
+        myCombat.useHpPotion();
+    }
+
+    public void combat_pressMpPotionBtn(ActionEvent event) {
+        myCombat.useMpPotion();
+    }
+
     public void combat_pressFlamestrikeBtn(ActionEvent event) {
-        PlayerSkills mySkills = myMercenary.skills;
-
-        updatePlayer_mp();
-
-        updateForest_mpPotion();
-
-        updateForest_skills();
+        myCombat.useFlamestrike();
     }
 
     public void combat_pressHealBtn(ActionEvent event) {
-        PlayerSkills mySkills = myMercenary.skills;
-
-        int prevHp = myMercenary.hp;
-
-        mySkills.heal.cast(myMercenary);
-
-        int effectiveHeal = myMercenary.hp - prevHp;
-        sendMessage("You cast a spell and healed yourself for " + effectiveHeal + " hp.");
-
-        updatePlayer_hp();
-        updatePlayer_mp();
-
-        updateForest_hpPotion();
-        updateForest_mpPotion();
-
-        updateForest_skills();
+        myCombat.useHeal();
     }
 
     public void hunt() {

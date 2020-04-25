@@ -44,15 +44,6 @@ public class Flamestrike extends Skill {
             }
 
             selectedTarget.hp -= spellDamage;
-
-            int opponentIndex = i + 1;
-
-            System.out.println("Flamestrike deals " + spellDamage + " damage to " + selectedTarget.name + " <" + opponentIndex + ">.");
-            if (selectedTarget.hp < 0) {
-                System.out.println(selectedTarget.name + " has died.");
-            }
         }
-
-        System.out.println();
     }
 }

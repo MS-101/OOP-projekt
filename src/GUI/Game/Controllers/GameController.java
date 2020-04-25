@@ -125,7 +125,7 @@ public class GameController implements Initializable {
     }
 
     public void resetMercenary() {
-        myMercenary = new Mercenary();
+        myMercenary.reset();
         updatePlayer_all();
     }
 

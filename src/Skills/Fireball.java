@@ -39,11 +39,5 @@ public class Fireball extends Skill {
         }
 
         target.hp -= spellDamage;
-
-        System.out.println("Fireball deals " + spellDamage + " damage to " + target.name + ".");
-        if (target.hp < 0) {
-            System.out.println(target.name + " has died.");
-        }
-        System.out.println();
     }
 }

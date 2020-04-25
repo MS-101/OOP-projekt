@@ -2,6 +2,7 @@ package Combat;
 
 import Entities.Monsters.Monster;
 import Entities.Player.Mercenary;
+import Entities.Player.PlayerConsumables;
 import GUI.Game.Controllers.ForestController;
 
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public class Combat {
         player.skills.fireball.cast(player, target);
         int damage = prevHp - target.hp;
 
-        assignedController.sendMessage(player.name + " casts a spell and deals " + damage + " damage to " + target.name + ".");
+        assignedController.sendMessage(player.name + " casts a spell [Fireball] and deals " + damage + " damage to " + target.name + ".");
         if (target.hp <= 0) {
             killOpponent(opponentIndex);
         }
@@ -80,6 +81,82 @@ public class Combat {
         } else {
             victory();
         }
+    }
+
+    public void useFlamestrike() {
+        ArrayList<Integer> prevHp = new ArrayList<>();
+        int opponentIndex;
+
+        Monster pickedOpponent;
+        for (opponentIndex = 0; opponentIndex < opponents.size(); opponentIndex++) {
+            pickedOpponent = opponents.get(opponentIndex);
+            prevHp.add(pickedOpponent.hp);
+        }
+
+        player.skills.flamestrike.cast(player, opponents);
+
+        for (opponentIndex = 0; opponentIndex < opponents.size(); opponentIndex++) {
+            pickedOpponent = opponents.get(opponentIndex);
+            int damage = prevHp.get(opponentIndex) - pickedOpponent.hp;
+
+            assignedController.sendMessage(player.name + " casts a spell [Flamestrike] and deals " + damage + " damage to " + pickedOpponent.name + ".");
+
+            if (pickedOpponent.hp <= 0) {
+                killOpponent(opponentIndex);
+                opponentIndex--;
+            }
+        }
+
+        assignedController.updateForest_monsterHBox();
+        assignedController.updatePlayer_mp();
+        assignedController.updatePlayer_mpPotions();
+
+        if (opponents.size() > 0) {
+            opponentsTurn();
+        } else {
+            victory();
+        }
+    }
+
+    public void useHeal() {
+        int prevHp = player.hp;
+        player.skills.heal.cast(player);
+        int healAmount = player.hp - prevHp;
+
+        assignedController.sendMessage(player.name + " casts a spell [Heal] and restores " + healAmount + " hp.");
+
+        assignedController.updatePlayer_hp();
+        assignedController.updatePlayer_hpPotions();
+        assignedController.updatePlayer_mp();
+        assignedController.updatePlayer_mpPotions();
+
+        opponentsTurn();
+    }
+
+    public void useHpPotion() {
+        int prevHp = player.hp;
+        player.consumables.useHpPotion(player);
+        int healAmount = player.hp - prevHp;
+
+        assignedController.sendMessage(player.name + " drank hp potion and restored " + healAmount + " hp.");
+
+        assignedController.updatePlayer_hp();
+        assignedController.updatePlayer_hpPotions();
+
+        opponentsTurn();
+    }
+
+    public void useMpPotion() {
+        int prevMp = player.mp;
+        player.consumables.useMpPotion(player);
+        int healAmount = player.mp - prevMp;
+
+        assignedController.sendMessage(player.name + " drank mp potion and restored " + healAmount + " mp.");
+
+        assignedController.updatePlayer_mp();
+        assignedController.updatePlayer_mpPotions();
+
+        opponentsTurn();
     }
 
     public void killOpponent(int opponentIndex) {
@@ -152,5 +229,9 @@ public class Combat {
         assignedController.setForestButtons();
         assignedController.clearMonsters();
         assignedController.resetMercenary();
+    }
+
+    public void flee() {
+
     }
 }
