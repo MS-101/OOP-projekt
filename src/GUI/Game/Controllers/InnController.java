@@ -16,7 +16,7 @@ public class InnController extends GameController {
     @FXML
     Button restBtn;
 
-    public void rest() {
+    public void rest() throws IOException {
         Inn myInn = myVillage.myInn;
 
         int healHpAmount = (int)(myMercenary.maxHp * myInn.roomComfort);
@@ -32,6 +32,8 @@ public class InnController extends GameController {
         updatePlayer_mp();
         updatePlayer_gold();
         updateInn_rest();
+
+        saveGame();
     }
 
     public void updateInn_all() {

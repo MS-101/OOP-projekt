@@ -49,7 +49,7 @@ public class ForgeController extends GameController {
     @FXML
     ProgressBar repairArmorDurBar;
 
-    public void buyItem(ActionEvent event) {
+    public void buyItem(ActionEvent event) throws IOException {
         Forge myForge = myVillage.myForge;
 
         Button myButton = (Button)event.getTarget();
@@ -71,9 +71,11 @@ public class ForgeController extends GameController {
 
         myForge.forgeInventory.remove(itemId);
         updateForge_all();
+
+        saveGame();
     }
 
-    public void repairWeapon() {
+    public void repairWeapon() throws IOException {
         Weapon myWeapon = myMercenary.weapon;
 
         int payment = (int)(((double)(myWeapon.maxDurability - myWeapon.durability) / (double)myWeapon.maxDurability) * myWeapon.repairCost);
@@ -85,9 +87,11 @@ public class ForgeController extends GameController {
         updatePlayer_weapon();
         updateForge_trade();
         updateForge_repairAll();
+
+        saveGame();
     }
 
-    public void repairArmor() {
+    public void repairArmor() throws IOException {
         Armor myArmor = myMercenary.armor;
 
         int payment = (int)(((double)(myArmor.maxDurability - myArmor.durability) / (double)myArmor.maxDurability) * myArmor.repairCost);
@@ -99,6 +103,8 @@ public class ForgeController extends GameController {
         updatePlayer_armor();
         updateForge_trade();
         updateForge_repairAll();
+
+        saveGame();
     }
 
     public void returnToVillage() throws IOException {

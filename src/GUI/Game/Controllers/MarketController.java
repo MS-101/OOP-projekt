@@ -45,7 +45,7 @@ public class MarketController extends GameController {
         myScene.setRoot(villageRoot);
     }
 
-    public void buyHpPotion() {
+    public void buyHpPotion() throws IOException {
         PlayerConsumables myConsumables = myMercenary.consumables;
         HpPotion hpPotionData = new HpPotion();
 
@@ -57,9 +57,11 @@ public class MarketController extends GameController {
         updatePlayer_gold();
         updatePlayer_hpPotions();
         updateMarket_tradeAll();
+
+        saveGame();
     }
 
-    public void buyMpPotion() {
+    public void buyMpPotion() throws IOException {
         PlayerConsumables myConsumables = myMercenary.consumables;
         MpPotion mpPotionData = new MpPotion();
 
@@ -71,6 +73,8 @@ public class MarketController extends GameController {
         updatePlayer_gold();
         updatePlayer_mpPotions();
         updateMarket_tradeAll();
+
+        saveGame();
     }
 
     public void updateMarket_all() {

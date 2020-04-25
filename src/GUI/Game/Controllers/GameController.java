@@ -7,6 +7,7 @@ import Entities.Player.PlayerStats;
 import Enviroments.Village;
 import Items.Armor.Armor;
 import Items.Weapons.Weapon;
+import MySystem.AccountsFileHandler;
 import MySystem.AccountsHashTable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -129,6 +131,12 @@ public class GameController implements Initializable {
         updatePlayer_all();
     }
 
+    public void saveGame() throws IOException {
+        AccountsFileHandler myAccountsFileHandler = new AccountsFileHandler();
+
+        myAccountsFileHandler.rewriteAccountsFile(accountsFile, myHashtable);
+    }
+
     public void disablePlayerButtons() {
         attrsPane.setDisable(true);
         skillsPane.setDisable(true);
@@ -141,19 +149,23 @@ public class GameController implements Initializable {
         consumablesPane.setDisable(false);
     }
 
-    public void pressHpPotionBtn (ActionEvent event) {
+    public void pressHpPotionBtn (ActionEvent event) throws IOException {
         myMercenary.consumables.useHpPotion(myMercenary);
         updatePlayer_hp();
         updatePlayer_hpPotions();
+
+        saveGame();
     }
 
-    public void pressMpPotionBtn (ActionEvent event) {
+    public void pressMpPotionBtn (ActionEvent event) throws IOException {
         myMercenary.consumables.useMpPotion(myMercenary);
         updatePlayer_mp();
         updatePlayer_mpPotions();
+
+        saveGame();
     }
 
-    public void pressStrengthBtn (ActionEvent event) {
+    public void pressStrengthBtn (ActionEvent event) throws IOException {
         PlayerStats myStats = myMercenary.stats;
 
         myStats.attributePoints--;
@@ -164,18 +176,22 @@ public class GameController implements Initializable {
 
         updatePlayer_attributes();
         updatePlayer_hp();
+
+        saveGame();
     }
 
-    public void pressDexterityBtn (ActionEvent event) {
+    public void pressDexterityBtn (ActionEvent event) throws IOException {
         PlayerStats myStats = myMercenary.stats;
 
         myStats.attributePoints--;
         myStats.dexterity++;
 
         updatePlayer_attributes();
+
+        saveGame();
     }
 
-    public void pressIntelligenceBtn (ActionEvent event) {
+    public void pressIntelligenceBtn (ActionEvent event) throws IOException {
         PlayerStats myStats = myMercenary.stats;
 
         myStats.attributePoints--;
@@ -186,33 +202,41 @@ public class GameController implements Initializable {
 
         updatePlayer_attributes();
         updatePlayer_mp();
+
+        saveGame();
     }
 
-    public void pressFireballBtn (ActionEvent event) {
+    public void pressFireballBtn (ActionEvent event) throws IOException {
         PlayerSkills mySkills = myMercenary.skills;
 
         mySkills.skillPoints--;
         mySkills.fireball.upgrade();
 
         updatePlayer_skills();
+
+        saveGame();
     }
 
-    public void pressFlamestrikeBtn (ActionEvent event) {
+    public void pressFlamestrikeBtn (ActionEvent event) throws IOException {
         PlayerSkills mySkills = myMercenary.skills;
 
         mySkills.skillPoints--;
         mySkills.flamestrike.upgrade();
 
         updatePlayer_skills();
+
+        saveGame();
     }
 
-    public void pressHealBtn (ActionEvent event) {
+    public void pressHealBtn (ActionEvent event) throws IOException {
         PlayerSkills mySkills = myMercenary.skills;
 
         mySkills.skillPoints--;
         mySkills.heal.upgrade();
 
         updatePlayer_skills();
+
+        saveGame();
     }
 
     public void updatePlayer_all() {

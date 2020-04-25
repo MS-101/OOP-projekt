@@ -57,19 +57,19 @@ public class ForestController extends GameController {
         updateForest_monsterHBox();
     }
 
-    public void combat_pressHpPotionBtn(ActionEvent event) {
+    public void combat_pressHpPotionBtn(ActionEvent event) throws IOException {
         myCombat.useHpPotion();
     }
 
-    public void combat_pressMpPotionBtn(ActionEvent event) {
+    public void combat_pressMpPotionBtn(ActionEvent event) throws IOException {
         myCombat.useMpPotion();
     }
 
-    public void combat_pressFlamestrikeBtn(ActionEvent event) {
+    public void combat_pressFlamestrikeBtn(ActionEvent event) throws IOException {
         myCombat.useFlamestrike();
     }
 
-    public void combat_pressHealBtn(ActionEvent event) {
+    public void combat_pressHealBtn(ActionEvent event) throws IOException {
         myCombat.useHeal();
     }
 
@@ -163,11 +163,19 @@ public class ForestController extends GameController {
                         Monster target = myCombat.opponents.get(finalMonsterIndex);
 
                         if (combat_attackBtn.isSelected()) {
-                            myCombat.useAttack(finalMonsterIndex);
+                            try {
+                                myCombat.useAttack(finalMonsterIndex);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
 
                         if (combat_fireballBtn.isSelected()) {
-                            myCombat.useFireball(finalMonsterIndex);
+                            try {
+                                myCombat.useFireball(finalMonsterIndex);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 });

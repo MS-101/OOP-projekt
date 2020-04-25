@@ -5,6 +5,7 @@ import Entities.Player.Mercenary;
 import Entities.Player.PlayerConsumables;
 import GUI.Game.Controllers.ForestController;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -38,7 +39,7 @@ public class Combat {
         }
     }
 
-    public void useAttack(int opponentIndex) {
+    public void useAttack(int opponentIndex) throws IOException {
         Monster target = opponents.get(opponentIndex);
 
         int prevHp = target.hp;
@@ -60,7 +61,7 @@ public class Combat {
         }
     }
 
-    public void useFireball(int opponentIndex) {
+    public void useFireball(int opponentIndex) throws IOException {
         Monster target = opponents.get(opponentIndex);
 
         int prevHp = target.hp;
@@ -83,7 +84,7 @@ public class Combat {
         }
     }
 
-    public void useFlamestrike() {
+    public void useFlamestrike() throws IOException {
         ArrayList<Integer> prevHp = new ArrayList<>();
         int opponentIndex;
 
@@ -118,7 +119,7 @@ public class Combat {
         }
     }
 
-    public void useHeal() {
+    public void useHeal() throws IOException {
         int prevHp = player.hp;
         player.skills.heal.cast(player);
         int healAmount = player.hp - prevHp;
@@ -133,7 +134,7 @@ public class Combat {
         opponentsTurn();
     }
 
-    public void useHpPotion() {
+    public void useHpPotion() throws IOException {
         int prevHp = player.hp;
         player.consumables.useHpPotion(player);
         int healAmount = player.hp - prevHp;
@@ -146,7 +147,7 @@ public class Combat {
         opponentsTurn();
     }
 
-    public void useMpPotion() {
+    public void useMpPotion() throws IOException {
         int prevMp = player.mp;
         player.consumables.useMpPotion(player);
         int healAmount = player.mp - prevMp;
@@ -178,7 +179,7 @@ public class Combat {
         assignedController.sendMessage(target.name + " has died! [" + gainedExp + " exp, " + gainedGold + " gold]");
     }
 
-    public void opponentsTurn() {
+    public void opponentsTurn() throws IOException {
         int i;
 
         assignedController.disableCombatButtons();
@@ -214,21 +215,25 @@ public class Combat {
         assignedController.sendMessage("TURN " + turn + ":");
     }
 
-    public void victory() {
+    public void victory() throws IOException {
         assignedController.sendMessage("");
         assignedController.sendMessage("You are victorious!");
 
         assignedController.setForestButtons();
+
+        assignedController.saveGame();
     }
 
-    public void defeat() {
+    public void defeat() throws IOException {
         assignedController.sendMessage("");
         assignedController.sendMessage("You were defeated!");
         assignedController.sendMessage("A new adventurer takes your place.");
 
         assignedController.setForestButtons();
         assignedController.clearMonsters();
+
         assignedController.resetMercenary();
+        assignedController.saveGame();
     }
 
     public void flee() {

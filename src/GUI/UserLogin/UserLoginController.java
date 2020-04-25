@@ -44,6 +44,12 @@ public class UserLoginController implements Initializable {
         String username = tf_username.getText();
         String unprotectedPassword = pf_password.getText();
 
+        if (username.isEmpty() || unprotectedPassword.isEmpty()) {
+            label_error.setText("You must enter username and password!");
+            label_error.setVisible(true);
+            return;
+        }
+
         Account myAccount = myHashTable.login(username, unprotectedPassword);
 
         if (myAccount != null) {
@@ -51,7 +57,6 @@ public class UserLoginController implements Initializable {
             Mercenary myMercenary = myAccount.getAccountMercenary();
 
             startGame(accountsFile, myHashTable, myMercenary, myVillage);
-            //myVillage.visit(accountsFile, myHashTable, myMercenary);
         } else {
             label_error.setText("Incorrect password or username!");
             label_error.setVisible(true);
@@ -62,6 +67,12 @@ public class UserLoginController implements Initializable {
         String username = tf_username.getText();
         String unprotectedPassword = pf_password.getText();
 
+        if (username.isEmpty() || unprotectedPassword.isEmpty()) {
+            label_error.setText("You must enter username and password!");
+            label_error.setVisible(true);
+            return;
+        }
+
         Account registeredAccount = myHashTable.register(username, unprotectedPassword);
         if (registeredAccount != null) {
             myAccountManager.rewriteAccountsFile(accountsFile, myHashTable);
@@ -70,7 +81,6 @@ public class UserLoginController implements Initializable {
             Mercenary myMercenary = registeredAccount.getAccountMercenary();
 
             startGame(accountsFile, myHashTable, myMercenary, myVillage);
-            //myVillage.visit(accountsFile, myHashTable, myMercenary);
         } else {
             label_error.setText("Username is already in use!");
             label_error.setVisible(true);
@@ -87,25 +97,18 @@ public class UserLoginController implements Initializable {
         controller.passUserData(accountsFile, myHashTable, myVillage, myMercenary);
         primaryStage.setScene(new Scene(villageRoot, 1200, 1000));
 
-        //testing
-        myMercenary.loot.gold = 200;
-        myMercenary.consumables.hpPotions_amount = 5;
-        myMercenary.consumables.mpPotions_amount = 5;
-        myMercenary.stats.attributePoints = 10;
-        myMercenary.skills.skillPoints = 10;
-
         controller.updatePlayer_all();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)  {
-        //if (!accountsFile.exists()) {
+        if (!accountsFile.exists()) {
             try {
                 myAccountManager.createAccountsFile(accountsFile);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        //}
+        }
 
         try {
             myHashTable = myAccountManager.readAccountsFile(accountsFile);
