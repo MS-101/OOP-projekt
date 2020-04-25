@@ -236,7 +236,23 @@ public class Combat {
         assignedController.saveGame();
     }
 
-    public void flee() {
+    public void flee() throws IOException {
+        Random random = new Random();
 
+        int diceRoll = random.nextInt(100);
+
+        System.out.println(diceRoll);
+
+        if (diceRoll <= 70) {
+            assignedController.sendMessage("You have fled the battle!");
+
+            assignedController.setForestButtons();
+            assignedController.clearMonsters();
+
+            assignedController.saveGame();
+        } else {
+            assignedController.sendMessage("You have failed to escape your pursuers!");
+            opponentsTurn();
+        }
     }
 }

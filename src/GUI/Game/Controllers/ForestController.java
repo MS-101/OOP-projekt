@@ -73,7 +73,7 @@ public class ForestController extends GameController {
         myCombat.useHeal();
     }
 
-    public void hunt() {
+    public void pressHunt() {
         enableCombatButtons();
         setCombatButtons();
 
@@ -217,6 +217,16 @@ public class ForestController extends GameController {
 
     public void clearMonsters() {
         monsterHBox.getChildren().clear();
+    }
+
+    public void pressReturn() throws IOException {
+        String returnBtnText = returnBtn.getText();
+
+        if (returnBtnText.equals("Return")) {
+            returnToVillage();
+        } else if (returnBtnText.equals("Flee")) {
+            myCombat.flee();
+        }
     }
 
     public void returnToVillage() throws IOException {
