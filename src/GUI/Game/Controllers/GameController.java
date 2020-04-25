@@ -67,6 +67,8 @@ public class GameController implements Initializable {
     private SplitPane armorDescr;
 
     @FXML
+    private Button logOutBtn;
+    @FXML
     private Button hpPotionBtn;
     @FXML
     private Button mpPotionBtn;
