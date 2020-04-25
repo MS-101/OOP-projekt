@@ -171,12 +171,17 @@ public class Combat {
         int gainedGold = randomNumber.nextInt((target.highGold - target.lowGold) + 1) + target.lowGold;
 
         player.loot.addExp(gainedExp);
-        assignedController.updatePlayer_exp();
-        assignedController.updatePlayer_nameLevel();
         player.loot.addGold(gainedGold);
-        assignedController.updatePlayer_gold();
 
         assignedController.sendMessage(target.name + " has died! [" + gainedExp + " exp, " + gainedGold + " gold]");
+
+        while (player.checkLevelUp()) {
+            assignedController.sendMessage("LEVEL UP!");
+        }
+
+        assignedController.updatePlayer_exp();
+        assignedController.updatePlayer_nameLevel();
+        assignedController.updatePlayer_gold();
     }
 
     public void opponentsTurn() throws IOException {

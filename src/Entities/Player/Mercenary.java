@@ -40,10 +40,8 @@ public class Mercenary extends Entity {
         this.lvlRequirementInc = lvlRequirementInc;
     }
 
-    public void checkLevelUp() {
-        while (this.lvl < this.maxLvl && this.loot.exp >= this.lvlRequirement) {
-            System.out.println("LEVEL UP!");
-
+    public boolean checkLevelUp() {
+        if (this.lvl < this.maxLvl && this.loot.exp >= this.lvlRequirement) {
             this.lvl++;
             this.stats.attributePoints += 2;
             this.skills.skillPoints += 1;
@@ -55,6 +53,10 @@ public class Mercenary extends Entity {
                 this.loot.exp = 0;
                 this.lvlRequirement = 0;
             }
+
+            return true;
         }
+
+        return false;
     }
 }
