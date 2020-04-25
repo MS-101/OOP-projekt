@@ -152,8 +152,6 @@ public class Entity implements Serializable {
 
         receiver.hp -= totalDmg;
 
-        System.out.println();
-
         if (this instanceof Mercenary && this.weapon != null) {
             this.weapon.durability--;
 

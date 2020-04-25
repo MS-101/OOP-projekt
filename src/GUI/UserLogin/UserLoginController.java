@@ -102,13 +102,13 @@ public class UserLoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)  {
-        if (!accountsFile.exists()) {
+        //if (!accountsFile.exists()) {
             try {
                 myAccountManager.createAccountsFile(accountsFile);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        //}
 
         try {
             myHashTable = myAccountManager.readAccountsFile(accountsFile);

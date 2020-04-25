@@ -57,7 +57,7 @@ public class AccountsHashTable implements Serializable {
         pickedAccount.setProtectedPassword(protectedPassword);
         pickedAccount.setSalt(salt);
         pickedAccount.setAccountVillage(new Village());
-        pickedAccount.setAccountMercenary(new Mercenary());
+        pickedAccount.setAccountMercenary(new Mercenary(username));
 
         return pickedAccount;
     }

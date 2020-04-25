@@ -11,10 +11,14 @@ import MySystem.AccountsFileHandler;
 import MySystem.AccountsHashTable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
@@ -135,6 +139,13 @@ public class GameController implements Initializable {
         AccountsFileHandler myAccountsFileHandler = new AccountsFileHandler();
 
         myAccountsFileHandler.rewriteAccountsFile(accountsFile, myHashtable);
+    }
+
+    public void pressLogOutBtn() throws IOException {
+        Stage primaryStage = (Stage) ap.getScene().getWindow();
+
+        Parent loginRoot = FXMLLoader.load(getClass().getResource("../../UserLogin/UserLogin.fxml"));
+        primaryStage.setScene(new Scene(loginRoot, 400, 300));
     }
 
     public void disablePlayerButtons() {

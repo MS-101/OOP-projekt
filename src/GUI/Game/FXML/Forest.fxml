@@ -501,18 +501,27 @@
                                                 </AnchorPane>
                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                                     <children>
-                                                        <VBox prefHeight="200.0" prefWidth="384.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                            <children>
-                                                                <Label fx:id="goldLabel" alignment="TOP_LEFT" contentDisplay="TOP" text="Gold: x">
-                                                                    <font>
-                                                                        <Font size="18.0" />
-                                                                    </font>
-                                                                    <padding>
-                                                                        <Insets left="5.0" />
-                                                                    </padding>
-                                                                </Label>
-                                                            </children>
-                                                        </VBox>
+                                          <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="384.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <items>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                                      <Label fx:id="goldLabel" alignment="CENTER" contentDisplay="TOP" prefHeight="40.0" prefWidth="186.0" text="Gold: x" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                          <font>
+                                                                              <Font size="18.0" />
+                                                                          </font>
+                                                                          <padding>
+                                                                              <Insets left="5.0" />
+                                                                          </padding>
+                                                                      </Label>
+                                                   </children>
+                                                </AnchorPane>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                      <Button mnemonicParsing="false" onAction="#pressLogOutBtn" prefHeight="40.0" prefWidth="186.0" text="Log Out" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                            </items>
+                                          </SplitPane>
                                                     </children>
                                                 </AnchorPane>
                                             </items>

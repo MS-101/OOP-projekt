@@ -13,7 +13,9 @@ public class Mercenary extends Entity {
     public int lvlRequirement;
     int lvlRequirementInc;
 
-    public Mercenary() {
+    public Mercenary(String username) {
+        this.setName(username);
+
         reset();
     }
 
@@ -23,7 +25,6 @@ public class Mercenary extends Entity {
         setBasePhysicalDmg(4, 5);
         setBasePiercingDmg(0, 0);
         setBaseArmor(0);
-        setName("Mercenary");
 
         setLvlRequirement(100, 30);
 

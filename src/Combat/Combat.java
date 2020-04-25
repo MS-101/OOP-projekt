@@ -177,10 +177,13 @@ public class Combat {
 
         while (player.checkLevelUp()) {
             assignedController.sendMessage("LEVEL UP!");
+
+            assignedController.updatePlayer_nameLevel();
+            assignedController.updatePlayer_attributes();
+            assignedController.updateForest_skills();
         }
 
         assignedController.updatePlayer_exp();
-        assignedController.updatePlayer_nameLevel();
         assignedController.updatePlayer_gold();
     }
 
