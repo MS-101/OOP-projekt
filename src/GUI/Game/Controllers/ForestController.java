@@ -5,6 +5,8 @@ import Entities.Monsters.Monster;
 import Entities.Player.PlayerConsumables;
 import Entities.Player.PlayerSkills;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Orientation;
@@ -23,7 +25,7 @@ public class ForestController extends GameController {
     Combat myCombat;
 
     @FXML
-    HBox MonsterHBox;
+    HBox monsterHBox;
 
     @FXML
     ToggleButton combat_attackBtn;
@@ -48,18 +50,14 @@ public class ForestController extends GameController {
     ListView<String> combatLog;
 
     public void combat_pressAttackBtn(ActionEvent event) {
-
+        updateForest_monsterHBox();
     }
 
     public void combat_pressHpPotionBtn(ActionEvent event) {
-        combat_attackBtn.setSelected(false);
-        combat_fireballBtn.setSelected(false);
-
         int prevHp = myMercenary.hp;
-
         pressHpPotionBtn(event);
-
         int effectiveHeal = myMercenary.hp - prevHp;
+
         sendMessage("You drank hp potion and restored " + effectiveHeal + " hp.");
 
         updateForest_hpPotion();
@@ -68,47 +66,33 @@ public class ForestController extends GameController {
     }
 
     public void combat_pressMpPotionBtn(ActionEvent event) {
-        combat_attackBtn.setSelected(false);
-        combat_fireballBtn.setSelected(false);
-
         int prevMp = myMercenary.mp;
-
         pressMpPotionBtn(event);
-
         int effectiveHeal = myMercenary.mp - prevMp;
+
         sendMessage("You drank mp potion and restored " + effectiveHeal + " mp.");
 
         updateForest_mpPotion();
 
-        updateForest_fireball();
-        updateForest_flamestrike();
-        updateForest_heal();
+        updateForest_skills();
     }
 
     public void combat_pressFireballBtn(ActionEvent event) {
-
+        updateForest_monsterHBox();
     }
 
     public void combat_pressFlamestrikeBtn(ActionEvent event) {
         PlayerSkills mySkills = myMercenary.skills;
 
-        combat_attackBtn.setSelected(false);
-        combat_fireballBtn.setSelected(false);
-
         updatePlayer_mp();
 
         updateForest_mpPotion();
 
-        updateForest_fireball();
-        updateForest_heal();
-        updateForest_flamestrike();
+        updateForest_skills();
     }
 
     public void combat_pressHealBtn(ActionEvent event) {
         PlayerSkills mySkills = myMercenary.skills;
-
-        combat_attackBtn.setSelected(false);
-        combat_fireballBtn.setSelected(false);
 
         int prevHp = myMercenary.hp;
 
@@ -123,9 +107,7 @@ public class ForestController extends GameController {
         updateForest_hpPotion();
         updateForest_mpPotion();
 
-        updateForest_fireball();
-        updateForest_heal();
-        updateForest_flamestrike();
+        updateForest_skills();
     }
 
     public void hunt() {
@@ -133,11 +115,15 @@ public class ForestController extends GameController {
         setCombatButtons();
 
         myCombat = new Combat(myMercenary, this);
-        generateMonsterPanes();
+        updateForest_monsterHBox();
+        combatLog.getItems().clear();
+        sendMessage("TURN 1:");
     }
 
-    public void generateMonsterPanes() {
+    public void updateForest_monsterHBox() {
         int monsterIndex;
+
+        monsterHBox.getChildren().clear();
 
         for (monsterIndex = 0; monsterIndex < myCombat.opponents.size(); monsterIndex++) {
             Monster pickedMonster = myCombat.opponents.get(monsterIndex);
@@ -204,6 +190,28 @@ public class ForestController extends GameController {
             Button monsterBtn = new Button();
             monsterBtn.setText("Target");
 
+            if (combat_attackBtn.isSelected() || combat_fireballBtn.isSelected()) {
+                monsterBtn.setDisable(false);
+
+                int finalMonsterIndex = monsterIndex;
+                monsterBtn.setOnAction(new EventHandler() {
+                    @Override
+                    public void handle(Event event) {
+                        Monster target = myCombat.opponents.get(finalMonsterIndex);
+
+                        if (combat_attackBtn.isSelected()) {
+                            myCombat.useAttack(finalMonsterIndex);
+                        }
+
+                        if (combat_fireballBtn.isSelected()) {
+                            myCombat.useFireball(finalMonsterIndex);
+                        }
+                    }
+                });
+            } else {
+                monsterBtn.setDisable(true);
+            }
+
             monsterBtnAnchor.getChildren().addAll(monsterBtn);
 
             monsterBtnAnchor.setTopAnchor(monsterBtn,  0.0);
@@ -225,7 +233,7 @@ public class ForestController extends GameController {
 
             monsterPaneAnchor.getChildren().add(monsterPane);
 
-            MonsterHBox.getChildren().add(monsterPaneAnchor);
+            monsterHBox.getChildren().add(monsterPaneAnchor);
 
             monsterPaneAnchor.setTopAnchor(monsterPane, 0.0);
             monsterPaneAnchor.setLeftAnchor(monsterPane, 0.0);
@@ -234,6 +242,10 @@ public class ForestController extends GameController {
 
             monsterPaneAnchor.setPrefWidth(200);
         }
+    }
+
+    public void clearMonsters() {
+        monsterHBox.getChildren().clear();
     }
 
     public void returnToVillage() throws IOException {
@@ -251,6 +263,7 @@ public class ForestController extends GameController {
 
     public void sendMessage(String message) {
         combatLog.getItems().add(message);
+        combatLog.scrollTo(combatLog.getItems().size());
     }
 
     public void setForestButtons() {
@@ -268,6 +281,9 @@ public class ForestController extends GameController {
     }
 
     public void setCombatButtons() {
+        combat_attackBtn.setSelected(true);
+        combat_fireballBtn.setSelected(false);
+
         combat_attackBtn.setVisible(true);
         combat_hpPotionBtn.setVisible(true);
         combat_mpPotionBtn.setVisible(true);
@@ -293,12 +309,18 @@ public class ForestController extends GameController {
 
     public void enableCombatButtons() {
         combat_attackBtn.setDisable(false);
-        updateForest_All();
+        updateForest_all();
     }
 
-    public void updateForest_All() {
+    public void updateForest_all() {
         updateForest_hpPotion();
         updateForest_mpPotion();
+        updateForest_fireball();
+        updateForest_flamestrike();
+        updateForest_heal();
+    }
+
+    public void updateForest_skills() {
         updateForest_fireball();
         updateForest_flamestrike();
         updateForest_heal();

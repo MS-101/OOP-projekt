@@ -124,6 +124,11 @@ public class GameController implements Initializable {
         this.myMercenary = myMercenary;
     }
 
+    public void resetMercenary() {
+        myMercenary = new Mercenary();
+        updatePlayer_all();
+    }
+
     public void disablePlayerButtons() {
         attrsPane.setDisable(true);
         skillsPane.setDisable(true);

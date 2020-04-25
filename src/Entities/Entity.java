@@ -152,26 +152,13 @@ public class Entity implements Serializable {
 
         receiver.hp -= totalDmg;
 
-        System.out.println(this.name + " deals " + totalDmg + " damage to " + receiver.name + ".");
-        if (receiver.hp <= 0) {
-            System.out.println(receiver.name + " has died.");
-        }
         System.out.println();
 
         if (this instanceof Mercenary && this.weapon != null) {
             this.weapon.durability--;
 
             if (this.weapon.durability == 0) {
-                System.out.println("Your weapon just broke!");
-                System.out.println();
-
                 this.setWeapon(null);
-            } else if (this.weapon.durability < 0.2 * this.weapon.maxDurability) {
-                System.out.println("You should repair your weapon if you don't want to break it [" + this.weapon.durability + "/" + this.weapon.maxDurability +  " durability]");
-                System.out.println();
-            } else if (this.weapon.durability < 0.4 * this.weapon.maxDurability) {
-                System.out.println("Your weapon could use some repairs... [" + this.weapon.durability + "/" + this.weapon.maxDurability +  " durability]");
-                System.out.println();
             }
         }
 
@@ -179,16 +166,7 @@ public class Entity implements Serializable {
             receiver.armor.durability--;
 
             if (receiver.armor.durability == 0) {
-                System.out.println("Your armor just broke!");
-                System.out.println();
-
                 receiver.setArmor(null);
-            } else if (receiver.armor.durability < 0.2 * receiver.armor.maxDurability) {
-                System.out.println("You should repair your armor if you don't want to break it [" + receiver.weapon.durability + "/" + receiver.weapon.maxDurability +  " durability]");
-                System.out.println();
-            } else if (receiver.weapon.durability < 0.4 * receiver.weapon.maxDurability) {
-                System.out.println("Your weapon could use some repairs... [" + receiver.weapon.durability + "/" + receiver.weapon.maxDurability +  " durability]");
-                System.out.println();
             }
         }
 

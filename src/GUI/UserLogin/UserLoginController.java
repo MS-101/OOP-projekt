@@ -88,12 +88,9 @@ public class UserLoginController implements Initializable {
         primaryStage.setScene(new Scene(villageRoot, 1200, 1000));
 
         //testing
-        myMercenary.hp = 50;
-        myMercenary.mp = 50;
         myMercenary.loot.gold = 200;
         myMercenary.consumables.hpPotions_amount = 5;
         myMercenary.consumables.mpPotions_amount = 5;
-        myMercenary.weapon.durability = 1;
         myMercenary.stats.attributePoints = 10;
         myMercenary.skills.skillPoints = 10;
 
