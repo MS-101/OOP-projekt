@@ -317,8 +317,8 @@ public class GameController implements Initializable {
             double durProgress = (double)myWeapon.durability / (double)myWeapon.maxDurability;
             weaponDurBar.setProgress(durProgress);
 
-            weapon_physDmg.setText("Physical damage: " + myWeapon.lowPhysicalDmg + "-" + myWeapon.highPhysicalDmg);
-            weapon_piercDmg.setText("Piercing damage: " + myWeapon.lowPiercingDmg + "-" + myWeapon.highPiercingDmg);
+            weapon_physDmg.setText("Physical damage: " + myWeapon.lowPhysDmg + "-" + myWeapon.highPhysDmg);
+            weapon_piercDmg.setText("Piercing damage: " + myWeapon.lowPiercDmg + "-" + myWeapon.highPiercDmg);
 
             weaponDescr.setVisible(true);
         } else {

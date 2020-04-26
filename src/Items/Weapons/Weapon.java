@@ -3,23 +3,23 @@ package Items.Weapons;
 import Items.Item;
 
 public class Weapon extends Item {
-    public int lowPhysicalDmg, highPhysicalDmg;
-    public int lowPiercingDmg, highPiercingDmg;
+    public int lowPhysDmg, highPhysDmg;
+    public int lowPiercDmg, highPiercDmg;
 
     public void setPhysicalDmg(int lowPhysicalDmg, int highPhysicalDmg) {
-        this.lowPhysicalDmg = lowPhysicalDmg;
-        this.highPhysicalDmg = highPhysicalDmg;
+        this.lowPhysDmg = lowPhysicalDmg;
+        this.highPhysDmg = highPhysicalDmg;
     }
 
     public void setPiercingDmg(int lowPiercingDmg, int highPiercingDmg) {
-        this.lowPiercingDmg = lowPiercingDmg;
-        this.highPiercingDmg = highPiercingDmg;
+        this.lowPiercDmg = lowPiercingDmg;
+        this.highPiercDmg = highPiercingDmg;
     }
 
     public void copy(Weapon weaponCopy) {
         super.copy(weaponCopy);
-        weaponCopy.setPhysicalDmg(this.lowPhysicalDmg, this.highPhysicalDmg);
-        weaponCopy.setPiercingDmg(this.lowPiercingDmg, this.highPiercingDmg);
+        weaponCopy.setPhysicalDmg(this.lowPhysDmg, this.highPhysDmg);
+        weaponCopy.setPiercingDmg(this.lowPiercDmg, this.highPiercDmg);
     }
 
     public Weapon getCopy() {

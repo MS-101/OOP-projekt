@@ -1,5 +1,6 @@
 package Entities;
 
+import Combat.DamageHandler;
 import Entities.Player.*;
 import Items.Weapons.Weapon;
 import Items.Armor.Armor;
@@ -10,8 +11,8 @@ import java.util.Random;
 public class Entity implements Serializable {
     public int maxHp, hp;
     public int maxMp, mp;
-    public int lowPhysicalDmg, highPhysicalDmg;
-    public int lowPiercingDmg, highPiercingDmg;
+    public int lowPhysDmg, highPhysDmg;
+    public int lowPiercDmg, highPiercDmg;
     public int baseArmor;
     public String name;
 
@@ -29,13 +30,13 @@ public class Entity implements Serializable {
     }
 
     public void setBasePhysicalDmg(int lowPhysicalDmg, int highPhysicalDmg) {
-        this.lowPhysicalDmg = lowPhysicalDmg;
-        this.highPhysicalDmg = highPhysicalDmg;
+        this.lowPhysDmg = lowPhysicalDmg;
+        this.highPhysDmg = highPhysicalDmg;
     }
 
     public void setBasePiercingDmg(int lowPiercingDmg, int highPiercingDmg) {
-        this.lowPiercingDmg = lowPiercingDmg;
-        this.highPiercingDmg = highPiercingDmg;
+        this.lowPiercDmg = lowPiercingDmg;
+        this.highPiercDmg = highPiercingDmg;
     }
 
     public void setBaseArmor(int baseArmor) {
@@ -70,81 +71,33 @@ public class Entity implements Serializable {
         }
     }
 
-    public void healAll(int amount) {
-        healHp(amount);
-        healMp(amount);
-    }
-
+    //returns true when critical damage was used
     public boolean attack(Entity receiver) {
-        int inflictedPhysicalDmg, remainingPhysicalDmg, absorbedPhysicalDmg;
-        int inflictedPiercingDmg;
-        int basePhysicalDmg = 0, basePiercingDmg = 0;
-        int weaponPhysicalDmg = 0, weaponPiercingDmg = 0, equipmentArmor;
-        int totalArmor, totalDmg;
-        double armorReduction;
-        Random randomNumber = new Random();
+        int physDmg, piercDmg, totalDmg;
+        boolean critUsed = false;
+        DamageHandler myDmgHandler = new DamageHandler();
 
-        totalArmor = receiver.baseArmor;
-
-        if (receiver.armor != null) {
-            equipmentArmor = receiver.armor.armorVal;
-
-            if (receiver instanceof Mercenary && receiver.armor.durability <= 0.2 * receiver.armor.maxDurability) {
-                equipmentArmor *= 0.5;
-            }
-
-            totalArmor += equipmentArmor;
+        if (myDmgHandler.tryDodge()) {
+            return false;
         }
 
-        basePhysicalDmg = randomNumber.nextInt((this.highPhysicalDmg - this.lowPhysicalDmg) + 1) + lowPhysicalDmg;
-
-        if (this.weapon != null) {
-            weaponPhysicalDmg = randomNumber.nextInt((this.weapon.highPhysicalDmg - this.weapon.lowPhysicalDmg) + 1) + this.weapon.lowPhysicalDmg;
-
-            if (this instanceof  Mercenary && this.weapon.durability <= 0.2 * this.weapon.maxDurability) {
-                weaponPhysicalDmg *= 0.5;
-            }
-        }
-
-        inflictedPhysicalDmg = basePhysicalDmg + weaponPhysicalDmg;
-
+        physDmg = myDmgHandler.calcPhysDmg(this.weapon, this.lowPhysDmg, this.highPhysDmg);
+        physDmg = myDmgHandler.absorbDmg(receiver.armor, receiver.baseArmor, physDmg);
         if (this instanceof Mercenary) {
-            inflictedPhysicalDmg *= (double)((Mercenary) this).stats.strength / 10;
+            physDmg = myDmgHandler.applyStr(((Mercenary) this).stats.strength, physDmg);
         }
 
-        if (totalArmor != 0) {
-            armorReduction = 0.3;
-
-            remainingPhysicalDmg = inflictedPhysicalDmg - totalArmor;
-
-            if (remainingPhysicalDmg > 0) {
-                absorbedPhysicalDmg = totalArmor;
-
-                inflictedPhysicalDmg = (int)(armorReduction * absorbedPhysicalDmg) + remainingPhysicalDmg;
-            } else {
-                absorbedPhysicalDmg = inflictedPhysicalDmg;
-
-                inflictedPhysicalDmg = (int)(armorReduction * absorbedPhysicalDmg);
-            }
-        }
-
-        basePiercingDmg = randomNumber.nextInt((this.highPiercingDmg - this.lowPiercingDmg) + 1) + this.lowPiercingDmg;
-
-        if (this.weapon != null) {
-            weaponPiercingDmg = randomNumber.nextInt((this.weapon.highPiercingDmg - this.weapon.lowPiercingDmg) + 1) + this.weapon.lowPiercingDmg;
-
-            if (this instanceof  Mercenary && this.weapon.durability <= 0.2 * this.weapon.maxDurability) {
-                weaponPiercingDmg *= 0.5;
-            }
-        }
-
-        inflictedPiercingDmg = basePiercingDmg + weaponPiercingDmg;
-
+        piercDmg = myDmgHandler.calcPiercDmg(this.weapon, this.lowPiercDmg, this.highPiercDmg);
         if (this instanceof Mercenary) {
-            inflictedPiercingDmg *= (double)((Mercenary) this).stats.dexterity / 10;
+            piercDmg = myDmgHandler.applyDex(((Mercenary) this).stats.dexterity, piercDmg);
         }
 
-        totalDmg = inflictedPhysicalDmg + inflictedPiercingDmg;
+        totalDmg = physDmg + piercDmg;
+
+        if (myDmgHandler.tryCrit()) {
+            totalDmg = myDmgHandler.calcCritDmg(totalDmg);
+            critUsed = true;
+        }
 
         if (totalDmg < 1) {
             totalDmg = 1;
@@ -168,6 +121,6 @@ public class Entity implements Serializable {
             }
         }
 
-        return true;
+        return critUsed;
     }
 }

@@ -9,7 +9,7 @@ public class Mercenary extends Entity {
     public PlayerLoot loot;
     public PlayerSkills skills;
 
-    public int lvl = 0, maxLvl = 6;
+    public int lvl, maxLvl = 6;
     public int lvlRequirement;
     int lvlRequirementInc;
 
@@ -26,14 +26,20 @@ public class Mercenary extends Entity {
         setBasePiercingDmg(0, 0);
         setBaseArmor(0);
 
+        setLvl(0);
         setLvlRequirement(100, 30);
 
-        this.stats = new PlayerStats(10, 10, 10);
         this.consumables = new PlayerConsumables(3, 0);
-        this.loot = new PlayerLoot(50);
         this.skills = new PlayerSkills(1, 0, 0);
+        this.stats = new PlayerStats(10, 10, 10);
+        this.loot = new PlayerLoot(50);
 
         setWeapon(new Copper_Dagger());
+        setArmor(null);
+    }
+
+    public void setLvl(int lvl) {
+        this.lvl = lvl;
     }
 
     public void setLvlRequirement(int lvlRequirement, int lvlRequirementInc) {

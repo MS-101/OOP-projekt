@@ -17,8 +17,8 @@ public class Monster extends Entity {
 
         newMonster.setMaxHp(this.maxHp);
         newMonster.setMaxMp(this.maxMp);
-        newMonster.setBasePhysicalDmg(this.lowPhysicalDmg, this.highPhysicalDmg);
-        newMonster.setBasePiercingDmg(this.lowPiercingDmg, this.highPiercingDmg);
+        newMonster.setBasePhysicalDmg(this.lowPhysDmg, this.highPhysDmg);
+        newMonster.setBasePiercingDmg(this.lowPiercDmg, this.highPiercDmg);
         newMonster.setBaseArmor(this.baseArmor);
         newMonster.setName(this.name);
 

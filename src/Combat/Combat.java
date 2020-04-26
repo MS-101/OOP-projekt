@@ -42,13 +42,34 @@ public class Combat {
     public void useAttack(int opponentIndex) throws IOException {
         Monster target = opponents.get(opponentIndex);
 
-        int prevHp = target.hp;
-        player.attack(target);
-        int damage = prevHp - target.hp;
+        boolean hadWeapon, critUsed;
 
-        assignedController.sendMessage(player.name + " deals " + damage + " damage to " + target.name + ".");
+        if (player.weapon != null) {
+            hadWeapon = true;
+        } else {
+            hadWeapon = false;
+        }
+
+        int prevHp = target.hp;
+        critUsed = player.attack(target);
+        int dmg = prevHp - target.hp;
+
+        if (dmg > 0) {
+            if (critUsed) {
+                assignedController.sendMessage(player.name + " attacks and deals " + dmg + " damage to " + target.name + ". [CRITICAL DAMAGE]");
+            } else {
+                assignedController.sendMessage(player.name + " attacks and deals " + dmg + " damage to " + target.name + ".");
+            }
+        } else {
+            assignedController.sendMessage(player.name + " attacks and misses " + target.name + ".");
+        }
+
         if (target.hp <= 0) {
             killOpponent(opponentIndex);
+        }
+
+        if (hadWeapon && player.weapon == null) {
+            assignedController.sendMessage("Your weapon just broke!");
         }
 
         assignedController.updateForest_monsterHBox();
@@ -180,7 +201,7 @@ public class Combat {
 
             assignedController.updatePlayer_nameLevel();
             assignedController.updatePlayer_attributes();
-            assignedController.updateForest_skills();
+            assignedController.updatePlayer_skills();
         }
 
         assignedController.updatePlayer_exp();
@@ -195,15 +216,35 @@ public class Combat {
         for (i = 0; i < opponents.size(); i++) {
             Monster attacker = opponents.get(i);
 
-            int prevHp = player.hp;
-            attacker.attack(player);
-            int damage = prevHp - player.hp;
+            boolean hadArmor, critUsed;
 
-            assignedController.sendMessage(attacker.name + " deals " + damage + " damage to " + player.name + ".");
+            if (player.armor != null) {
+                hadArmor = true;
+            } else {
+                hadArmor = false;
+            }
+
+            int prevHp = player.hp;
+            critUsed = attacker.attack(player);
+            int dmg = prevHp - player.hp;
+
+            if (dmg > 0) {
+                if (critUsed) {
+                    assignedController.sendMessage(attacker.name + " attacks and deals " + dmg + " damage to " + player.name + ". [CRITICAL DAMAGE]");
+                } else {
+                    assignedController.sendMessage(attacker.name + " attacks and deals " + dmg + " damage to " + player.name + ".");
+                }
+            } else {
+                assignedController.sendMessage(attacker.name + " attacks and misses " + player.name + ".");
+            }
 
             assignedController.updatePlayer_hp();
             assignedController.updatePlayer_hpPotions();
             assignedController.updatePlayer_armor();
+
+            if (hadArmor && player.armor == null) {
+                assignedController.sendMessage("Your armor just broke!");
+            }
 
             if (player.hp <= 0) {
                 assignedController.sendMessage(player.name + " has died!");
@@ -248,8 +289,6 @@ public class Combat {
         Random random = new Random();
 
         int diceRoll = random.nextInt(100);
-
-        System.out.println(diceRoll);
 
         if (diceRoll <= 70) {
             assignedController.sendMessage("You have fled the battle!");

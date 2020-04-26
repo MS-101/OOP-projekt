@@ -4,11 +4,9 @@ import Enviroments.Forge;
 import Items.Armor.Armor;
 import Items.Item;
 import Items.Weapons.Weapon;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.event.WeakEventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -19,7 +17,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-import javax.swing.event.ChangeListener;
 import java.io.IOException;
 
 public class ForgeController extends GameController {
@@ -152,12 +149,12 @@ public class ForgeController extends GameController {
             if (pickedItem instanceof Weapon) {
                 Weapon pickedWeapon = (Weapon) pickedItem;
 
-                if (pickedWeapon.lowPhysicalDmg != 0 && pickedWeapon.highPhysicalDmg != 0) {
-                    itemDescr.getItems().add("physical damage: " + pickedWeapon.lowPhysicalDmg + " - " + pickedWeapon.highPhysicalDmg);
+                if (pickedWeapon.lowPhysDmg != 0 && pickedWeapon.highPhysDmg != 0) {
+                    itemDescr.getItems().add("physical damage: " + pickedWeapon.lowPhysDmg + " - " + pickedWeapon.highPhysDmg);
                 }
 
-                if (pickedWeapon.lowPiercingDmg != 0 && pickedWeapon.highPiercingDmg != 0) {
-                    itemDescr.getItems().add("piercing damage: " + pickedWeapon.lowPiercingDmg + " - " + pickedWeapon.highPiercingDmg);
+                if (pickedWeapon.lowPiercDmg != 0 && pickedWeapon.highPiercDmg != 0) {
+                    itemDescr.getItems().add("piercing damage: " + pickedWeapon.lowPiercDmg + " - " + pickedWeapon.highPiercDmg);
                 }
             }
             if (pickedItem instanceof Armor) {
