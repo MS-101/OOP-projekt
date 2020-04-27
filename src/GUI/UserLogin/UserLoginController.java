@@ -12,8 +12,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 
@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 
 public class UserLoginController implements Initializable {
     File accountsFile = new File("accounts.txt");
-    AccountsFileHandler myAccountManager = new AccountsFileHandler();
+    AccountsFileHandler myAccountHandler = new AccountsFileHandler();
     AccountsHashTable myHashTable;
 
     @FXML
@@ -38,15 +38,15 @@ public class UserLoginController implements Initializable {
     private PasswordField pf_password;
 
     @FXML
-    private Label label_error;
+    private TextArea errorMessage;
 
     public void pressLoginButton (ActionEvent event) throws NoSuchAlgorithmException, IOException {
         String username = tf_username.getText();
         String unprotectedPassword = pf_password.getText();
 
         if (username.isEmpty() || unprotectedPassword.isEmpty()) {
-            label_error.setText("You must enter username and password!");
-            label_error.setVisible(true);
+            errorMessage.setText("You must enter username and password!");
+            errorMessage.setVisible(true);
             return;
         }
 
@@ -58,8 +58,8 @@ public class UserLoginController implements Initializable {
 
             startGame(accountsFile, myHashTable, myMercenary, myVillage);
         } else {
-            label_error.setText("Incorrect password or username!");
-            label_error.setVisible(true);
+            errorMessage.setText("Incorrect password or username!");
+            errorMessage.setVisible(true);
         }
     }
 
@@ -68,22 +68,28 @@ public class UserLoginController implements Initializable {
         String unprotectedPassword = pf_password.getText();
 
         if (username.isEmpty() || unprotectedPassword.isEmpty()) {
-            label_error.setText("You must enter username and password!");
-            label_error.setVisible(true);
+            errorMessage.setText("You must enter username and password!");
+            errorMessage.setVisible(true);
+            return;
+        }
+
+        if (!myHashTable.isPasswordStrong(unprotectedPassword)) {
+            errorMessage.setText("Password must contain at least 8 characters, lowercase letter, uppercase letter, number and special symbol.");
+            errorMessage.setVisible(true);
             return;
         }
 
         Account registeredAccount = myHashTable.register(username, unprotectedPassword);
         if (registeredAccount != null) {
-            myAccountManager.rewriteAccountsFile(accountsFile, myHashTable);
+            myAccountHandler.rewriteAccountsFile(accountsFile, myHashTable);
 
             Village myVillage = registeredAccount.getAccountVillage();
             Mercenary myMercenary = registeredAccount.getAccountMercenary();
 
             startGame(accountsFile, myHashTable, myMercenary, myVillage);
         } else {
-            label_error.setText("Username is already in use!");
-            label_error.setVisible(true);
+            errorMessage.setText("Username is already in use!");
+            errorMessage.setVisible(true);
         }
     }
 
@@ -104,14 +110,14 @@ public class UserLoginController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle)  {
         if (!accountsFile.exists()) {
             try {
-                myAccountManager.createAccountsFile(accountsFile);
+                myAccountHandler.createAccountsFile(accountsFile);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
         try {
-            myHashTable = myAccountManager.readAccountsFile(accountsFile);
+            myHashTable = myAccountHandler.readAccountsFile(accountsFile);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }

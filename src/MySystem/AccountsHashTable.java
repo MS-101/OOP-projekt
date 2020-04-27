@@ -30,6 +30,42 @@ public class AccountsHashTable implements Serializable {
         }
     }
 
+    public boolean isPasswordStrong(String unprotectedPassword) {
+        int passwordLength = unprotectedPassword.length();
+        if (passwordLength < 8) {
+            return false;
+        }
+
+        boolean lowerCaseFound = false;
+        boolean upperCaseFound = false;
+        boolean numberFound = false;
+        boolean specialFound = false;
+
+        int i;
+        for (i = 0; i < unprotectedPassword.length(); i++) {
+            char curChar = unprotectedPassword.charAt(i);
+
+            if (curChar > 'a' && curChar < 'z') {
+                lowerCaseFound = true;
+                continue;
+            }
+
+            if (curChar > 'A' && curChar < 'Z') {
+                upperCaseFound = true;
+                continue;
+            }
+
+            if (curChar > '0' && curChar < '9') {
+                numberFound = true;
+                continue;
+            }
+
+            specialFound = true;
+        }
+
+        return (lowerCaseFound && upperCaseFound && numberFound && specialFound);
+    }
+
     public Account register(String username, String unprotectedPassword) throws NoSuchAlgorithmException {
         int key = abs((username.hashCode())) % hashtableSize;
 
