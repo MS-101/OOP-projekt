@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -143,7 +144,7 @@
                                                                     <items>
                                                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                            <children>
-                                                                              <Label fx:id="hpPotionLabel" alignment="CENTER" prefHeight="158.0" prefWidth="225.0" text="hp potions: a/b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                              <Label fx:id="hpPotionLabel" alignment="CENTER" prefHeight="158.0" prefWidth="225.0" text="HP Potions: a/b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                                            </children>
                                                                         </AnchorPane>
                                                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -161,7 +162,7 @@
                                                                      <items>
                                                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                            <children>
-                                                                              <Label fx:id="mpPotionLabel" alignment="CENTER" prefHeight="158.0" prefWidth="225.0" text="mp potions: a/b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                              <Label fx:id="mpPotionLabel" alignment="CENTER" prefHeight="158.0" prefWidth="225.0" text="MP Potions: a/b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                                            </children>
                                                                         </AnchorPane>
                                                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -312,7 +313,10 @@
                                                                                 <items>
                                                                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                                        <children>
-                                                                                          <Label fx:id="strLabel" alignment="CENTER" prefHeight="34.0" prefWidth="109.0" text="Strength: x" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                          <Label fx:id="strLabel" alignment="CENTER" prefHeight="34.0" prefWidth="109.0" text="Strength: x" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                             <tooltip>
+                                                                                                <Tooltip text="Increases physical damage and max hp." />
+                                                                                             </tooltip></Label>
                                                                                        </children>
                                                                                     </AnchorPane>
                                                                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -330,7 +334,10 @@
                                                                                  <items>
                                                                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                                        <children>
-                                                                                          <Label fx:id="dexLabel" alignment="CENTER" prefHeight="34.0" prefWidth="109.0" text="Dexterity: x" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                          <Label fx:id="dexLabel" alignment="CENTER" prefHeight="34.0" prefWidth="109.0" text="Dexterity: x" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                             <tooltip>
+                                                                                                <Tooltip text="Increases piercing damage." />
+                                                                                             </tooltip></Label>
                                                                                        </children>
                                                                                     </AnchorPane>
                                                                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -348,7 +355,10 @@
                                                                                  <items>
                                                                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                                        <children>
-                                                                                          <Label fx:id="intLabel" alignment="CENTER" prefHeight="34.0" prefWidth="109.0" text="Intelligence: x" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                          <Label fx:id="intLabel" alignment="CENTER" prefHeight="34.0" prefWidth="109.0" text="Intelligence: x" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                             <tooltip>
+                                                                                                <Tooltip text="Increases skill power and max mp." />
+                                                                                             </tooltip></Label>
                                                                                        </children>
                                                                                     </AnchorPane>
                                                                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -390,7 +400,10 @@
                                                                                  <items>
                                                                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                                        <children>
-                                                                                          <Label fx:id="fireballLabel" alignment="CENTER" prefHeight="34.0" prefWidth="109.0" text="Fireball: a/b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                          <Label fx:id="fireballLabel" alignment="CENTER" prefHeight="34.0" prefWidth="109.0" text="Fireball: a/b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                             <tooltip>
+                                                                                                <Tooltip text="Deals damage to single target." />
+                                                                                             </tooltip></Label>
                                                                                        </children>
                                                                                     </AnchorPane>
                                                                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -408,7 +421,10 @@
                                                                                  <items>
                                                                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                                        <children>
-                                                                                          <Label fx:id="flamestrikeLabel" alignment="CENTER" prefHeight="34.0" prefWidth="109.0" text="Flamestrike: a/b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                          <Label fx:id="flamestrikeLabel" alignment="CENTER" prefHeight="34.0" prefWidth="109.0" text="Flamestrike: a/b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                             <tooltip>
+                                                                                                <Tooltip text="Deals damage to all opponents." />
+                                                                                             </tooltip></Label>
                                                                                        </children>
                                                                                     </AnchorPane>
                                                                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -426,7 +442,10 @@
                                                                                  <items>
                                                                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                                        <children>
-                                                                                          <Label fx:id="healLabel" alignment="CENTER" prefHeight="34.0" prefWidth="109.0" text="Heal: a/b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                                          <Label fx:id="healLabel" alignment="CENTER" prefHeight="34.0" prefWidth="109.0" text="Heal: a/b" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                             <tooltip>
+                                                                                                <Tooltip text="Heals your hp." />
+                                                                                             </tooltip></Label>
                                                                                        </children>
                                                                                     </AnchorPane>
                                                                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">

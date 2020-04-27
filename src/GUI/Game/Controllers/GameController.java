@@ -357,7 +357,8 @@ public class GameController implements Initializable {
     public void updatePlayer_hpPotions() {
         PlayerConsumables myConsumables = myMercenary.consumables;
 
-        hpPotionLabel.setText("hp potions: " + myConsumables.hpPotions_amount + "/" + myConsumables.hpPotions_maxAmount);
+        hpPotionLabel.setText("HP Potions: " + myConsumables.hpPotions_amount + "/" + myConsumables.hpPotions_maxAmount);
+
         if (myConsumables.hpPotions_amount > 0 && myMercenary.hp < myMercenary.maxHp) {
             hpPotionBtn.setDisable(false);
         } else {
@@ -368,7 +369,8 @@ public class GameController implements Initializable {
     public void updatePlayer_mpPotions() {
         PlayerConsumables myConsumables = myMercenary.consumables;
 
-        mpPotionLabel.setText("mp potions: " + myConsumables.mpPotions_amount + "/" + myConsumables.mpPotions_maxAmount);
+        mpPotionLabel.setText("MP Potions: " + myConsumables.mpPotions_amount + "/" + myConsumables.mpPotions_maxAmount);
+
         if (myConsumables.mpPotions_amount > 0 && myMercenary.mp < myMercenary.maxMp) {
             mpPotionBtn.setDisable(false);
         } else {
