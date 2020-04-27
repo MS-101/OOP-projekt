@@ -57,8 +57,8 @@ Targetable abilities:
 - fireball - deal damage to single target
 
 Non-targetable abilities:
-- hp - use hp potion
-- mp - use mp potion
+- hp potion - use hp potion
+- mp potion - use mp potion
 - flamestrike - deals damage to all opponents
 - heal - heals your hp
 - flee - attempt to escape from battle
