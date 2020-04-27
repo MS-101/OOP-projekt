@@ -4,7 +4,7 @@ import Entities.Player.Mercenary;
 import Entities.Player.PlayerConsumables;
 import Entities.Player.PlayerSkills;
 import Entities.Player.PlayerStats;
-import Enviroments.Village;
+import Environments.Village;
 import Items.Armor.Armor;
 import Items.Weapons.Weapon;
 import MySystem.AccountsFileHandler;

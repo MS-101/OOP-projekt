@@ -1,6 +1,6 @@
 package GUI.Game.Controllers;
 
-import Enviroments.Forge;
+import Environments.Forge;
 import Items.Armor.Armor;
 import Items.Item;
 import Items.Weapons.Weapon;

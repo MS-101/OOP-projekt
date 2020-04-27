@@ -1,4 +1,4 @@
-package Enviroments;
+package Environments;
 
 import java.io.Serializable;
 

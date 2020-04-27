@@ -1,15 +1,12 @@
-package Enviroments;
+package Environments;
 
-import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-import Entities.Player.Mercenary;
 import Items.Item;
 import Items.Weapons.*;
 import Items.Armor.*;
-import MySystem.*;
 
 public class Forge implements Serializable {
     public ArrayList<Item> forgeInventory;

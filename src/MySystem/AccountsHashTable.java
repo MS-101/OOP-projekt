@@ -1,10 +1,9 @@
 package MySystem;
 
 import Entities.Player.Mercenary;
-import Enviroments.Village;
+import Environments.Village;
 
 import java.io.Serializable;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

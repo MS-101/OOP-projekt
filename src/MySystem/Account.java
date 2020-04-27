@@ -1,7 +1,7 @@
 package MySystem;
 
 import Entities.Player.Mercenary;
-import Enviroments.Village;
+import Environments.Village;
 
 import java.io.Serializable;
 

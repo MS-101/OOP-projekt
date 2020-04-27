@@ -18,7 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 
 import MySystem.*;
-import Enviroments.Village;
+import Environments.Village;
 import Entities.Player.Mercenary;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;

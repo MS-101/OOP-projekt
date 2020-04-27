@@ -9,44 +9,58 @@ Example of aggregation - class Mercenary contains references to classes PlayerCo
 When you first launch the game you will be asked to register an account.
 The next time you start the game you will be able to log in to that account.
 All passwords are encrypted using SHA-512 with salt and pepper.
+User password is required to contain at least 8 characters, lowercase letter, uppercase letter, number and special symbol.
+
+Game auto-saves at certain points.
+You can log out from your account at any time (button in bottom right corner).
+Game GUI contains 2 panes - location pane on the left and character pane on the right.
 
 In game you can visit the following locations:
-Inn - you can rest to restore hp and mp there, save or quit the game
+Inn - you can rest to restore hp and mp there
 Forge - you can buy and repair equipment there
 Market - you can buy consumables there
-Church - you can allocate attribute and skill points after level up there
 Forest - you can hunt monsters there
 
-Player stats:
-hp - if it falls to 0 you die and you start the game with a new character
-mp - it is used to cast skills
-strength - increases physical damage
-dexterity - increases piercing damage
-intelligence - increases skill power
+After acquiring enough exp points, the player levels up and gains 2 attribute points and 1 skill point.
+You can allocate them at any time outside of combat in the character pane.
 
-Players can learn and upgrade skills. They can also buy equipment and consumables.
+Player attributes:
+strength - increases physical damage and max hp
+dexterity - increases piercing damage
+intelligence - increases skill power and max mp
+
+Player skills:
+fireball - deal damage to single target
+flamestrike - deals damage to all opponents
+heal - heals your hp
 
 Consumables explained
-- they can be used in combat only
 - you can have at most 10 consumables of each type
 - there are currently 2 consumables - hp potion (heals hp) and mp potion (heals mp)
 
 Items explained
 - you can equip a weapon and armor
 - items have durability, if it falls to 0 the item will break
+- when item is heavily damaged it is less effective
 - weapons can deal physical and piercing damage
 - armor can protect against physical damage
 
 Combat mechanics:
 Combat is turn based, player always starts first.
 In combat you can fight at most 3 opponents at a time.
+You cannot interact with character pane during combat.
+You get exp and gold from killing monsters.
 
 During player turn, the player can decide to do one of the following:
-- attack - deal damage with your weapon
-- spell - use an ability
+Targetable abilities:
+- attack - deal damage with your weapon (can miss or crit)
+- fireball - deal damage to single target
+
+Non-targetable abilities:
 - hp - use hp potion
 - mp - use mp potion
-- skip - skip your turn
+- flamestrike - deals damage to all opponents
+- heal - heals your hp
 - flee - attempt to escape from battle
 
 During enemy turn monsters attack the player.
