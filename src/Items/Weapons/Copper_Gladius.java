@@ -1,5 +1,10 @@
 package Items.Weapons;
 
+/**
+ * Balanced weapon. It deals decent amount of physical and some piercing damage.
+ * This weapon is strong against all monsters.
+ */
+
 public class Copper_Gladius extends Weapon {
     public Copper_Gladius() {
         setPhysicalDmg(10, 11);
