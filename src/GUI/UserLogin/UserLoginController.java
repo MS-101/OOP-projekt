@@ -21,6 +21,12 @@ import Entities.Player.Mercenary;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * This controller controls login GUI elements.
+ * This allows the player to send registration or login request to mySystem.
+ * Upon successful registration/login game is started with user's data.
+ */
+
 public class UserLoginController implements Initializable {
     File accountsFile = new File("accounts.txt");
     AccountsFileHandler myAccountHandler = new AccountsFileHandler();
@@ -37,6 +43,14 @@ public class UserLoginController implements Initializable {
 
     @FXML
     private TextArea errorMessage;
+
+    /**
+     * This method handles event of pressing login button.
+     * It reads user's username and password from GUI elements and sends login request.
+     * If login is successful the game is started using the account's data.
+     * If login is unsuccessful user gets error message.
+     * Login can fail if user doesn't input or types incorrect account information.
+     */
 
     public void pressLoginButton () {
         String username = tf_username.getText();
@@ -60,6 +74,15 @@ public class UserLoginController implements Initializable {
             errorMessage.setVisible(true);
         }
     }
+
+    /**
+     * This method handles event of pressing register button.
+     * It reads user's username and password from GUI elements and sends register request.
+     * If registration is successful the game is started using the new account's data.
+     * If registration is unsuccessful user gets error message.
+     * Registration can fail if user doesn't input account information,
+     * or uses weak password or entered username is already in use.
+     */
 
     public void pressRegisterButton () {
         String username = tf_username.getText();
@@ -93,6 +116,16 @@ public class UserLoginController implements Initializable {
         }
     }
 
+    /**
+     * Starts the game with player data.
+     * Game is always started in village.
+     *
+     * @param accountsFile File where accounts hashtable is stored.
+     * @param myHashTable Hashtable where accounts are stored.
+     * @param myMercenary Player's mercenary.
+     * @param myVillage Player's village.
+     */
+
     private void startGame(File accountsFile, AccountsHashTable myHashTable, Mercenary myMercenary, Village myVillage) {
         Stage primaryStage = (Stage)ap.getScene().getWindow();
 
@@ -111,6 +144,16 @@ public class UserLoginController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Checks if account file exists. If it doesn't exist, it creates a new account file.
+     * Then it reads the hashtable from accounts file.
+     * The game doesn't handle updates well. If game crashes at startup it is likely that
+     * you are using outdated accounts file and you will need to delete it manually to start the game. (accounts.txt)
+     *
+     * @param url url
+     * @param resourceBundle resourceBundle
+     */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)  {
