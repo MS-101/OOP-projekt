@@ -29,10 +29,12 @@ public class Fireball extends Skill {
     }
 
     /**
-     * Increases current level and power of this ability.
+     * Spends 1 skill point and increases current level and power of this ability.
      */
 
-    public void upgrade() {
+    public void upgrade(Mercenary myMercenary) {
+        myMercenary.skills.skillPoints--;
+
         if (this.curLvl > 0) {
             this.lowSpellDmg += 10;
             this.highSpellDmg += 10;
@@ -51,7 +53,7 @@ public class Fireball extends Skill {
     public void cast(Entity caster, Entity target) {
         super.cast(caster);
 
-        int i, spellDamage;
+        int spellDamage;
         Random randomNumber = new Random();
 
         spellDamage = randomNumber.nextInt((this.highSpellDmg - this.lowSpellDmg) + 1) + lowSpellDmg;

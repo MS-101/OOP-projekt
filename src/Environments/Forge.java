@@ -25,9 +25,8 @@ public class Forge implements Serializable {
      */
 
     public Forge() {
-        int i;
-        forgeInventory = new ArrayList<Item>();
-        forgeLootTable = new ArrayList<Item>();
+        forgeInventory = new ArrayList<>();
+        forgeLootTable = new ArrayList<>();
 
         forgeLootTable.add(new Copper_Dagger());
         forgeLootTable.add(new Copper_Gladius());

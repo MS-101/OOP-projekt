@@ -1,7 +1,5 @@
 package GUI.Game.Controllers;
 
-import Consumables.HpPotion;
-import Consumables.MpPotion;
 import Entities.Player.PlayerConsumables;
 import Environments.Market;
 import javafx.fxml.FXML;
@@ -33,13 +31,19 @@ public class MarketController extends GameController {
     @FXML
     Label mpPotion_cost;
 
+    /**
+     * This will send the player to village.
+     * Creates a new controller and passes all the required data there.
+     * Changes the root of current scene to the root of village.
+     */
+
     public void returnToVillage() {
-        Scene myScene = (Scene) ap.getScene();
+        Scene myScene = ap.getScene();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Village.fxml"));
 
         try {
-            Parent villageRoot = (Parent) loader.load();
+            Parent villageRoot = loader.load();
             VillageController myController = loader.getController();
 
             myController.passUserData(accountsFile, myHashtable, myVillage, myMercenary);

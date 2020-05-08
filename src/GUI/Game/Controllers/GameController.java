@@ -9,7 +9,6 @@ import Items.Armor.Armor;
 import Items.Weapons.Weapon;
 import MySystem.AccountsFileHandler;
 import MySystem.AccountsHashTable;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,7 +24,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
+/**
+ * Parent class of all game controllers. This controller implements the handling of player tab.
+ * Also contains data and methods that all of the game controllers need to operate.
+ */
 
 public class GameController implements Initializable {
     File accountsFile;
@@ -66,8 +68,6 @@ public class GameController implements Initializable {
     @FXML
     private SplitPane armorDescr;
 
-    @FXML
-    private Button logOutBtn;
     @FXML
     private Button hpPotionBtn;
     @FXML
@@ -124,6 +124,15 @@ public class GameController implements Initializable {
     @FXML
     private Label goldLabel;
 
+    /**
+     * This method allows controllers to pass user data between each other.
+     *
+     * @param accountsFile File that is used to store player accounts.
+     * @param myHashtable Hashtable that is stores in player accounts file.
+     * @param myVillage User's village.
+     * @param myMercenary User's mercenary.
+     */
+
     public void passUserData(File accountsFile, AccountsHashTable myHashtable, Village myVillage, Mercenary myMercenary) {
         this.accountsFile = accountsFile;
         this.myHashtable = myHashtable;
@@ -132,10 +141,18 @@ public class GameController implements Initializable {
         this.myMercenary = myMercenary;
     }
 
+    /**
+     * Resets mercenary and updated all player tab GUI elements.
+     */
+
     public void resetMercenary() {
         myMercenary.reset();
         updatePlayer_all();
     }
+
+    /**
+     * Saves user's game data to an external file.
+     */
 
     public void saveGame() {
         AccountsFileHandler myAccountsFileHandler = new AccountsFileHandler();
@@ -143,12 +160,26 @@ public class GameController implements Initializable {
         myAccountsFileHandler.rewriteAccountsFile(accountsFile, myHashtable);
     }
 
-    public void pressLogOutBtn() throws IOException {
+    /**
+     * This method handles event of pressing log out button.
+     * This will change the scene to login scene.
+     */
+
+    public void pressLogOutBtn() {
         Stage primaryStage = (Stage) ap.getScene().getWindow();
 
-        Parent loginRoot = FXMLLoader.load(getClass().getResource("../../UserLogin/UserLogin.fxml"));
-        primaryStage.setScene(new Scene(loginRoot, 400, 300));
+        try {
+            Parent loginRoot = FXMLLoader.load(getClass().getResource("../../UserLogin/UserLogin.fxml"));
+            primaryStage.setScene(new Scene(loginRoot, 400, 300));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+    /**
+     * Disables all buttons in player pane.
+     * Used when entering combat.
+     */
 
     public void disablePlayerButtons() {
         attrsPane.setDisable(true);
@@ -156,13 +187,23 @@ public class GameController implements Initializable {
         consumablesPane.setDisable(true);
     }
 
+    /**
+     * Enables all buttons in player pane.
+     * Used when exiting combat.
+     */
+
     public void enablePlayerButtons() {
         attrsPane.setDisable(false);
         skillsPane.setDisable(false);
         consumablesPane.setDisable(false);
     }
 
-    public void pressHpPotionBtn (ActionEvent event) throws IOException {
+    /**
+     * This method handles event of pressing hp potion button in player pane.
+     * Makes the player use hp potion and updates all associated GUI elements.
+     */
+
+    public void pressHpPotionBtn() {
         myMercenary.consumables.useHpPotion(myMercenary);
         updatePlayer_hp();
         updatePlayer_hpPotions();
@@ -170,7 +211,12 @@ public class GameController implements Initializable {
         saveGame();
     }
 
-    public void pressMpPotionBtn (ActionEvent event) throws IOException {
+    /**
+     * This method handles event of pressing mp potion button in player pane.
+     * Makes the player use mp potion and updates all associated GUI elements.
+     */
+
+    public void pressMpPotionBtn() {
         myMercenary.consumables.useMpPotion(myMercenary);
         updatePlayer_mp();
         updatePlayer_mpPotions();
@@ -178,14 +224,15 @@ public class GameController implements Initializable {
         saveGame();
     }
 
-    public void pressStrengthBtn (ActionEvent event) throws IOException {
+    /**
+     * This method handles event of pressing strength button in player pane.
+     * Makes the player increase their strength stat and updates all associated GUI elements.
+     */
+
+    public void pressStrengthBtn() {
         PlayerStats myStats = myMercenary.stats;
 
-        myStats.attributePoints--;
-        myStats.strength++;
-
-        myMercenary.maxHp += 5;
-        myMercenary.hp += 5;
+        myStats.increaseStrength(myMercenary);
 
         updatePlayer_attributes();
         updatePlayer_hp();
@@ -193,25 +240,30 @@ public class GameController implements Initializable {
         saveGame();
     }
 
-    public void pressDexterityBtn (ActionEvent event) throws IOException {
+    /**
+     * This method handles event of pressing dexterity button in player pane.
+     * Makes the player increase their dexterity stat and updates all associated GUI elements.
+     */
+
+    public void pressDexterityBtn() {
         PlayerStats myStats = myMercenary.stats;
 
-        myStats.attributePoints--;
-        myStats.dexterity++;
+        myStats.increaseDexterity(myMercenary);
 
         updatePlayer_attributes();
 
         saveGame();
     }
 
-    public void pressIntelligenceBtn (ActionEvent event) throws IOException {
+    /**
+     * This method handles event of pressing intelligence button in player pane.
+     * Makes the player increase their intelligence stat and updates all associated GUI elements.
+     */
+
+    public void pressIntelligenceBtn() {
         PlayerStats myStats = myMercenary.stats;
 
-        myStats.attributePoints--;
-        myStats.intelligence++;
-
-        myMercenary.maxMp += 5;
-        myMercenary.mp += 5;
+        myStats.increaseIntelligence(myMercenary);
 
         updatePlayer_attributes();
         updatePlayer_mp();
@@ -219,38 +271,54 @@ public class GameController implements Initializable {
         saveGame();
     }
 
-    public void pressFireballBtn (ActionEvent event) throws IOException {
+    /**
+     * This method handles event of pressing fireball button in player pane.
+     * Makes the player upgrade their fireball skill and updates all associated GUI elements.
+     */
+
+    public void pressFireballBtn() {
         PlayerSkills mySkills = myMercenary.skills;
 
-        mySkills.skillPoints--;
-        mySkills.fireball.upgrade();
+        mySkills.fireball.upgrade(myMercenary);
 
         updatePlayer_skills();
 
         saveGame();
     }
 
-    public void pressFlamestrikeBtn (ActionEvent event) throws IOException {
+    /**
+     * This method handles event of pressing flamestrike button in player pane.
+     * Makes the player upgrade their flamestrike skill and updates all associated GUI elements.
+     */
+
+    public void pressFlamestrikeBtn() {
         PlayerSkills mySkills = myMercenary.skills;
 
-        mySkills.skillPoints--;
-        mySkills.flamestrike.upgrade();
+        mySkills.flamestrike.upgrade(myMercenary);
 
         updatePlayer_skills();
 
         saveGame();
     }
 
-    public void pressHealBtn (ActionEvent event) throws IOException {
+    /**
+     * This method handles event of pressing heal button in player pane.
+     * Makes the player upgrade their heal skill and updates all associated GUI elements.
+     */
+
+    public void pressHealBtn() {
         PlayerSkills mySkills = myMercenary.skills;
 
-        mySkills.skillPoints--;
-        mySkills.heal.upgrade();
+        mySkills.heal.upgrade(myMercenary);
 
         updatePlayer_skills();
 
         saveGame();
     }
+
+    /**
+     * Updates all player GUI elements.
+     */
 
     public void updatePlayer_all() {
         updatePlayer_nameLevel();
@@ -271,9 +339,18 @@ public class GameController implements Initializable {
         updatePlayer_gold();
     }
 
+    /**
+     * Updates player name and level in player GUI.
+     */
+
     public void updatePlayer_nameLevel() {
         playerPane.setText(myMercenary.name + " [lvl " + myMercenary.lvl + " ]");
     }
+
+    /**
+     * Updates player exp in player GUI.
+     * If player is at max exp, it will be stated in exp label.
+     */
 
     public void updatePlayer_exp() {
         if (myMercenary.lvl != myMercenary.maxLvl) {

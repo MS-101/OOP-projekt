@@ -15,7 +15,7 @@ public class InnController extends GameController {
     @FXML
     Button restBtn;
 
-    public void rest() throws IOException {
+    public void rest() {
         Inn myInn = myVillage.myInn;
 
         myInn.rest(myMercenary, myVillage.myForge);
@@ -46,13 +46,19 @@ public class InnController extends GameController {
         }
     }
 
+    /**
+     * This will send the player to village.
+     * Creates new controller and passes all required data there.
+     * Changes the root of current scene to the root of village.
+     */
+
     public void returnToVillage() {
-        Scene myScene = (Scene) ap.getScene();
+        Scene myScene = ap.getScene();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Village.fxml"));
 
         try {
-            Parent villageRoot = (Parent) loader.load();
+            Parent villageRoot = loader.load();
 
             VillageController myController = loader.getController();
             myController.passUserData(accountsFile, myHashtable, myVillage, myMercenary);

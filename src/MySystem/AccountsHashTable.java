@@ -65,7 +65,7 @@ public class AccountsHashTable implements Serializable {
         return (lowerCaseFound && upperCaseFound && numberFound && specialFound);
     }
 
-    public Account register(String username, String unprotectedPassword) throws NoSuchAlgorithmException {
+    public Account register(String username, String unprotectedPassword) {
         int key = abs((username.hashCode())) % hashtableSize;
 
         AccountNode pickedAccountNode = this.accountHashTable.get(key);
@@ -97,7 +97,7 @@ public class AccountsHashTable implements Serializable {
         return pickedAccount;
     }
 
-    public Account login(String username, String unprotectedPassword) throws NoSuchAlgorithmException {
+    public Account login(String username, String unprotectedPassword) {
         int key = abs(username.hashCode()) % hashtableSize;
 
         AccountNode pickedAccountNode = this.accountHashTable.get(key);
@@ -123,24 +123,30 @@ public class AccountsHashTable implements Serializable {
         return null;
     }
 
-    private static String securePassword(String unprotectedPassword, String salt, char pepper) throws NoSuchAlgorithmException {
+    private static String securePassword(String unprotectedPassword, String salt, char pepper) {
         String appendedPassword = unprotectedPassword + salt + pepper;
 
-        MessageDigest digest = MessageDigest.getInstance("SHA-512");
-        byte[] passwordBytes = appendedPassword.getBytes(StandardCharsets.UTF_8);
-        int i, passwordStrength = 100;
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-512");
+            byte[] passwordBytes = appendedPassword.getBytes(StandardCharsets.UTF_8);
+            int i, passwordStrength = 100;
 
-        for (i = 0; i < passwordStrength; i++) {
-            passwordBytes = digest.digest(passwordBytes);
+            for (i = 0; i < passwordStrength; i++) {
+                passwordBytes = digest.digest(passwordBytes);
+            }
+
+            String protectedPassword = bytesToHex(passwordBytes);
+
+            return protectedPassword;
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
 
-        String protectedPassword = bytesToHex(passwordBytes);
-
-        return protectedPassword;
+        return null;
     }
 
     private static String bytesToHex(byte[] hash) {
-        StringBuffer hexString = new StringBuffer();
+        StringBuilder hexString = new StringBuilder();
         for (int i = 0; i < hash.length; i++) {
             String hex = Integer.toHexString(0xff & hash[i]);
             if(hex.length() == 1) hexString.append('0');

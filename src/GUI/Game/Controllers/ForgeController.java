@@ -19,6 +19,11 @@ import javafx.scene.paint.Color;
 
 import java.io.IOException;
 
+/**
+ * This controller controls forge GUI elements and is an extension of GameController class.
+ * This allow the player to interact with forge.
+ */
+
 public class ForgeController extends GameController {
     @FXML
     VBox tradeVBox;
@@ -46,6 +51,13 @@ public class ForgeController extends GameController {
     @FXML
     ProgressBar repairArmorDurBar;
 
+    /**
+     * This method handles event of pressing buy item button.
+     * Calls the buyItem method from Forge, updates the necessary GUI elements and saves the game.
+     *
+     * @param itemID Index of bought item.
+     */
+
     public void buyItem(int itemID) {
         Forge myForge = myVillage.myForge;
 
@@ -60,7 +72,12 @@ public class ForgeController extends GameController {
         saveGame();
     }
 
-    public void repairWeapon() throws IOException {
+    /**
+     * This method handles event of pressing repairWeapon button.
+     * Calls the repairItem method from Forge, updates the necessary GUI elements and saves the game.
+     */
+
+    public void repairWeapon() {
         Forge myForge = myVillage.myForge;
         Weapon myWeapon = myMercenary.weapon;
 
@@ -74,7 +91,12 @@ public class ForgeController extends GameController {
         saveGame();
     }
 
-    public void repairArmor() throws IOException {
+    /**
+     * This method handles event of pressing repairArmor button.
+     * Calls the repairItem method from Forge and updates the necessary GUI elements.
+     */
+
+    public void repairArmor() {
         Forge myForge = myVillage.myForge;
         Armor myArmor = myMercenary.armor;
 
@@ -87,6 +109,12 @@ public class ForgeController extends GameController {
 
         saveGame();
     }
+
+    /**
+     * This will send the player to village.
+     * Creates a new controller and passes all the required data there.
+     * Changes the root of current scene to the root of village.
+     */
 
     public void returnToVillage() {
         Scene myScene = ap.getScene();
@@ -106,10 +134,22 @@ public class ForgeController extends GameController {
         }
     }
 
+    /**
+     * Updates all forge GUI elements.
+     */
+
     public  void updateForge_all() {
         updateForge_trade();
         updateForge_repairAll();
     }
+
+    /**
+     * Updates trade tab in forge GUI.
+     * All available items are displayed in the trade tab.
+     * Each item consists of splitPane which contains the item's name, description, button and cost.
+     * If the player cannot afford an item, it's purchase button is disabled
+     * and it's cost label's font color is set to red.
+     */
 
     public void updateForge_trade() {
         int itemIndex;
@@ -213,10 +253,20 @@ public class ForgeController extends GameController {
         }
     }
 
+    /**
+     * Updates repair tab in forge GUI.
+     */
+
     public void updateForge_repairAll() {
         updateForge_repairWeapon();
         updateForge_repairArmor();
     }
+
+    /**
+     * Updates weapon repair GUI elements in forge GUI.
+     * If the player cannot afford to repair their weapon, the repair button is disabled
+     * and it's cost label's font color is set to red.
+     */
 
     public void updateForge_repairWeapon() {
         Weapon myWeapon = myMercenary.weapon;
@@ -255,6 +305,12 @@ public class ForgeController extends GameController {
             repairWeaponBtn.setDisable(true);
         }
     }
+
+    /**
+     * Updates armor repair GUI elements in forge GUI.
+     * If the player cannot afford to repair their armor, the repair button is disabled
+     * and it's cost label's font color is set to red.
+     */
 
     public void updateForge_repairArmor() {
         Armor myArmor = myMercenary.armor;

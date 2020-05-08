@@ -6,7 +6,6 @@ import Items.Weapons.Weapon;
 import Items.Armor.Armor;
 
 import java.io.Serializable;
-import java.util.Random;
 
 /**
  * This class is a parent class of all monsters and player.

@@ -4,7 +4,6 @@ import Combat.Combat;
 import Entities.Monsters.Monster;
 import Entities.Player.PlayerConsumables;
 import Entities.Player.PlayerSkills;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,6 +19,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 import java.io.IOException;
+
+/**
+ * This controller controls forest GUI elements and is an extension of GameController class.
+ * It can switch between forest buttons and combat buttons.
+ * Combat is initiated from here and player input during combat is taken from this controller.
+ */
 
 public class ForestController extends GameController {
     Combat myCombat;
@@ -49,29 +54,59 @@ public class ForestController extends GameController {
     @FXML
     ListView<String> combatLog;
 
-    public void combat_pressAttackBtn(ActionEvent event) {
+    /**
+     * This method handles event of pressing attack button.
+     */
+
+    public void combat_pressAttackBtn() {
         updateForest_monsterHBox();
     }
 
-    public void combat_pressFireballBtn(ActionEvent event) {
+    /**
+     * This method handles event of pressing fireball button.
+     */
+
+    public void combat_pressFireballBtn() {
         updateForest_monsterHBox();
     }
 
-    public void combat_pressHpPotionBtn(ActionEvent event) {
+    /**
+     * This method handles event of pressing hp potion button.
+     */
+
+    public void combat_pressHpPotionBtn() {
         myCombat.useHpPotion();
     }
 
-    public void combat_pressMpPotionBtn(ActionEvent event) {
+    /**
+     * This method handles event of pressing mp potion button.
+     */
+
+    public void combat_pressMpPotionBtn() {
         myCombat.useMpPotion();
     }
 
-    public void combat_pressFlamestrikeBtn(ActionEvent event) {
+    /**
+     * This method handles event of pressing flamestrike button.
+     */
+
+    public void combat_pressFlamestrikeBtn() {
         myCombat.useFlamestrike();
     }
 
-    public void combat_pressHealBtn(ActionEvent event) {
+    /**
+     * This method handles event of pressing heal button.
+     */
+
+    public void combat_pressHealBtn() {
         myCombat.useHeal();
     }
+
+    /**
+     * This method handles event of pressing hunt button.
+     * It creates new instance of combat and displays monsters in GUI.
+     * It also sends message to combat log signaling the start of first turn.
+     */
 
     public void pressHunt() {
         enableCombatButtons();
@@ -82,6 +117,11 @@ public class ForestController extends GameController {
         combatLog.getItems().clear();
         sendMessage("TURN 1:");
     }
+
+    /**
+     * This method is used for updating displayed monsters in GUI.
+     * It is capable of adding any amount of monsters to GUI.
+     */
 
     public void updateForest_monsterHBox() {
         int monsterIndex;
@@ -160,8 +200,6 @@ public class ForestController extends GameController {
                 monsterBtn.setOnAction(new EventHandler() {
                     @Override
                     public void handle(Event event) {
-                        Monster target = myCombat.opponents.get(finalMonsterIndex);
-
                         if (combat_attackBtn.isSelected()) {
                             myCombat.useAttack(finalMonsterIndex);
                         }
@@ -207,11 +245,21 @@ public class ForestController extends GameController {
         }
     }
 
+    /**
+     * Removes all monsters from GUI
+     */
+
     public void clearMonsters() {
         monsterHBox.getChildren().clear();
     }
 
-    public void pressReturn() throws IOException {
+    /**
+     * This method handles event of pressing return/flee button.
+     * When returning it simply sends you to village.
+     * When fleeing it runs the flee method from combat.
+     */
+
+    public void pressReturn() {
         String returnBtnText = returnBtn.getText();
 
         if (returnBtnText.equals("Return")) {
@@ -221,13 +269,19 @@ public class ForestController extends GameController {
         }
     }
 
+    /**
+     * This will send the player to village.
+     * Creates a new controller and passes all the required data there.
+     * Changes the root of current scene to the root of village.
+     */
+
     public void returnToVillage() {
-        Scene myScene = (Scene) ap.getScene();
+        Scene myScene = ap.getScene();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Village.fxml"));
 
         try {
-            Parent villageRoot = (Parent) loader.load();
+            Parent villageRoot = loader.load();
             VillageController myController = loader.getController();
 
             myController.passUserData(accountsFile, myHashtable, myVillage, myMercenary);
@@ -239,10 +293,24 @@ public class ForestController extends GameController {
         }
     }
 
+    /**
+     * This allows the controller to send messages to combat log.
+     *
+     * @param message String that will be printed in combat log.
+     */
+
     public void sendMessage(String message) {
         combatLog.getItems().add(message);
         combatLog.scrollTo(combatLog.getItems().size());
     }
+
+    /**
+     * Sets buttons to forest buttons.
+     * In this state player can interact with player pane's buttons.
+     * In the forest pane player is allowed to interact with forest buttons,
+     * for example they can hunt to initiate combat.
+     * Return button is set to "return" state.
+     */
 
     public void setForestButtons() {
         combat_attackBtn.setVisible(false);
@@ -257,6 +325,14 @@ public class ForestController extends GameController {
 
         enablePlayerButtons();
     }
+
+    /**
+     * Sets buttons to combat buttons.
+     * In this state player cannot interact with player pane's buttons.
+     * In the forest pane player is allowed to interact with combat buttons,
+     * for example they can attack opponents, use skills, etc...
+     * Return buttons is set to "flee" state.
+     */
 
     public void setCombatButtons() {
         combat_attackBtn.setSelected(true);
@@ -276,6 +352,10 @@ public class ForestController extends GameController {
         enableCombatButtons();
     }
 
+    /**
+     * This method is called to prevent the player from acting during opponent's turn.
+     */
+
     public void disableCombatButtons() {
         combat_attackBtn.setDisable(true);
         combat_hpPotionBtn.setDisable(true);
@@ -285,10 +365,18 @@ public class ForestController extends GameController {
         combat_healBtn.setDisable(true);
     }
 
+    /**
+     * This method is called at the start of player turn to allow him to act.
+     */
+
     public void enableCombatButtons() {
         combat_attackBtn.setDisable(false);
         updateForest_all();
     }
+
+    /**
+     * Updates all forest GUI elements.
+     */
 
     public void updateForest_all() {
         updateForest_hpPotion();
@@ -298,11 +386,10 @@ public class ForestController extends GameController {
         updateForest_heal();
     }
 
-    public void updateForest_skills() {
-        updateForest_fireball();
-        updateForest_flamestrike();
-        updateForest_heal();
-    }
+    /**
+     * Updates fireball button in forest GUI.
+     * It will be disabled when the player has yet to learn this skill or they don't have enough mana to cast it.
+     */
 
     public  void updateForest_fireball() {
         PlayerSkills mySkills = myMercenary.skills;
@@ -316,6 +403,11 @@ public class ForestController extends GameController {
         }
     }
 
+    /**
+     * Updates flamestrike button in forest GUI.
+     * It will be disabled when the player has yet to learn this skill or they don't have enough mana to cast it.
+     */
+
     public  void updateForest_flamestrike() {
         PlayerSkills mySkills = myMercenary.skills;
 
@@ -327,6 +419,11 @@ public class ForestController extends GameController {
             combat_flamestrikeBtn.setDisable(true);
         }
     }
+
+    /**
+     * Updates heal button in forest GUI.
+     * It will be disabled when the player has yet to learn this skill or they don't have enough mana to cast it.
+     */
 
     public  void updateForest_heal() {
         PlayerSkills mySkills = myMercenary.skills;
@@ -340,6 +437,11 @@ public class ForestController extends GameController {
         }
     }
 
+    /**
+     * Updates hp potions button in forest GUI.
+     * It will be disabled when the player is at full health or doesn't have any hp potions.
+     */
+
     public void updateForest_hpPotion() {
         PlayerConsumables myConsumables = myMercenary.consumables;
 
@@ -351,6 +453,11 @@ public class ForestController extends GameController {
             combat_hpPotionBtn.setDisable(true);
         }
     }
+
+    /**
+     * Updates mp potions button in forest GUI.
+     * It will be disabled when the player is at full mana or doesn't have any mp potions.
+     */
 
     public void updateForest_mpPotion() {
         PlayerConsumables myConsumables = myMercenary.consumables;

@@ -40,7 +40,7 @@ public class UserLoginController implements Initializable {
     @FXML
     private TextArea errorMessage;
 
-    public void pressLoginButton (ActionEvent event) throws NoSuchAlgorithmException, IOException {
+    public void pressLoginButton (ActionEvent event) {
         String username = tf_username.getText();
         String unprotectedPassword = pf_password.getText();
 
@@ -63,7 +63,7 @@ public class UserLoginController implements Initializable {
         }
     }
 
-    public void pressRegisterButton (ActionEvent event) throws NoSuchAlgorithmException, IOException {
+    public void pressRegisterButton (ActionEvent event) {
         String username = tf_username.getText();
         String unprotectedPassword = pf_password.getText();
 
@@ -79,7 +79,9 @@ public class UserLoginController implements Initializable {
             return;
         }
 
+
         Account registeredAccount = myHashTable.register(username, unprotectedPassword);
+
         if (registeredAccount != null) {
             myAccountHandler.rewriteAccountsFile(accountsFile, myHashTable);
 
@@ -93,17 +95,23 @@ public class UserLoginController implements Initializable {
         }
     }
 
-    private void startGame(File accountsFile, AccountsHashTable myHashTable, Mercenary myMercenary, Village myVillage) throws IOException {
+    private void startGame(File accountsFile, AccountsHashTable myHashTable, Mercenary myMercenary, Village myVillage) {
         Stage primaryStage = (Stage) ap.getScene().getWindow();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../Game/FXML/Village.fxml"));
-        Parent villageRoot = (Parent) loader.load();
-        VillageController controller = loader.getController();
 
-        controller.passUserData(accountsFile, myHashTable, myVillage, myMercenary);
-        primaryStage.setScene(new Scene(villageRoot, 1200, 1000));
+        try {
+            Parent villageRoot = (Parent) loader.load();
+            VillageController controller = loader.getController();
 
-        controller.updatePlayer_all();
+            controller.passUserData(accountsFile, myHashTable, myVillage, myMercenary);
+            primaryStage.setScene(new Scene(villageRoot, 1200, 1000));
+
+            controller.updatePlayer_all();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -26,10 +26,12 @@ public class Heal extends Skill {
     }
 
     /**
-     * Increases current level and power of this ability.
+     * Spends 1 skill point and increases current level and power of this ability.
      */
 
-    public void upgrade() {
+    public void upgrade(Mercenary myMercenary) {
+        myMercenary.skills.skillPoints--;
+
         if (this.curLvl > 0) {
             this.healAmount += 10;
         }

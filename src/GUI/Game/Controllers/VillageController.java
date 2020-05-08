@@ -7,6 +7,13 @@ import javafx.scene.Scene;
 import java.io.IOException;
 
 public class VillageController extends GameController {
+
+    /**
+     * This will send the player to inn.
+     * Creates a new controller and passes all the required data there.
+     * Changes the root of current scene to the root of inn.
+     */
+
     public void goToInn() {
         Scene myScene = (Scene)ap.getScene();
 
@@ -25,6 +32,12 @@ public class VillageController extends GameController {
             e.printStackTrace();
         }
     }
+
+    /**
+     * This will send the player to forge.
+     * Creates a new controller and passes all the required data there.
+     * Changes the root of current scene to the root of forge.
+     */
 
     public void goToForge() {
         Scene myScene = (Scene)ap.getScene();
@@ -45,6 +58,12 @@ public class VillageController extends GameController {
         }
     }
 
+    /**
+     * This will send the player to market.
+     * Creates a new controller and passes all the required data there.
+     * Changes the root of current scene to the root of market.
+     */
+
     public void goToMarket() {
         Scene myScene = (Scene)ap.getScene();
 
@@ -63,6 +82,12 @@ public class VillageController extends GameController {
             e.printStackTrace();
         }
     }
+
+    /**
+     * This will send the player to forest.
+     * Creates a new controller and passes all the required data there.
+     * Changes the root of current scene to the root of forest.
+     */
 
     public void goToForest() {
         Scene myScene = (Scene)ap.getScene();

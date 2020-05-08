@@ -2,10 +2,8 @@ package Combat;
 
 import Entities.Monsters.Monster;
 import Entities.Player.Mercenary;
-import Entities.Player.PlayerConsumables;
 import GUI.Game.Controllers.ForestController;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 

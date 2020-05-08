@@ -1,6 +1,5 @@
 package Combat;
 
-import Entities.Player.Mercenary;
 import Items.Armor.Armor;
 import Items.Weapons.Weapon;
 
