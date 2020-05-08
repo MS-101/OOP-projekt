@@ -3,7 +3,6 @@ package GUI.UserLogin;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 
 import GUI.Game.Controllers.VillageController;
@@ -15,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.event.ActionEvent;
 
 import MySystem.*;
 import Environments.Village;
@@ -40,7 +38,7 @@ public class UserLoginController implements Initializable {
     @FXML
     private TextArea errorMessage;
 
-    public void pressLoginButton (ActionEvent event) {
+    public void pressLoginButton () {
         String username = tf_username.getText();
         String unprotectedPassword = pf_password.getText();
 
@@ -63,7 +61,7 @@ public class UserLoginController implements Initializable {
         }
     }
 
-    public void pressRegisterButton (ActionEvent event) {
+    public void pressRegisterButton () {
         String username = tf_username.getText();
         String unprotectedPassword = pf_password.getText();
 
@@ -96,12 +94,12 @@ public class UserLoginController implements Initializable {
     }
 
     private void startGame(File accountsFile, AccountsHashTable myHashTable, Mercenary myMercenary, Village myVillage) {
-        Stage primaryStage = (Stage) ap.getScene().getWindow();
+        Stage primaryStage = (Stage)ap.getScene().getWindow();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../Game/FXML/Village.fxml"));
 
         try {
-            Parent villageRoot = (Parent) loader.load();
+            Parent villageRoot = loader.load();
             VillageController controller = loader.getController();
 
             controller.passUserData(accountsFile, myHashTable, myVillage, myMercenary);

@@ -364,6 +364,10 @@ public class GameController implements Initializable {
         }
     }
 
+    /**
+     * Updates player hp in player GUI.
+     */
+
     public void updatePlayer_hp() {
         hpLabel.setText(myMercenary.hp + "/" + myMercenary.maxHp);
 
@@ -371,12 +375,20 @@ public class GameController implements Initializable {
         hpBar.setProgress(progress);
     }
 
+    /**
+     * Updates player mp in player GUI.
+     */
+
     public void updatePlayer_mp() {
         mpLabel.setText(myMercenary.mp + "/" + myMercenary.maxMp);
 
         double progress = (double)myMercenary.mp / (double)myMercenary.maxMp;
         mpBar.setProgress(progress);
     }
+
+    /**
+     * Updates player weapon in player GUI.
+     */
 
     public void updatePlayer_weapon() {
         Weapon myWeapon = myMercenary.weapon;
@@ -405,6 +417,10 @@ public class GameController implements Initializable {
         }
     }
 
+    /**
+     * Updates player armor in player GUI.
+     */
+
     public void updatePlayer_armor() {
         Armor myArmor = myMercenary.armor;
 
@@ -431,6 +447,10 @@ public class GameController implements Initializable {
         }
     }
 
+    /**
+     * Updates player hp potions in player GUI.
+     */
+
     public void updatePlayer_hpPotions() {
         PlayerConsumables myConsumables = myMercenary.consumables;
 
@@ -443,6 +463,10 @@ public class GameController implements Initializable {
         }
     }
 
+    /**
+     * Updates player mp potions in player GUI.
+     */
+
     public void updatePlayer_mpPotions() {
         PlayerConsumables myConsumables = myMercenary.consumables;
 
@@ -454,6 +478,10 @@ public class GameController implements Initializable {
             mpPotionBtn.setDisable(true);
         }
     }
+
+    /**
+     * Updates player attributes in player GUI.
+     */
 
     public void updatePlayer_attributes() {
         PlayerStats myStats = myMercenary.stats;
@@ -474,6 +502,10 @@ public class GameController implements Initializable {
             intBtn.setDisable(true);
         }
     }
+
+    /**
+     * Updates player skills in player GUI.
+     */
 
     public void updatePlayer_skills() {
         PlayerSkills mySkills = myMercenary.skills;
@@ -508,6 +540,10 @@ public class GameController implements Initializable {
             healBtn.setDisable(true);
         }
     }
+
+    /**
+     * Updates player gold in player GUI.
+     */
 
     public void updatePlayer_gold() {
         goldLabel.setText("Gold: " + myMercenary.loot.gold);

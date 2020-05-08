@@ -6,6 +6,11 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 
+/**
+ * This controller controls village GUI elements and is an extension of GameController class.
+ * This allow the player to visit village establishment and forest from here.
+ */
+
 public class VillageController extends GameController {
 
     /**
@@ -15,12 +20,12 @@ public class VillageController extends GameController {
      */
 
     public void goToInn() {
-        Scene myScene = (Scene)ap.getScene();
+        Scene myScene = ap.getScene();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Inn.fxml"));
 
         try {
-            Parent innRoot = (Parent)loader.load();
+            Parent innRoot = loader.load();
             InnController myController = loader.getController();
 
             myController.passUserData(accountsFile, myHashtable, myVillage, myMercenary);
@@ -40,12 +45,12 @@ public class VillageController extends GameController {
      */
 
     public void goToForge() {
-        Scene myScene = (Scene)ap.getScene();
+        Scene myScene = ap.getScene();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Forge.fxml"));
 
         try {
-            Parent forgeRoot = (Parent)loader.load();
+            Parent forgeRoot = loader.load();
             ForgeController myController = loader.getController();
 
             myController.passUserData(accountsFile, myHashtable, myVillage, myMercenary);
@@ -65,12 +70,12 @@ public class VillageController extends GameController {
      */
 
     public void goToMarket() {
-        Scene myScene = (Scene)ap.getScene();
+        Scene myScene = ap.getScene();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Market.fxml"));
 
         try {
-            Parent marketRoot = (Parent)loader.load();
+            Parent marketRoot = loader.load();
             MarketController myController = loader.getController();
 
             myController.passUserData(accountsFile, myHashtable, myVillage, myMercenary);
@@ -90,12 +95,12 @@ public class VillageController extends GameController {
      */
 
     public void goToForest() {
-        Scene myScene = (Scene)ap.getScene();
+        Scene myScene = ap.getScene();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Forest.fxml"));
 
         try {
-            Parent forestRoot = (Parent)loader.load();
+            Parent forestRoot = loader.load();
             ForestController myController = loader.getController();
 
             myController.passUserData(accountsFile, myHashtable, myVillage, myMercenary);

@@ -11,9 +11,19 @@ import javafx.scene.paint.Color;
 
 import java.io.IOException;
 
+/**
+ * This controller controls inn GUI elements and is an extension of GameController class.
+ * This allow the player to interact with inn.
+ */
+
 public class InnController extends GameController {
     @FXML
     Button restBtn;
+
+    /**
+     * This method handles the event of pressing rest button.
+     * It calls the rest method from Inn class and updates the associated GUI elements.
+     */
 
     public void rest() {
         Inn myInn = myVillage.myInn;
@@ -28,9 +38,19 @@ public class InnController extends GameController {
         saveGame();
     }
 
+    /**
+     * Updates all inn GUI elements.
+     */
+
     public void updateInn_all() {
         updateInn_rest();
     }
+
+    /**
+     * Updates rest button in inn GUI.
+     * If player doesn't have enough gold to spend the night at inn,
+     * the button is disabled and button text font color is set to red.
+     */
 
     public void updateInn_rest() {
         Inn myInn = myVillage.myInn;

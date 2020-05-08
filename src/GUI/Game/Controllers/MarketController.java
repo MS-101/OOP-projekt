@@ -12,6 +12,11 @@ import javafx.scene.paint.Color;
 
 import java.io.IOException;
 
+/**
+ * This controller controls inn GUI elements and is an extension of GameController class.
+ * This allow the player to interact with inn.
+ */
+
 public class MarketController extends GameController {
     @FXML
     Button hpPotion_btn;
@@ -55,6 +60,11 @@ public class MarketController extends GameController {
         }
     }
 
+    /**
+     * This method handles event of pressing buy hp potion button.
+     * Calls buy hp potion method from market and updates all associated GUI elements.
+     */
+
     public void buyHpPotion() {
         Market myMarket = myVillage.myMarket;
 
@@ -66,6 +76,11 @@ public class MarketController extends GameController {
 
         saveGame();
     }
+
+    /**
+     * This method handles event of pressing buy mp potion button.
+     * Calls buy mp potion method from market and updates all associated GUI elements.
+     */
 
     public void buyMpPotion() {
         Market myMarket = myVillage.myMarket;
@@ -79,14 +94,28 @@ public class MarketController extends GameController {
         saveGame();
     }
 
+    /**
+     * Updates all market GUI elements.
+     */
+
     public void updateMarket_all() {
         updateMarket_tradeAll();
     }
+
+    /**
+     * Updates market trade tab GUI.
+     */
 
     public void updateMarket_tradeAll() {
         updateMarket_tradeHpPotions();
         updateMarket_tradeMpPotions();
     }
+
+    /**
+     * Updates market GUI elements associated with buying hp potions.
+     * When player doesn't have enough gold to buy hp potion,
+     * buy button is disabled and cost font color is set to red.
+     */
 
     public void updateMarket_tradeHpPotions() {
         PlayerConsumables myConsumables = myMercenary.consumables;
@@ -113,6 +142,12 @@ public class MarketController extends GameController {
             hpPotion_btn.setDisable(true);
         }
     }
+
+    /**
+     * Updates market GUI elements associated with buying mp potions.
+     * When player doesn't have enough gold to buy mp potion,
+     * buy button is disabled and cost font color is set to red.
+     */
 
     public void updateMarket_tradeMpPotions() {
         PlayerConsumables myConsumables = myMercenary.consumables;
