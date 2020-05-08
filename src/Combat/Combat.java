@@ -9,12 +9,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * This class handles combat between player and randomly generated monsters.
+ * Player always starts first in each turn and after each player action remaining monsters attack the player.
+ * Combat is ended after player flees the combat, dies or defeats all monsters.
+ * Combat also prints appropriate messages to controllers combat log.
+ */
+
 public class Combat {
     Mercenary player;
     ForestController assignedController;
 
     public ArrayList<Monster> opponents = new ArrayList<>();
     int turn;
+
+    /**
+     * This constructor generates random opponents and assigns player
+     * and forest controller to this class.
+     *
+     * @param player Player that entered the combat.
+     * @param assignedController Controller of forest from which the combat is initialized.
+     */
 
     public Combat(Mercenary player, ForestController assignedController) {
         this.player = player;
@@ -23,6 +38,10 @@ public class Combat {
 
         generateOpponents();
     }
+
+    /**
+     * This method generates random opponents using MonsterList class
+     */
 
     protected void generateOpponents() {
         int i;
@@ -39,7 +58,14 @@ public class Combat {
         }
     }
 
-    public void useAttack(int opponentIndex) throws IOException {
+    /**
+     * This method is used for making player attack monster.
+     * It also prints out messages about the attack into combat log.
+     *
+     * @param opponentIndex Index of targeted opponent in monster list.
+     */
+
+    public void useAttack(int opponentIndex) {
         Monster target = opponents.get(opponentIndex);
 
         boolean hadWeapon, critUsed;
@@ -82,7 +108,14 @@ public class Combat {
         }
     }
 
-    public void useFireball(int opponentIndex) throws IOException {
+    /**
+     * This method is used for making player cast fireball on monster.
+     * It also prints out messages about the spell casting into combat log.
+     *
+     * @param opponentIndex Index of targeted opponent in monster list.
+     */
+
+    public void useFireball(int opponentIndex) {
         Monster target = opponents.get(opponentIndex);
 
         int prevHp = target.hp;
@@ -105,7 +138,12 @@ public class Combat {
         }
     }
 
-    public void useFlamestrike() throws IOException {
+    /**
+     * This method is used for making player cast flamestrike on all monsters.
+     * It also prints out messages about the spell casting into combat log.
+     */
+
+    public void useFlamestrike() {
         ArrayList<Integer> prevHp = new ArrayList<>();
         int opponentIndex;
 
@@ -140,7 +178,12 @@ public class Combat {
         }
     }
 
-    public void useHeal() throws IOException {
+    /**
+     * This method is used for making player cast heal on themselves.
+     * It also prints out messages about the spell casting into combat log.
+     */
+
+    public void useHeal() {
         int prevHp = player.hp;
         player.skills.heal.cast(player);
         int healAmount = player.hp - prevHp;
@@ -155,7 +198,12 @@ public class Combat {
         opponentsTurn();
     }
 
-    public void useHpPotion() throws IOException {
+    /**
+     * This method is used for making player use health potion.
+     * It also prints out messages about consumable usage into combat log.
+     */
+
+    public void useHpPotion() {
         int prevHp = player.hp;
         player.consumables.useHpPotion(player);
         int healAmount = player.hp - prevHp;
@@ -168,7 +216,12 @@ public class Combat {
         opponentsTurn();
     }
 
-    public void useMpPotion() throws IOException {
+    /**
+     * This method is used for making player use mana potion.
+     * It also prints out messages about consumable usage into combat log.
+     */
+
+    public void useMpPotion() {
         int prevMp = player.mp;
         player.consumables.useMpPotion(player);
         int healAmount = player.mp - prevMp;
@@ -180,6 +233,14 @@ public class Combat {
 
         opponentsTurn();
     }
+
+    /**
+     * This method is used for removing monster from combat.
+     * It grants the player loot from killed monster.
+     * It also prints out messages about killed monster and loot gained from it.
+     *
+     * @param opponentIndex Index of targeted opponent in monster list.
+     */
 
     public void killOpponent(int opponentIndex) {
         Monster target = opponents.get(opponentIndex);
@@ -208,7 +269,14 @@ public class Combat {
         assignedController.updatePlayer_gold();
     }
 
-    public void opponentsTurn() throws IOException {
+    /**
+     * This method is used for handling opponent turn.
+     * During monster's turn the remaining opponents attack player.
+     * If player's hp goes to 0 or below they die and they are defeated.
+     * It also prints out messages about monster attacks.
+     */
+
+    public void opponentsTurn() {
         int i;
 
         assignedController.disableCombatButtons();
@@ -257,6 +325,10 @@ public class Combat {
         nextTurn();
     }
 
+    /**
+     * This method simply increments turn counter and prints out the current turn.
+     */
+
     public void nextTurn() {
         turn++;
 
@@ -264,7 +336,11 @@ public class Combat {
         assignedController.sendMessage("TURN " + turn + ":");
     }
 
-    public void victory() throws IOException {
+    /**
+     * This method prints out victory message, sets forest buttons and saves game.
+     */
+
+    public void victory() {
         assignedController.sendMessage("");
         assignedController.sendMessage("You are victorious!");
 
@@ -273,7 +349,11 @@ public class Combat {
         assignedController.saveGame();
     }
 
-    public void defeat() throws IOException {
+    /**
+     * This method prints out defeat message, sets forest buttons, clears monsters, resets mercenary and saves game.
+     */
+
+    public void defeat() {
         assignedController.sendMessage("");
         assignedController.sendMessage("You were defeated!");
         assignedController.sendMessage("A new adventurer takes your place.");
@@ -285,7 +365,15 @@ public class Combat {
         assignedController.saveGame();
     }
 
-    public void flee() throws IOException {
+    /**
+     * This method allows the player to attempt escaping from combat.
+     * There is a chance of failing to flee from battle.
+     * When mercenary successfully escapes from combat monsters are cleared, forest buttons are set and game is saved.
+     * When mercenary fails to escape they just wasted their turn and opponent turn follows.
+     * It also prints out messages about escape result.
+     */
+
+    public void flee() {
         Random random = new Random();
 
         int diceRoll = random.nextInt(100);

@@ -46,12 +46,8 @@ public class ForgeController extends GameController {
     @FXML
     ProgressBar repairArmorDurBar;
 
-    public void buyItem(ActionEvent event) throws IOException {
+    public void buyItem(int itemID) {
         Forge myForge = myVillage.myForge;
-
-        Button myButton = (Button)event.getTarget();
-        String buttonId = myButton.getId();
-        int itemID = buttonId.charAt(4);
 
         myForge.buyItem(myMercenary, itemID);
 
@@ -92,17 +88,22 @@ public class ForgeController extends GameController {
         saveGame();
     }
 
-    public void returnToVillage() throws IOException {
+    public void returnToVillage() {
         Scene myScene = ap.getScene();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Village.fxml"));
-        Parent villageRoot = loader.load();
 
-        VillageController myController = loader.getController();
-        myController.passUserData(accountsFile, myHashtable, myVillage, myMercenary);
-        myController.updatePlayer_all();
+        try {
+            Parent villageRoot = loader.load();
+            VillageController myController = loader.getController();
 
-        myScene.setRoot(villageRoot);
+            myController.passUserData(accountsFile, myHashtable, myVillage, myMercenary);
+            myController.updatePlayer_all();
+
+            myScene.setRoot(villageRoot);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public  void updateForge_all() {
@@ -127,10 +128,10 @@ public class ForgeController extends GameController {
             itemName.setAlignment(Pos.CENTER);
             itemNameAnchor.getChildren().add(itemName);
 
-            itemNameAnchor.setTopAnchor(itemName, 0.0);
-            itemNameAnchor.setLeftAnchor(itemName, 0.0);
-            itemNameAnchor.setRightAnchor(itemName, 0.0);
-            itemNameAnchor.setBottomAnchor(itemName, 0.0);
+            AnchorPane.setTopAnchor(itemName, 0.0);
+            AnchorPane.setLeftAnchor(itemName, 0.0);
+            AnchorPane.setRightAnchor(itemName, 0.0);
+            AnchorPane.setBottomAnchor(itemName, 0.0);
 
             AnchorPane itemDescrAnchor = new AnchorPane();
             ListView<String> itemDescr = new ListView<String>();
@@ -154,10 +155,10 @@ public class ForgeController extends GameController {
             itemDescr.setFocusTraversable(false);
             itemDescrAnchor.getChildren().add(itemDescr);
 
-            itemDescrAnchor.setTopAnchor(itemDescr, 0.0);
-            itemDescrAnchor.setLeftAnchor(itemDescr, 0.0);
-            itemDescrAnchor.setRightAnchor(itemDescr, 0.0);
-            itemDescrAnchor.setBottomAnchor(itemDescr, 0.0);
+            AnchorPane.setTopAnchor(itemDescr, 0.0);
+            AnchorPane.setLeftAnchor(itemDescr, 0.0);
+            AnchorPane.setRightAnchor(itemDescr, 0.0);
+            AnchorPane.setBottomAnchor(itemDescr, 0.0);
 
             AnchorPane itemCostAnchor = new AnchorPane();
             Label itemCost = new Label();
@@ -165,10 +166,10 @@ public class ForgeController extends GameController {
             itemCost.setAlignment(Pos.CENTER);
             itemCostAnchor.getChildren().add(itemCost);
 
-            itemCostAnchor.setTopAnchor(itemCost, 0.0);
-            itemCostAnchor.setLeftAnchor(itemCost, 0.0);
-            itemCostAnchor.setRightAnchor(itemCost, 0.0);
-            itemCostAnchor.setBottomAnchor(itemCost, 0.0);
+            AnchorPane.setTopAnchor(itemCost, 0.0);
+            AnchorPane.setLeftAnchor(itemCost, 0.0);
+            AnchorPane.setRightAnchor(itemCost, 0.0);
+            AnchorPane.setBottomAnchor(itemCost, 0.0);
 
             AnchorPane itemBtnAnchor = new AnchorPane();
             Button itemBtn = new Button();
@@ -178,29 +179,10 @@ public class ForgeController extends GameController {
                 int finalItemIndex = itemIndex;
 
                 itemBtn.setOnAction(new EventHandler() {
+
                     @Override
                     public void handle(Event event) {
-                        if (pickedItem instanceof Weapon) {
-                            Weapon pickedWeapon = (Weapon)pickedItem;
-
-                            myMercenary.setWeapon(pickedWeapon);
-                            updatePlayer_weapon();
-                        }
-
-                        if (pickedItem instanceof Armor) {
-                            Armor pickedArmor = (Armor)pickedItem;
-
-                            myMercenary.setArmor(pickedArmor);
-                            updatePlayer_armor();
-                        }
-
-                        myMercenary.loot.payGold(pickedItem.cost);
-
-                        myForge.forgeInventory.remove(finalItemIndex);
-
-                        updatePlayer_gold();
-                        updateForge_trade();
-                        updateForge_repairAll();
+                        buyItem(finalItemIndex);
                     }
                 });
 
@@ -212,10 +194,10 @@ public class ForgeController extends GameController {
 
             itemBtnAnchor.getChildren().add(itemBtn);
 
-            itemBtnAnchor.setTopAnchor(itemBtn, 0.0);
-            itemBtnAnchor.setLeftAnchor(itemBtn, 0.0);
-            itemBtnAnchor.setRightAnchor(itemBtn, 0.0);
-            itemBtnAnchor.setBottomAnchor(itemBtn, 0.0);
+            AnchorPane.setTopAnchor(itemBtn, 0.0);
+            AnchorPane.setLeftAnchor(itemBtn, 0.0);
+            AnchorPane.setRightAnchor(itemBtn, 0.0);
+            AnchorPane.setBottomAnchor(itemBtn, 0.0);
 
             forgeItem.getItems().addAll(itemNameAnchor, itemDescrAnchor, itemBtnAnchor, itemCostAnchor);
 

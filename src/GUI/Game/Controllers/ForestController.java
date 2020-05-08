@@ -57,19 +57,19 @@ public class ForestController extends GameController {
         updateForest_monsterHBox();
     }
 
-    public void combat_pressHpPotionBtn(ActionEvent event) throws IOException {
+    public void combat_pressHpPotionBtn(ActionEvent event) {
         myCombat.useHpPotion();
     }
 
-    public void combat_pressMpPotionBtn(ActionEvent event) throws IOException {
+    public void combat_pressMpPotionBtn(ActionEvent event) {
         myCombat.useMpPotion();
     }
 
-    public void combat_pressFlamestrikeBtn(ActionEvent event) throws IOException {
+    public void combat_pressFlamestrikeBtn(ActionEvent event) {
         myCombat.useFlamestrike();
     }
 
-    public void combat_pressHealBtn(ActionEvent event) throws IOException {
+    public void combat_pressHealBtn(ActionEvent event) {
         myCombat.useHeal();
     }
 
@@ -115,14 +115,14 @@ public class ForestController extends GameController {
 
             monsterHpAnchor.getChildren().addAll(monsterHpBar, monsterHpLabel);
 
-            monsterHpAnchor.setTopAnchor(monsterHpLabel,  0.0);
-            monsterHpAnchor.setLeftAnchor(monsterHpLabel, 0.0);
-            monsterHpAnchor.setRightAnchor(monsterHpLabel, 0.0);
-            monsterHpAnchor.setBottomAnchor(monsterHpLabel, 0.0);
-            monsterHpAnchor.setTopAnchor(monsterHpBar,  0.0);
-            monsterHpAnchor.setLeftAnchor(monsterHpBar, 0.0);
-            monsterHpAnchor.setRightAnchor(monsterHpBar, 0.0);
-            monsterHpAnchor.setBottomAnchor(monsterHpBar, 0.0);
+            AnchorPane.setTopAnchor(monsterHpLabel,  0.0);
+            AnchorPane.setLeftAnchor(monsterHpLabel, 0.0);
+            AnchorPane.setRightAnchor(monsterHpLabel, 0.0);
+            AnchorPane.setBottomAnchor(monsterHpLabel, 0.0);
+            AnchorPane.setTopAnchor(monsterHpBar,  0.0);
+            AnchorPane.setLeftAnchor(monsterHpBar, 0.0);
+            AnchorPane.setRightAnchor(monsterHpBar, 0.0);
+            AnchorPane.setBottomAnchor(monsterHpBar, 0.0);
 
             AnchorPane monsterMpAnchor = new AnchorPane();
             Label monsterMpLabel = new Label();
@@ -140,14 +140,14 @@ public class ForestController extends GameController {
 
             monsterMpAnchor.getChildren().addAll(monsterMpBar, monsterMpLabel);
 
-            monsterMpAnchor.setTopAnchor(monsterMpLabel,  0.0);
-            monsterMpAnchor.setLeftAnchor(monsterMpLabel, 0.0);
-            monsterMpAnchor.setRightAnchor(monsterMpLabel, 0.0);
-            monsterMpAnchor.setBottomAnchor(monsterMpLabel, 0.0);
-            monsterMpAnchor.setTopAnchor(monsterMpBar,  0.0);
-            monsterMpAnchor.setLeftAnchor(monsterMpBar, 0.0);
-            monsterMpAnchor.setRightAnchor(monsterMpBar, 0.0);
-            monsterMpAnchor.setBottomAnchor(monsterMpBar, 0.0);
+            AnchorPane.setTopAnchor(monsterMpLabel,  0.0);
+            AnchorPane.setLeftAnchor(monsterMpLabel, 0.0);
+            AnchorPane.setRightAnchor(monsterMpLabel, 0.0);
+            AnchorPane.setBottomAnchor(monsterMpLabel, 0.0);
+            AnchorPane.setTopAnchor(monsterMpBar,  0.0);
+            AnchorPane.setLeftAnchor(monsterMpBar, 0.0);
+            AnchorPane.setRightAnchor(monsterMpBar, 0.0);
+            AnchorPane.setBottomAnchor(monsterMpBar, 0.0);
 
             AnchorPane monsterBtnAnchor = new AnchorPane();
             Button monsterBtn = new Button();
@@ -163,19 +163,11 @@ public class ForestController extends GameController {
                         Monster target = myCombat.opponents.get(finalMonsterIndex);
 
                         if (combat_attackBtn.isSelected()) {
-                            try {
-                                myCombat.useAttack(finalMonsterIndex);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                            myCombat.useAttack(finalMonsterIndex);
                         }
 
                         if (combat_fireballBtn.isSelected()) {
-                            try {
-                                myCombat.useFireball(finalMonsterIndex);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                            myCombat.useFireball(finalMonsterIndex);
                         }
                     }
                 });
@@ -185,20 +177,20 @@ public class ForestController extends GameController {
 
             monsterBtnAnchor.getChildren().addAll(monsterBtn);
 
-            monsterBtnAnchor.setTopAnchor(monsterBtn,  0.0);
-            monsterBtnAnchor.setLeftAnchor(monsterBtn, 0.0);
-            monsterBtnAnchor.setRightAnchor(monsterBtn, 0.0);
-            monsterBtnAnchor.setBottomAnchor(monsterBtn, 0.0);
+            AnchorPane.setTopAnchor(monsterBtn,  0.0);
+            AnchorPane.setLeftAnchor(monsterBtn, 0.0);
+            AnchorPane.setRightAnchor(monsterBtn, 0.0);
+            AnchorPane.setBottomAnchor(monsterBtn, 0.0);
 
             monsterSplitPane.getItems().addAll(monsterHpAnchor, monsterMpAnchor, monsterBtnAnchor);
             monsterSplitPane.setDividerPositions(0.33, 0.66);
 
             monsterPaneContent.getChildren().addAll(monsterSplitPane);
 
-            monsterPaneContent.setTopAnchor(monsterSplitPane,  0.0);
-            monsterPaneContent.setLeftAnchor(monsterSplitPane, 0.0);
-            monsterPaneContent.setRightAnchor(monsterSplitPane, 0.0);
-            monsterPaneContent.setBottomAnchor(monsterSplitPane, 0.0);
+            AnchorPane.setTopAnchor(monsterSplitPane,  0.0);
+            AnchorPane.setLeftAnchor(monsterSplitPane, 0.0);
+            AnchorPane.setRightAnchor(monsterSplitPane, 0.0);
+            AnchorPane.setBottomAnchor(monsterSplitPane, 0.0);
 
             monsterPane.setContent(monsterPaneContent);
 
@@ -206,10 +198,10 @@ public class ForestController extends GameController {
 
             monsterHBox.getChildren().add(monsterPaneAnchor);
 
-            monsterPaneAnchor.setTopAnchor(monsterPane, 0.0);
-            monsterPaneAnchor.setLeftAnchor(monsterPane, 0.0);
-            monsterPaneAnchor.setRightAnchor(monsterPane, 0.0);
-            monsterPaneAnchor.setBottomAnchor(monsterPane, 0.0);
+            AnchorPane.setTopAnchor(monsterPane, 0.0);
+            AnchorPane.setLeftAnchor(monsterPane, 0.0);
+            AnchorPane.setRightAnchor(monsterPane, 0.0);
+            AnchorPane.setBottomAnchor(monsterPane, 0.0);
 
             monsterPaneAnchor.setPrefWidth(200);
         }
@@ -229,17 +221,22 @@ public class ForestController extends GameController {
         }
     }
 
-    public void returnToVillage() throws IOException {
+    public void returnToVillage() {
         Scene myScene = (Scene) ap.getScene();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Village.fxml"));
-        Parent villageRoot = (Parent) loader.load();
 
-        VillageController myController = loader.getController();
-        myController.passUserData(accountsFile, myHashtable, myVillage, myMercenary);
-        myController.updatePlayer_all();
+        try {
+            Parent villageRoot = (Parent) loader.load();
+            VillageController myController = loader.getController();
 
-        myScene.setRoot(villageRoot);
+            myController.passUserData(accountsFile, myHashtable, myVillage, myMercenary);
+            myController.updatePlayer_all();
+
+            myScene.setRoot(villageRoot);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void sendMessage(String message) {

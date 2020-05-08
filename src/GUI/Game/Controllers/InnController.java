@@ -46,16 +46,21 @@ public class InnController extends GameController {
         }
     }
 
-    public void returnToVillage() throws IOException {
+    public void returnToVillage() {
         Scene myScene = (Scene) ap.getScene();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Village.fxml"));
-        Parent villageRoot = (Parent) loader.load();
 
-        VillageController myController = loader.getController();
-        myController.passUserData(accountsFile, myHashtable, myVillage, myMercenary);
-        myController.updatePlayer_all();
+        try {
+            Parent villageRoot = (Parent) loader.load();
 
-        myScene.setRoot(villageRoot);
+            VillageController myController = loader.getController();
+            myController.passUserData(accountsFile, myHashtable, myVillage, myMercenary);
+            myController.updatePlayer_all();
+
+            myScene.setRoot(villageRoot);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

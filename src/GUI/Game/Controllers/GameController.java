@@ -137,7 +137,7 @@ public class GameController implements Initializable {
         updatePlayer_all();
     }
 
-    public void saveGame() throws IOException {
+    public void saveGame() {
         AccountsFileHandler myAccountsFileHandler = new AccountsFileHandler();
 
         myAccountsFileHandler.rewriteAccountsFile(accountsFile, myHashtable);

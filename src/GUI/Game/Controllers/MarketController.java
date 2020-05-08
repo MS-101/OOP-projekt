@@ -33,20 +33,25 @@ public class MarketController extends GameController {
     @FXML
     Label mpPotion_cost;
 
-    public void returnToVillage() throws IOException {
+    public void returnToVillage() {
         Scene myScene = (Scene) ap.getScene();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Village.fxml"));
-        Parent villageRoot = (Parent) loader.load();
 
-        VillageController myController = loader.getController();
-        myController.passUserData(accountsFile, myHashtable, myVillage, myMercenary);
-        myController.updatePlayer_all();
+        try {
+            Parent villageRoot = (Parent) loader.load();
+            VillageController myController = loader.getController();
 
-        myScene.setRoot(villageRoot);
+            myController.passUserData(accountsFile, myHashtable, myVillage, myMercenary);
+            myController.updatePlayer_all();
+
+            myScene.setRoot(villageRoot);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void buyHpPotion() throws IOException {
+    public void buyHpPotion() {
         Market myMarket = myVillage.myMarket;
 
         myMarket.buyHpPotion(myMercenary);
@@ -58,7 +63,7 @@ public class MarketController extends GameController {
         saveGame();
     }
 
-    public void buyMpPotion() throws IOException {
+    public void buyMpPotion() {
         Market myMarket = myVillage.myMarket;
 
         myMarket.buyMpPotion(myMercenary);
