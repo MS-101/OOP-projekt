@@ -7,8 +7,19 @@ import Entities.Player.Mercenary;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * This skill deals spell damage to multiple targets.
+ */
+
 public class Flamestrike extends Skill {
     public int lowSpellDmg, highSpellDmg;
+
+    /**
+     * This constructor sets current and maximum level,
+     * range of spell damage and mana cost of this ability.
+     *
+     * @param curLvl Value used for setting the current level of this ability.
+     */
 
     public Flamestrike(int curLvl) {
         this.curLvl = curLvl;
@@ -19,6 +30,10 @@ public class Flamestrike extends Skill {
         this.highSpellDmg = 25;
     }
 
+    /**
+     * Increases current level and power of this ability.
+     */
+
     public void upgrade() {
         if (this.curLvl > 0) {
             this.lowSpellDmg += 5;
@@ -27,6 +42,13 @@ public class Flamestrike extends Skill {
 
         this.curLvl++;
     }
+
+    /**
+     * This method allows the caster to use this ability on a targets.
+     *
+     * @param caster Entity that casted this ability.
+     * @param targets Entities that are targeted by this ability.
+     */
 
     public void cast(Entity caster, ArrayList<Monster> targets) {
         super.cast(caster);

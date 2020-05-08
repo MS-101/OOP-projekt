@@ -3,8 +3,19 @@ package Skills;
 import Entities.Entity;
 import Entities.Player.Mercenary;
 
+/**
+ * This skill heals caster.
+ */
+
 public class Heal extends Skill {
     public int healAmount;
+
+    /**
+     * This constructor sets current and maximum level,
+     * amount of health healed and mana cost of this ability.
+     *
+     * @param curLvl Value used for setting the current level of this ability.
+     */
 
     public Heal(int curLvl) {
         this.curLvl = curLvl;
@@ -14,6 +25,10 @@ public class Heal extends Skill {
         this.healAmount = 80;
     }
 
+    /**
+     * Increases current level and power of this ability.
+     */
+
     public void upgrade() {
         if (this.curLvl > 0) {
             this.healAmount += 10;
@@ -21,6 +36,12 @@ public class Heal extends Skill {
 
         this.curLvl++;
     }
+
+    /**
+     * This method allows the caster to use this ability on themselves.
+     *
+     * @param caster Entity that casted this ability.
+     */
 
     public void cast(Entity caster) {
         super.cast(caster);
