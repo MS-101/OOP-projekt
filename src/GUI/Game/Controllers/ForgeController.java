@@ -51,34 +51,24 @@ public class ForgeController extends GameController {
 
         Button myButton = (Button)event.getTarget();
         String buttonId = myButton.getId();
-        int itemId = buttonId.charAt(4);
+        int itemID = buttonId.charAt(4);
 
-        Item pickedItem = myForge.forgeInventory.get(itemId);
+        myForge.buyItem(myMercenary, itemID);
 
-        myMercenary.loot.payGold(pickedItem.cost);
         updatePlayer_gold();
+        updatePlayer_weapon();
+        updatePlayer_armor();
 
-        if (pickedItem instanceof Weapon) {
-            myMercenary.setWeapon((Weapon)pickedItem);
-            updatePlayer_weapon();
-        } else {
-            myMercenary.setArmor((Armor)pickedItem);
-            updatePlayer_armor();
-        }
-
-        myForge.forgeInventory.remove(itemId);
         updateForge_all();
 
         saveGame();
     }
 
     public void repairWeapon() throws IOException {
+        Forge myForge = myVillage.myForge;
         Weapon myWeapon = myMercenary.weapon;
 
-        int payment = (int)(((double)(myWeapon.maxDurability - myWeapon.durability) / (double)myWeapon.maxDurability) * myWeapon.repairCost);
-
-        myMercenary.loot.payGold(payment);
-        myWeapon.repairItem();
+        myForge.repairItem(myMercenary, myWeapon);
 
         updatePlayer_gold();
         updatePlayer_weapon();
@@ -89,12 +79,10 @@ public class ForgeController extends GameController {
     }
 
     public void repairArmor() throws IOException {
+        Forge myForge = myVillage.myForge;
         Armor myArmor = myMercenary.armor;
 
-        int payment = (int)(((double)(myArmor.maxDurability - myArmor.durability) / (double)myArmor.maxDurability) * myArmor.repairCost);
-
-        myMercenary.loot.payGold(payment);
-        myArmor.repairItem();
+        myForge.repairItem(myMercenary, myArmor);
 
         updatePlayer_gold();
         updatePlayer_armor();

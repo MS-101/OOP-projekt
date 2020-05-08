@@ -3,6 +3,7 @@ package GUI.Game.Controllers;
 import Consumables.HpPotion;
 import Consumables.MpPotion;
 import Entities.Player.PlayerConsumables;
+import Environments.Market;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -46,13 +47,9 @@ public class MarketController extends GameController {
     }
 
     public void buyHpPotion() throws IOException {
-        PlayerConsumables myConsumables = myMercenary.consumables;
-        HpPotion hpPotionData = new HpPotion();
+        Market myMarket = myVillage.myMarket;
 
-        int payment = hpPotionData.cost;
-
-        myMercenary.loot.payGold(payment);
-        myConsumables.addHpPotions(1);
+        myMarket.buyHpPotion(myMercenary);
 
         updatePlayer_gold();
         updatePlayer_hpPotions();
@@ -62,13 +59,9 @@ public class MarketController extends GameController {
     }
 
     public void buyMpPotion() throws IOException {
-        PlayerConsumables myConsumables = myMercenary.consumables;
-        MpPotion mpPotionData = new MpPotion();
+        Market myMarket = myVillage.myMarket;
 
-        int payment = mpPotionData.cost;
-
-        myMercenary.loot.payGold(payment);
-        myConsumables.addMpPotions(1);
+        myMarket.buyMpPotion(myMercenary);
 
         updatePlayer_gold();
         updatePlayer_mpPotions();

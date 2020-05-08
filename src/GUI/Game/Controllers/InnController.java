@@ -18,14 +18,7 @@ public class InnController extends GameController {
     public void rest() throws IOException {
         Inn myInn = myVillage.myInn;
 
-        int healHpAmount = (int)(myMercenary.maxHp * myInn.roomComfort);
-        int healMpAmount = (int)(myMercenary.maxMp * myInn.roomComfort);
-        int roomCost = myInn.roomCost;
-
-        myMercenary.healHp(healHpAmount);
-        myMercenary.healMp(healMpAmount);
-        myMercenary.loot.payGold(roomCost);
-        myVillage.myForge.generateInventory();
+        myInn.rest(myMercenary, myVillage.myForge);
 
         updatePlayer_hp();
         updatePlayer_mp();
