@@ -2,7 +2,18 @@ package MySystem;
 
 import java.io.*;
 
+/**
+ * This class implements methods for handling accounts file.
+ */
+
 public class AccountsFileHandler implements Serializable {
+
+    /**
+     * Creates new accounts file.
+     *
+     * @param accountsFile Accounts file to be created.
+     */
+
     public void createAccountsFile(File accountsFile) {
         AccountsHashTable newHashTable = new AccountsHashTable(1000);
 
@@ -18,6 +29,13 @@ public class AccountsFileHandler implements Serializable {
         }
     }
 
+    /**
+     * Overwrites existing accounts file's hashtable.
+     *
+     * @param accountsFile Accounts file to be overwritten.
+     * @param myHashTable Hashtable that will overwrite the existing hashtable in accounts file.
+     */
+
     public void rewriteAccountsFile(File accountsFile, AccountsHashTable myHashTable) {
         try {
             FileOutputStream fo = new FileOutputStream(accountsFile);
@@ -30,6 +48,13 @@ public class AccountsFileHandler implements Serializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Reads hashtable from accounts file.
+     *
+     * @param accountsFile Account file to be read.
+     * @return Returns accounts hashtable.
+     */
 
     public AccountsHashTable readAccountsFile(File accountsFile) {
         try {
