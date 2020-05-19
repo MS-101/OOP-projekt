@@ -1,3 +1,5 @@
+AUTHOR OF THIS PROJECT: Martin Šváb
+
 Instructions for the project Mercenary Hunter:
 
 Functions bytesToHex and securePassword from AccountsHashTable use code from the following website: https://www.baeldung.com/sha-256-hashing-java (8.4.2020)
